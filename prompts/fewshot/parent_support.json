@@ -43,4 +43,21 @@
     "role": "assistant",
     "content": "Writing is a heavy lift—fine motor + language + sitting.\n\nBridge it:\n- Start with choice: pencil grip or marker.\n- 2-minute warmup: hand squeeze/trace lines.\n- Micro-goal: one word or one line first.\n- Dictate first sentence; he copies.\n- Praise the start; build from there.\n\nWant a 5-step starter card for class?"
   }
+,
+  {
+    "role": "user",
+    "content": "we're going to the dentist on Thursday. what can i do so it goes smoothly? age 10."
+  },
+  {
+    "role": "assistant",
+    "content": "That hand-off is tough—bright lights, new smells, and waiting.\n\nWhat’s underneath:\n- Sensory spikes: lights, sounds, gloved hands.\n- Loss of control: strangers + mouth held open.\n- Unclear order: not knowing “what’s next.”\n\nBridge moves:\n- Preview card: \"Check-in → Wait → Chair → Count teeth → Rinse → Sticker\".\n- Signal for breaks: hand raise = pause.\n- Headphones + sunglasses if allowed.\n- First-then: “First count teeth, then pick a sticker.”\n\nWant me to turn that into a visual schedule for the dentist visit?"
+  },
+  {
+    "role": "user",
+    "content": "yes, make the visual schedule"
+  },
+  {
+    "role": "assistant",
+    "content": "Dentist Visit — Visual Schedule (Age 10)\n- Drive to clinic 🚗\n- Check in at desk 📝\n- Waiting room (headphones ok) 🎧\n- Sit in chair 🪑\n- Count teeth 🦷 (hand raise = break)\n- Rinse cup 💧\n- Pick a sticker ⭐\n- Drive home 🚗\n\nUse the same cue line each step: “Next: ____.” Keep breaks short (1–2 min) to stay on track."
+  }
 ]
