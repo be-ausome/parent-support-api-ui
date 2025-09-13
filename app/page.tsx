@@ -34,41 +34,44 @@ function extractImages(content: string) {
 /** Make model output easier to read:
  * - enforce line breaks after common section headers
  * - convert inline dashes ( -, – , — ) into real bullets
- * - break numbered lists onto new lines
+ * - break numbered lists onto new lines (1. 2. 3.)
  * - compact extra blank lines
  */
 function prettifyText(content: string) {
   let c = content.replace(/\r\n/g, '\n')
 
-  // Normalize en/em dashes to a plain hyphen
+  // Normalize en/em dashes to a plain hyphen for easier matching
   c = c.replace(/[–—]/g, '-')
 
-  // Newline after common headers (with/without colon)
+  // Newline after common headers (with/without a colon)
   const headers = [
-    "What’s likely happening", "What's likely happening",
-    "What’s underneath", "Underneath",
-    "What’s happening", "What's happening",
-    "What might help", "Bridge moves", "Bridge ideas", "What may help"
+    "What’s likely happening","What's likely happening",
+    "What’s underneath","Underneath",
+    "What’s happening","What's happening",
+    "What might help","What may help",
+    "Bridge moves","Bridge ideas","Next steps","Options","Try this"
   ]
   for (const h of headers) {
     const re = new RegExp(`(^|\\n)\\s*${h}:?\\s*`, 'gi')
     c = c.replace(re, (_m, p1) => `${p1}${h}:\n`)
   }
 
-  // Bullets from inline dashes
-  c = c.replace(/:\s*-\s+/g, ':\n- ')           // after a colon
-  c = c.replace(/([.)])\s-\s+/g, '$1\n- ')      // after . or )
+  // Dash bullets that run inline → newline bullets
+  c = c.replace(/:\s*-\s+/g, ':\n- ')            // after a colon
+  c = c.replace(/([.)])\s-\s+/g, '$1\n- ')       // after . or )
   c = c.replace(/(\S)\s-\s(?=[A-Za-z(])/g, '$1\n- ') // general case
-  c = c.replace(/"\s-\s+/g, '"\n- ')            // after a quote
+  c = c.replace(/"\s-\s+/g, '"\n- ')             // after a quote
+  c = c.replace(/\s•\s+/g, '\n• ')               // dot bullets
 
-  // Dot bullets
-  c = c.replace(/\s•\s+/g, '\n• ')
-
-  // Break numbered items that run inline: “… help. 1. Tip 2. Tip …”
-  c = c.replace(/([a-z)])\s+(\d+)\.\s/gi, '$1\n$2. ')
+  // Numbered lists that run inline → newline numbers
+  //  "... Bridge moves: 1. Tip 2. Tip" -> "...\n1. Tip\n2. Tip"
+  c = c.replace(/:\s*(\d+)\.\s/g, ':\n$1. ')
+  c = c.replace(/([.!?])\s+(\d+)\.\s/g, '$1\n$2. ')
+  c = c.replace(/([^\n])\s(\d+)\.\s/g, (_m, p1, n) => `${p1}\n${n}. `) // fallback
 
   // Collapse extra blank lines
   c = c.replace(/\n{3,}/g, '\n\n').trim()
+
   return c
 }
 
@@ -82,6 +85,8 @@ export default function ParentSupportPage() {
   const scrollerRef = useRef<HTMLDivElement>(null)
   const endRef = useRef<HTMLDivElement>(null)
   const taRef = useRef<HTMLTextAreaElement>(null)
+  const footerRef = useRef<HTMLFormElement>(null)
+  const [footerH, setFooterH] = useState(0)
 
   const presets = [
     'We are going to a baseball game. Make a visual schedule for the outing (age 15).',
@@ -90,13 +95,27 @@ export default function ParentSupportPage() {
     'Dentist visit Thursday—help with a visual strip (age 10).'
   ]
 
-  // Always scroll to newest message (works even after long renders)
+  // Measure footer height so content never hides behind it
   useEffect(() => {
-    endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
-    // run again after layout settles
-    const t = setTimeout(() => endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }), 80)
-    return () => clearTimeout(t)
-  }, [log, isLoading])
+    const measure = () => setFooterH(footerRef.current?.offsetHeight ?? 0)
+    measure()
+    const ro = new (window as any).ResizeObserver?.(measure)
+    if (ro && footerRef.current) ro.observe(footerRef.current)
+    window.addEventListener('resize', measure)
+    return () => {
+      window.removeEventListener('resize', measure)
+      ro?.disconnect?.()
+    }
+  }, [])
+
+  // Rock-solid autoscroll: scroll to sentinel now + after layout settles
+  useEffect(() => {
+    const go = () => endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    go()
+    const t1 = setTimeout(go, 60)
+    const t2 = setTimeout(go, 140)
+    return () => { clearTimeout(t1); clearTimeout(t2) }
+  }, [log, isLoading, footerH])
 
   // Autosize textarea as you type
   useEffect(() => {
@@ -172,7 +191,7 @@ export default function ParentSupportPage() {
   }
 
   return (
-    <div className="mx-auto max-w-5xl min-h-screen flex flex-col bg-white">
+    <div className="mx-auto max-w-5xl min-h-[100dvh] flex flex-col bg-white">
       {/* Header */}
       <header className="px-4 sm:px-6 py-4 border-b bg-white">
         <div className="flex items-center gap-3">
@@ -191,12 +210,19 @@ export default function ParentSupportPage() {
       <div
         ref={scrollerRef}
         className="flex-1 overflow-y-auto px-4 sm:px-6 py-6"
-        // Enough space so last message clears sticky footer (plus iOS safe-area)
-        style={{ paddingBottom: 'calc(18rem + env(safe-area-inset-bottom))' }}
+        style={{
+          // Enough space so the last message clears the sticky footer (plus iOS safe-area)
+          paddingBottom: `calc(${footerH + 96}px + env(safe-area-inset-bottom))`
+        }}
       >
         {/* Presets row */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {presets.map(p => (
+          {[
+            'We are going to a baseball game. Make a visual schedule for the outing (age 15).',
+            'Morning routine meltdown. Need a 5-step bridge.',
+            'Grocery store is loud. Lines are hard—short plan with a break signal.',
+            'Dentist visit Thursday—help with a visual strip (age 10).'
+          ].map(p => (
             <button key={p} type="button" className="chip" onClick={() => setInput(p)}>
               {p}
             </button>
@@ -260,7 +286,7 @@ export default function ParentSupportPage() {
       {errorMsg && <div className="toast">{errorMsg}</div>}
 
       {/* Sticky input */}
-      <form onSubmit={sendMessage} className="footer">
+      <form ref={footerRef} onSubmit={sendMessage} className="footer">
         <div className="mx-auto max-w-5xl px-4 sm:px-6 py-3">
           <div className="flex items-end gap-3">
             <textarea
