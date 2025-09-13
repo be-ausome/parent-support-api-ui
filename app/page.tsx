@@ -31,20 +31,29 @@ function extractImages(content: string) {
   return { text, images }
 }
 
-// Make model output easier to read: enforce line breaks & bullets
+/** Make model output easier to read:
+ * - enforce line breaks after common section headers
+ * - convert inline dashes ( -, – , — ) into real bullets
+ * - compact extra blank lines
+ */
 function prettifyText(content: string) {
   let c = content
 
-  // Newline after common section headers
+  // Newline after common headers
   c = c.replace(
-    /(What’s likely happening:|What's likely happening:|What’s underneath:|Underneath:|Bridge moves:|Bridge ideas:|What may help:)/g,
+    /(What’s likely happening:|What's likely happening:|What’s underneath:|Underneath:|Bridge moves:|Bridge ideas:|What may help:|What’s happening:|What's happening:)/g,
     '$1\n'
   )
 
-  // Turn inline dash bullets into line-start bullets
-  c = c.replace(/([:\.])\s*-\s+/g, '$1\n- ')
+  // Turn inline dash bullets into line-start bullets (supports -, – , —)
+  c = c.replace(/([:\.;])\s*[–—-]\s+/g, '$1\n- ') // after :, ., ;
+  // If a paragraph contains multiple spaced dashes, make them bullets
+  c = c.replace(/(\S)\s+[–—-]\s+/g, '$1\n- ')     // general case
   // Dot bullets
   c = c.replace(/\s•\s+/g, '\n• ')
+
+  // Ensure existing start-of-line dashes are on their own line
+  c = c.replace(/(?:^|\n)\s*[–—]\s+/g, m => m.replace(/[–—]/, '- '))
 
   // Compact excessive blank lines
   c = c.replace(/\n{3,}/g, '\n\n').trim()
@@ -108,7 +117,7 @@ export default function ParentSupportPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: text,
-          mode: 'text', // always text now
+          mode: 'text', // always text
           thread: [...log, userMsg].map(({ role, content }) => ({ role, content }))
         })
       })
@@ -168,7 +177,12 @@ export default function ParentSupportPage() {
       </header>
 
       {/* Chat area */}
-      <div ref={scrollerRef} className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 pb-40">
+      <div
+        ref={scrollerRef}
+        className="flex-1 overflow-y-auto px-4 sm:px-6 py-6"
+        // Enough space so the last message clears the sticky footer (plus safe-area)
+        style={{ paddingBottom: 'calc(14rem + env(safe-area-inset-bottom))' }}
+      >
         {/* Presets row */}
         <div className="flex flex-wrap gap-2 mb-4">
           {presets.map(p => (
