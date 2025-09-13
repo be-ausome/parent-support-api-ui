@@ -42,6 +42,7 @@ async function openaiChat(body: any) {
   const model = process.env.OPENAI_MODEL || 'gpt-5o-mini'
   if (!key) throw new Error('Missing OPENAI_API_KEY')
   body.model = model
+
   const res = await fetch(`${base}/chat/completions`, {
     method: 'POST',
     headers: { 'Authorization': `Bearer ${key}`, 'Content-Type': 'application/json' },
@@ -64,22 +65,25 @@ async function callOpenAI(prompt: string, mode: string) {
 
   const messages: any[] = [{ role: 'system', content: system }, { role: 'user', content: prompt }]
 
+  // Text path
   if (!schemaName) {
     const data = await openaiChat({ messages, temperature: 0.3 })
     const text = data.choices?.[0]?.message?.content ?? ''
     return { kind: 'text', text }
   }
 
+  // JSON path with robust fallback
   const schema = loadSchema(schemaName)
-
   let data: any
   try {
+    // Try schema-constrained first
     data = await openaiChat({
       messages,
       temperature: 0.2,
       response_format: { type: 'json_schema', json_schema: { name: schema.title || 'AusomeShape', schema } }
     })
   } catch {
+    // Fallback to plain JSON object mode
     data = await openaiChat({
       messages: [
         messages[0],
