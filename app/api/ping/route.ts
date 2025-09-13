@@ -16,7 +16,7 @@ export async function GET() {
       body: JSON.stringify({
         model: process.env.OPENAI_MODEL_TEXT || "gpt-4.1-mini",
         input: [{ role: "user", content: "ping" }],
-        max_output_tokens: 8
+        max_output_tokens: 32 // >= 16 to satisfy API minimum
       })
     });
     const text = await r.text();
