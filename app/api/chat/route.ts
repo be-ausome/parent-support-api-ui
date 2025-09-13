@@ -26,7 +26,9 @@ function corsHeaders(origin: string | null) {
 }
 
 function extractJSONObject(text: string): any {
+  // Strict parse first
   try { return JSON.parse(text) } catch {}
+  // Fallback: take the first {...} block if model adds prose or code fences
   const start = text.indexOf('{')
   const end = text.lastIndexOf('}')
   if (start >= 0 && end > start) {
@@ -39,7 +41,7 @@ function extractJSONObject(text: string): any {
 async function openaiChat(body: any) {
   const base = process.env.OPENAI_BASE_URL || 'https://api.openai.com/v1'
   const key = process.env.OPENAI_API_KEY
-  const model = process.env.OPENAI_MODEL || 'gpt-5o-mini'
+  const model = process.env.OPENAI_MODEL || 'gpt-4o-mini' // default to a JSON-friendly model
   if (!key) throw new Error('Missing OPENAI_API_KEY')
   body.model = model
 
@@ -54,10 +56,12 @@ async function openaiChat(body: any) {
 }
 
 async function callOpenAI(prompt: string, mode: string) {
+  // Load runtime system prompt
   const systemPath = path.join(process.cwd(), 'prompts', 'system.md')
   let system = 'You are a calm, concise Parent Support assistant.'
   try { system = fs.readFileSync(systemPath, 'utf-8') } catch {}
 
+  // Decide if this is JSON mode
   let schemaName: string | null = null
   if (mode === 'support_plan') schemaName = 'support_plan.schema.json'
   if (mode === 'social_story') schemaName = 'social_story.schema.json'
@@ -65,41 +69,49 @@ async function callOpenAI(prompt: string, mode: string) {
 
   const messages: any[] = [{ role: 'system', content: system }, { role: 'user', content: prompt }]
 
-  // Text path
+  // Text path (simple)
   if (!schemaName) {
     const data = await openaiChat({ messages, temperature: 0.3 })
     const text = data.choices?.[0]?.message?.content ?? ''
     return { kind: 'text', text }
   }
 
-  // JSON path with robust fallback
+  // JSON path (robust)
   const schema = loadSchema(schemaName)
+
+  // Attempt 1: json_object (widely supported by 4o/mini)
   let data: any
   try {
-    // Try schema-constrained first
-    data = await openaiChat({
-      messages,
-      temperature: 0.2,
-      response_format: { type: 'json_schema', json_schema: { name: schema.title || 'AusomeShape', schema } }
-    })
-  } catch {
-    // Fallback to plain JSON object mode
     data = await openaiChat({
       messages: [
         messages[0],
-        { role: 'system', content: 'Reply with JSON only. No code fences or extra text.' },
+        { role: 'system', content: 'Reply with JSON only that strictly matches the provided schema. No code fences or extra text.' },
         messages[1],
       ],
       temperature: 0.2,
       response_format: { type: 'json_object' }
     })
+  } catch {
+    // Attempt 2: no response_format, strong instruction
+    data = await openaiChat({
+      messages: [
+        messages[0],
+        { role: 'system', content: 'Return JSON only. No prose. No code fences. Match the schema exactly.' },
+        messages[1],
+      ],
+      temperature: 0.2
+    })
   }
 
   const text = data.choices?.[0]?.message?.content ?? '{}'
   const parsed = extractJSONObject(text)
+
+  // Validate and never 500 on schema mismatch
   const validate = ajv.compile(schema)
   const valid = validate(parsed)
-  if (!valid) return { kind: 'json', payload: { __repair__: validate.errors, raw: parsed } }
+  if (!valid) {
+    return { kind: 'json', payload: { __repair__: validate.errors, raw: parsed } }
+  }
   return { kind: 'json', payload: parsed }
 }
 
