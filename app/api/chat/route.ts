@@ -1,4 +1,4 @@
-// app/api/chat/route.ts — inline kernel/schemas, robust parsing, force text output
+// app/api/chat/route.ts — inline kernel/schemas, robust parsing, force plain text correctly
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "node:crypto";
 
@@ -24,20 +24,15 @@ function fpKernel(text: string) {
   };
 }
 
-// Very defensive extraction for the Responses API
+// Robust extraction for OpenAI Responses API
 function extractText(data: any): string {
-  if (typeof data?.output_text === "string" && data.output_text.trim()) {
-    return data.output_text.trim();
-  }
+  if (typeof data?.output_text === "string" && data.output_text.trim()) return data.output_text.trim();
   const pieces: string[] = [];
   const out = Array.isArray(data?.output) ? data.output : [];
   for (const part of out) {
     const content = Array.isArray(part?.content) ? part.content : [];
     for (const c of content) {
-      if ((c?.type === "output_text" || c?.type === "text") && typeof c?.text === "string") {
-        pieces.push(c.text);
-      }
-      // Some models use a generic "message" object
+      if ((c?.type === "output_text" || c?.type === "text") && typeof c?.text === "string") pieces.push(c.text);
       if (typeof c?.message === "string") pieces.push(c.message);
     }
   }
@@ -231,7 +226,7 @@ export async function POST(req: NextRequest) {
   const overlay = buildOverlay(tone, tags);
   const userContent = overlay ? `${overlay}\n\n---\n\n${message}` : message;
 
-  // TEXT MODE — force plain text output
+  // TEXT MODE — force plain text with text.format
   if (userMode === "text") {
     let r: Response;
     try {
@@ -244,7 +239,7 @@ export async function POST(req: NextRequest) {
             { role: "system", content: kernel },
             { role: "user", content: userContent }
           ],
-          response_format: { type: "text" }, // <— force text
+          text: { format: "plain" }, // << correct parameter
           temperature: 0.4,
           max_output_tokens: 600
         })
@@ -261,10 +256,9 @@ export async function POST(req: NextRequest) {
       );
     }
 
-    // Try to parse JSON → extract text; if parsing fails, return raw as a last resort
     try {
       const data = JSON.parse(raw);
-      const text = extractText(data) || raw; // fallback to raw body if no text field
+      const text = extractText(data) || raw;
       return NextResponse.json({
         mode: userMode,
         result: text,
@@ -272,7 +266,6 @@ export async function POST(req: NextRequest) {
         meta: { kernel_hash, kernel_version, tone, tags }
       });
     } catch {
-      // If the model ever returns non-JSON (rare), still surface it
       return NextResponse.json({
         mode: userMode,
         result: raw || "(no text returned)",
@@ -281,7 +274,7 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // JSON MODES — strict structured outputs
+  // JSON MODES — strict structured outputs (response_format is correct here)
   const schema = schemaFor(userMode);
   if (!schema) {
     return NextResponse.json({ error: { stage: "schema", hint: `Unknown mode: ${userMode}` } }, { status: 400 });
