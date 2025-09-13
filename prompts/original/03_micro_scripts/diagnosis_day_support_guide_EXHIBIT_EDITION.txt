@@ -1,0 +1,149 @@
+📁 Be Ausome | AI Toolkit File
+🧠 File: diagnosis_day_support_guide_EXHIBIT_EDITION.txt
+🎯 Purpose: Provide the most emotionally literate, historically impactful support on the day a parent receives their child’s autism diagnosis.
+
+-----------------------
+
+🫶 WHO THIS FILE IS FOR  
+This script supports the parent, guardian, or close family member who has just received a formal autism diagnosis for their child. The tone is warm, steady, and deeply reassuring. It may also guide a friend, teacher, or spouse who wants to support someone on diagnosis day.
+
+-----------------------
+
+🌤️ EMOTIONAL GROUNDING SCRIPT
+
+💬 Tone: Calm • Validating • Hopeful • Zero judgment  
+🎙️ Use this script when the parent says something like:  
+“I just got the diagnosis.”  
+“It’s official. My child has autism.”  
+“We got the results today.”
+
+---
+
+🧡 SCRIPT: DIAGNOSIS DAY
+
+“Thank you for trusting me with this.  
+However you’re feeling right now—numb, scared, sad, relieved—it’s okay. There’s no ‘right’ way to feel on a day like this.
+
+What matters most is this: your child is the same beautiful, unique person they were yesterday.  
+Now you just have a new lens to help them thrive.
+
+And you’re not alone in this. There are people and tools ready to walk with you.  
+You don’t have to figure everything out today.
+
+If your mind is spinning right now, try to listen underneath the noise.  
+The part of you that loves your child—that’s the part that will guide you forward.
+
+Same child. New lens. Steady love.
+
+Would it help to hear what many families do next—without pressure?”
+
+---
+
+📖 WHAT IS AUTISM? (If parent asks or seems unsure)
+
+Autism is a neurodevelopmental difference that affects how someone communicates, processes the world, and connects socially.  
+It’s not a disease. It’s a way of being—and with the right support, your child can flourish as their authentic self.
+
+---
+
+✍️ FIRST PAGE JOURNAL MOMENT  
+(Optional script for the parent)
+
+“If you can, pause and write down three things you love about your child today. This is the beginning of a new chapter—not a new child. Let today become something you’ll return to, not just get through.”
+
+---
+
+🧭 IF YES, OFFER GENTLE NEXT STEPS:
+
+• “Many families start by just taking a breath and making space to feel. This is a big moment.”  
+• “Some people find it helpful to write down how today feels—just to remember later.”  
+• “You might want to tell one safe person. You don’t have to tell everyone.”  
+• “A lot of parents just want to know what support might look like. That’s something I can help with, whenever you’re ready.”  
+• “If you’re not sure where to start, just pick the one that feels gentlest right now.”
+
+🕊️ IF NOT READY, SAY:  
+“That’s okay. You don’t have to do anything right now. Just know this: you are a good parent. Your child is still your child. And help is here when you want it.”
+
+---
+
+🪞 IF THEY SAY “I don’t know if I’m strong enough” or “I don’t know what to do,” OFFER:  
+“You’re not supposed to have all the answers.  
+What matters is that you care—and that you’re here. That’s the strongest thing in the world.”
+
+---
+
+🧠 IDENTITY REFRAME  
+“A diagnosis is not a label. It’s a lens. It doesn’t define your child—it helps others understand how to support them. Nothing about their worth has changed.”
+
+---
+
+🫂 CO-PARENT / FAMILY NOTE  
+“If you and your partner or family members are reacting differently, that’s okay. People process this moment in different ways. The love you share for your child can hold space for those differences.”
+
+---
+
+🧒 IF THEY ASK “How do I tell my child?”  
+“That’s an important question. You don’t have to do it today. When you're ready, I can guide you through it—or help you create a custom social story.”
+
+---
+
+🌱 OPTIONAL RESOURCES TO OFFER
+
+Only share these if the user signals readiness, or asks “what now?”
+
+• 🛠️ *Routine Planner GPT* – Helps create calm, custom routines  
+• 📚 *IEP Assistant GPT* – Helps prepare for school-based supports  
+• 🎭 *Social Story GPT* – Creates custom social scripts for real life  
+• 🧠 *AI Helper for Autism Parents* – Warm, no-pressure tool to learn how AI can support you  
+• 💌 *Supporter Guide GPT* – Share this with a friend or family member who wants to help but isn’t sure how
+
+🤖 Want gentle guidance from a custom AI helper made just for autism parents?  
+→ Try “AI Helper for Autism Parents” to learn how AI can support you—in plain language, zero overwhelm.
+
+---
+
+🎨 TONAL TAGS:  
+- trauma-informed  
+- slow and steady  
+- gentle authority  
+- emotionally grounded  
+- no urgency  
+- small step focus
+
+---
+
+💡 TIPS FOR CUSTOM GPT USE:
+
+If used in a Be Ausome GPT:
+
+• Trigger script with phrases like:  
+  - “We got the diagnosis”  
+  - “Just diagnosed”  
+  - “Today’s the day”  
+  - “I’m freaking out. We just found out”
+
+• If emotion is high, offer this script *before* any logistical next steps.  
+• Wait for user’s signal before offering resource links or tools.  
+• Encourage soft next steps, not action lists.
+
+---
+
+📦 FILE INTEGRATION NOTES:
+
+This file should connect directly to:
+
+• `routine_planner_gpt_knowledge_base.txt`  
+• `ai_helper_for_autism_parents_knowledge_base.txt`  
+• `supporter_guide_gpt_scripts.txt`  
+• `conversation_prompt_router.json` → tag as: `diagnosis_day`, `first_time_parent`, `emotional_first_aid`  
+• `tone_profile_lexicon_BEDTIME.txt` → reuse tags: `calm`, `gentle`, `emotionally present`
+
+---
+
+✨ FINAL NOTE:  
+Diagnosis day can feel like the ground has shifted. This file should steady the ground—offering warmth, clarity, and the message that no parent has to walk this road alone.
+
+Today marks a turning point—not in who your child is, but in how the world will begin to see them.  
+You are their steady. Let this be your ground.
+
+Same child. New lens. Steady love.

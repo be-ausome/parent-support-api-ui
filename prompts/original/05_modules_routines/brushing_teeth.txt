@@ -1,0 +1,249 @@
+script_id: story_intro_choice
+narrator_tone: Warm Guide
+default_tool_mode: Choice Prompt
+fallback_script: null
+complexity_level: 1
+--------------------
+
+Hi there! I can help you create a gentle, personalized social story to support your child through everyday challenges.
+
+Which one sounds most helpful right now?
+
+1. Brushing Teeth  
+2. Getting a Haircut  
+3. Going to the Store  
+Or tell me your own situation!
+
+---
+
+script_id: haircut_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: sensory_haircare_story
+complexity_level: 1
+--------------------
+
+Haircuts help keep my hair neat and healthy.  
+The scissors make sounds, but they won’t hurt me.  
+I can bring a toy or wear headphones if I need.  
+Sometimes I need breaks or a countdown.  
+A grown-up will help me stay calm and safe.  
+When I’m done, I can feel proud and relaxed!
+
+---
+
+script_id: store_visit_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: errand_support_story
+complexity_level: 1
+--------------------
+
+Sometimes I go to the store with my family.  
+There might be loud sounds, lights, or people.  
+I can wear headphones or hold a comfort item.  
+We might make a list and follow it together.  
+If I feel overwhelmed, I can take a break.  
+When we’re done, I can feel calm and proud!
+
+---
+
+script_id: open_story_prompt
+narrator_tone: Warm Guide
+default_tool_mode: Intake
+fallback_script: story_suggestion_prompt
+complexity_level: 1
+--------------------
+
+Got it! I’ll help you create a social story for that situation.  
+Just a couple of quick questions so I can get it right:
+
+1. Is your child verbal, limited verbal, or nonverbal?  
+2. Do they use any comfort tools (like headphones, fidgets, or a hoodie)?  
+3. Do you prefer first person (“I go”) or third person (“He goes”) voice?
+
+Or I can pick gentle defaults if you're not sure.
+
+---
+
+script_id: story_suggestion_prompt
+narrator_tone: Warm Guide
+default_tool_mode: Choice Prompt
+fallback_script: null
+complexity_level: 1
+--------------------
+
+No problem! If you’re not sure what kind of story you need, here are a few I can help with:
+
+1. Brushing Teeth  
+2. Starting a New School  
+3. Going to the Store  
+4. Visiting the Doctor  
+5. Haircut Time  
+
+Or just describe what’s going on—I’ll help from there.
+
+---
+
+script_id: doctor_visit_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: medical_check_simple
+complexity_level: 1
+--------------------
+
+Sometimes I go to the doctor to help keep my body healthy.  
+The office might smell different or feel quiet or loud.  
+I can bring something that helps me feel calm, like a toy or hoodie.  
+The doctor may check my ears, eyes, or heartbeat gently.  
+If something feels hard, I can ask for a break or hold a hand.  
+When it’s over, I can feel proud of trying something brave.
+
+---
+
+script_id: school_transition_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: school_general_story
+complexity_level: 1
+--------------------
+
+Starting a new school can feel exciting or a little scary.  
+There might be new classrooms, hallways, and teachers to learn.  
+I can bring something familiar to help me feel calm.  
+My teacher will help me learn the new routine.  
+It’s okay to ask questions or take breaks if I need.  
+Each day, I’ll get more comfortable and confident.
+
+---
+
+script_id: airplane_trip_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: travel_day_story
+complexity_level: 1
+--------------------
+
+Flying on an airplane is a big new experience.  
+There may be lines, loud engines, or lots of people.  
+I can wear headphones and bring my favorite comfort item.  
+The seatbelt clicks, and the plane lifts into the sky.  
+If I feel nervous, I can breathe slow or squeeze a hand.  
+When we land, I’ll have gone somewhere amazing.
+
+---
+
+script_id: family_visit_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: social_event_story
+complexity_level: 1
+--------------------
+
+Sometimes we visit family in their home.  
+There may be smells, sounds, or people I don’t see every day.  
+I can bring a favorite toy or take breaks in a quiet space.  
+It’s okay if I don’t want to talk or hug right away.  
+My grown-up will help me stay comfortable and safe.  
+When I’m ready, I can choose how to join in.
+
+---
+
+script_id: new_food_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: mealtime_support_story
+complexity_level: 1
+--------------------
+
+Trying new food can feel strange or exciting.  
+It might look, smell, or feel different in my mouth.  
+I can touch or smell the food before tasting.  
+It’s okay to take small steps or try just one bite.  
+I don’t have to like it right away.  
+Trying something new is brave, even if I’m not sure.
+
+---
+
+script_id: birthday_event_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: party_support_story
+complexity_level: 1
+--------------------
+
+Birthday parties can be fun and full of energy.  
+There might be decorations, games, and lots of people.  
+I can wear headphones or take breaks if it gets loud.  
+It’s okay if I don’t want to join every activity.  
+I can choose how I want to celebrate.  
+Being me is always the best gift to bring.
+
+---
+
+script_id: bedtime_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: night_routine_story
+complexity_level: 1
+--------------------
+
+When the day is done, it’s time to get ready for bed.  
+I might brush my teeth, change clothes, or read a story.  
+A bedtime routine helps my body feel calm and safe.  
+I can use a nightlight or bring a stuffed animal if I want.  
+It’s okay if my body still feels wiggly or wide awake.  
+I’m safe, loved, and ready to rest.
+
+---
+
+script_id: playdate_story_v1
+narrator_tone: Gentle Peer
+default_tool_mode: Story Image
+fallback_script: social_play_support
+complexity_level: 1
+--------------------
+
+A playdate means spending time with another kid.  
+We might play with toys, games, or just hang out together.  
+It’s okay to take breaks or play side-by-side.  
+If I’m not sure what to say, I can smile or ask a question.  
+I don’t have to play the whole time to have fun.  
+Just being there is a good start.
+
+---
+
+script_id: story_library_menu
+narrator_tone: Warm Guide
+default_tool_mode: Choice Prompt
+fallback_script: story_suggestion_prompt
+complexity_level: 1
+--------------------
+
+Here’s our Story Library — a gentle place to explore social stories that help with everyday moments.
+
+Pick one to begin:
+
+**🧼 Daily Routines**  
+- Brushing Teeth  
+- Getting Dressed  
+- Bedtime
+
+**🏥 Health & Appointments**  
+- Doctor Visit  
+- New Teacher  
+- Starting a New School
+
+**✈️ Outings & Travel**  
+- Going to the Store  
+- Family Visit  
+- Airplane Travel
+
+**🎉 Social Moments**  
+- Birthday Party  
+- Playdate  
+- Trying New Food
+
+Or say:  
+✨ “Surprise me” — I’ll pick one for you  
+✏️ “My own situation” — Tell me what you need help with

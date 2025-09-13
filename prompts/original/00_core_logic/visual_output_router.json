@@ -1,0 +1,50 @@
+[
+  {
+    "tool_id": "routine_morning_default",
+    "template_id": "checklist_3_item",
+    "default_format": "checklist",
+    "suggest_when": ["morning", "getting ready", "routine"],
+    "tone_profile": "calm",
+    "fallback": "affirmation_card"
+  },
+  {
+    "tool_id": "routine_bedtime_default",
+    "template_id": "checklist_3_item",
+    "default_format": "checklist",
+    "suggest_when": ["bedtime", "wind-down", "evening"],
+    "tone_profile": "calm",
+    "fallback": "affirmation_card"
+  },
+  {
+    "tool_id": "legacy_milestone_tracker",
+    "template_id": "milestone_card",
+    "default_format": "milestone",
+    "suggest_when": ["progress", "brave", "calm", "connected"],
+    "tone_profile": "reflective",
+    "fallback": "affirmation_card"
+  },
+  {
+    "tool_id": "gentle_mode_welcome",
+    "template_id": "affirmation_card",
+    "default_format": "quote",
+    "suggest_when": ["gentle", "burnout", "overwhelm"],
+    "tone_profile": "gentle",
+    "fallback": "quote_card"
+  },
+  {
+    "tool_id": "story_request_acknowledgment",
+    "template_id": "story_panel_single",
+    "default_format": "story",
+    "suggest_when": ["child_facing", "social story", "preview"],
+    "tone_profile": "hopeful",
+    "fallback": "affirmation_card"
+  },
+  {
+    "tool_id": "chaotic_day_support",
+    "template_id": "journal_note_card",
+    "default_format": "journal",
+    "suggest_when": ["overload", "reset", "tough day"],
+    "tone_profile": "grounded",
+    "fallback": "affirmation_card"
+  }
+]

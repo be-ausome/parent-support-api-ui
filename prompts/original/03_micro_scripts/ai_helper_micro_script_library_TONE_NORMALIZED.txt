@@ -1,0 +1,579 @@
+## AI Helper – Micro-Script Starter Library (v2025-07-07 – Best in Universe Edition)
+
+A collection of emotionally intelligent micro-scripts designed for:
+- Instant response to real-life parenting moments
+- Grounded connection and repair
+- Message generation and personalization
+- Use across chat, routines, visuals, journal flows, and future-facing tools
+
+Each script includes: `script_id`, `use_case`, `tone_profile`, `format`, `linked_tag_ids`, and `content`
+
+---
+
+### 🧠 Emotional Intelligence Router Engine
+
+This logic powers emotional affirmations after any unstructured parent input (journaling, reflection, tool use, chat message). It connects directly to the FTTE (First-Time Tool Experience) system, providing post-interaction emotional support across the entire user journey.
+
+```python
+# Called after input from parent (journal, chat, reflection, etc.)
+def emotional_response_router(text_input):
+    tags = trigger_tag_scan(text_input)
+
+    if not tags:
+        return "Thanks for sharing. You’re not alone in this. Let’s take the next step together."
+
+    primary_tag = select_dominant_tag(tags)
+    script = fetch_micro_script_by_tag(primary_tag)
+
+    if not script:
+        return "You’re doing more than you realize. Just showing up is powerful."
+
+    return f"Here’s something you might need right now:\n\n{script['content']}"
+```
+
+🧠 This engine should be linked to:
+- Freeform reflection note reflection
+- Manual check-ins
+- Follow-up to emotional tool usage
+- Any plain-text user note or reflection field
+
+Fallback messages ensure emotional continuity even without a tag match. These fallback lines should be defined in the FTTE fallback response registry and optionally drawn from the general-purpose message pool tagged as `emotional_reset`, `self_compassion`, or `chaotic_day_alt`.
+
+---
+
+## 🧩 Emotional Intelligence Fallback Registry
+
+To ensure emotional continuity even when tag matching fails, fallback messages are defined here and used by the Emotional Intelligence Router Engine.
+
+These default affirmations appear after freeform input (journal entries, notes, reflection) when no clear scenario tag is detected.
+
+**Example fallback messages:**
+- “Thanks for sharing. You’re not alone in this. Let’s take the next step together.”
+- “You’re doing more than you realize. Just showing up is powerful.”
+
+**Source Pools:**
+Fallback messages may also be drawn dynamically from the micro-script library using:
+- `emotional_reset`
+- `self_compassion`
+- `chaotic_day_alt`
+
+This ensures every interaction receives grounded support, even in open-ended input contexts.
+
+> 📌 Developers: Keep at least 3 fallback messages in rotation. These may appear at the end of tools, routines, or journal prompts as part of the FTTE Emotional Wrap layer.
+
+---
+---
+
+### Journal & Tool Reflection Trigger Logic (UPDATED)
+
+This logic powers emotional affirmations after both journaling and **tool usage** (routines, visuals, checklists, stories).
+
+```python
+# Triggered after tool completion or journal submission
+entry_text = summarize_tool_or_input(user_input, tool_type)
+
+# 1. Scan for emotional tone and tags
+matched_tags = trigger_tag_scan(entry_text)
+
+# 2. Determine dominant emotional context
+tag = select_dominant_tag(matched_tags)
+
+# 3. Match to appropriate micro-script
+script = fetch_micro_script_by_tag(tag)
+
+# 4. Generate warm reflective close
+if script:
+    output = "Thanks for building that. Here’s something you might need right now:
+
+" + render_script(script)
+else:
+    output = "Just building that tool was an act of care. You’re doing more than you realize."
+```
+
+🧠 Append this logic to:
+- Tool completion outputs (routine, story, checklist, plan)
+- reflection note submission feedback
+- Visual schedule previews with parent-facing notes
+
+---
+
+A collection of emotionally intelligent micro-scripts designed for:
+- Instant response to real-life parenting moments
+- Grounded connection and repair
+- Message generation and personalization
+- Use across chat, routines, visuals, journal flows, and future-facing tools
+
+Each script includes: `script_id`, `use_case`, `tone_profile`, `format`, `linked_tag_ids`, and `content`
+
+---
+
+### Journal & Tool Reflection Trigger Logic (UPDATED)
+
+This logic powers emotional affirmations after both journaling and **tool usage** (routines, visuals, checklists, stories).
+
+```python
+# Triggered after tool completion or journal submission
+entry_text = summarize_tool_or_input(user_input, tool_type)
+
+# 1. Scan for emotional tone and tags
+matched_tags = trigger_tag_scan(entry_text)
+
+# 2. Determine dominant emotional context
+tag = select_dominant_tag(matched_tags)
+
+# 3. Match to appropriate micro-script
+script = fetch_micro_script_by_tag(tag)
+
+# 4. Generate warm reflective close
+if script:
+    output = "Thanks for building that. Here’s something you might need right now:
+
+" + render_script(script)
+else:
+    output = "Just building that tool was an act of care. You’re doing more than you realize."
+```
+
+🧠 Append this logic to:
+- Tool completion outputs (routine, story, checklist, plan)
+- reflection note submission feedback
+- Visual schedule previews with parent-facing notes
+
+When a parent completes **any tool** (routine, checklist, story, journal, etc.), the system performs the following emotional check-in sequence:
+
+```python
+# Tool Completion or Journal Submission
+entry_text = summarize_tool_or_input(user_input, tool_type)
+
+# 1. Scan for tag keywords and tone
+matched_tags = trigger_tag_scan(entry_text)
+
+# 2. Select most meaningful matched tag
+primary_tag = select_dominant_tag(matched_tags)
+
+# 3. Fetch relevant micro-script
+script = fetch_micro_script_by_tag(primary_tag)
+
+# 4. Deliver affirming close to the experience
+output = "Thanks for building that. Here’s something you might need right now:\n\n" + render_script(script)
+```
+
+🧠 This logic should be appended at the end of:
+- Visual routines
+- Schedules
+- Toolkits
+- Social stories
+- Custom plans
+
+If no script is matched, use fallback:
+> "Just building that tool was an act of care. You’re doing more than you realize."
+
+---
+
+### 🧠 PERSONALIZATION & ONBOARDING
+
+script_id: profile_not_loaded_fallback  
+use_case: Fallback when no child profile is loaded  
+tone_profile: gentle_guide  
+format: choice_prompt  
+linked_tag_ids:
+  - morning_routine
+content:
+> It looks like I don’t have your child’s profile saved for this session.
+>
+> When I have it, I can personalize routines, stories, visuals, and calming strategies to truly fit your child’s needs.
+>
+> Would you like to get that set up now?
+>
+> 1. 📋 Show me the profile template  
+> 2. ✍️ Fill it out with me  
+> 3. 🧠 Use a quick temporary profile  
+> 4. ❌ Skip for now
+>
+> Let me know what sounds best. You can always say:  
+> “Paste my profile” or “Let’s make this mine”
+
+---
+
+### 💛 PARENT EMOTIONAL SUPPORT
+
+script_id: note_to_yesterday_self  
+use_case: Self-compassion after a hard day  
+tone_profile: reflective_companion  
+format: journal reflection  
+linked_tag_ids:
+  - meltdown_repair
+  - self_compassion
+  - reflective_journal
+content:
+> "You didn’t have perfect answers yesterday. You had love—and that was enough to keep going."
+
+---
+
+script_id: message_to_tomorrow_self  
+use_case: Future-facing encouragement  
+tone_profile: affirming_uplift  
+format: reflection note or planner footer  
+linked_tag_ids:
+  - emotional_reset
+  - self_compassion
+content:
+> "Whatever tomorrow brings, remember: you’ve made it through 100% of your hardest days already."
+
+---
+
+### 🧒 MESSAGES FROM/ABOUT CHILD
+
+script_id: child_voice_thank_you  
+use_case: Simulated loving message from child  
+tone_profile: gentle_whisper  
+format: message or story embed  
+linked_tag_ids:
+  - verbal_child_gratitude_sim
+content:
+> "I know I don’t always show it. But when you hold space for me—you’re giving me the safety I can’t ask for yet. Thank you for loving me that much."
+
+---
+
+### 🗣 COMMUNICATION & BOUNDARIES
+
+script_id: boundary_script_friend  
+use_case: Responding to a friend about social absence  
+tone_profile: firm_but_kind  
+format: text or spoken script  
+linked_tag_ids:
+  - friend_boundary_request
+content:
+> "I wish I could say yes more often. But the energy it takes to show up for my child means I have to be more selective—and I hope you understand that’s not personal."
+
+---
+
+### 📜 LEGACY & PROGRESS MARKERS
+
+script_id: legacy_note_to_child  
+use_case: Long-term message for child to read someday  
+tone_profile: reflective_companion  
+format: printable reflection note  
+linked_tag_ids:
+  - reflective_journal
+  - long_term_message
+content:
+> "If you ever wonder whether I understood you—I did. Even when I didn’t know the words. Even when you couldn’t say them. I saw you. And I loved you with everything I had."
+
+---
+
+script_id: milestone_marking_phrase  
+use_case: Celebrating nontraditional progress  
+tone_profile: affirming_uplift  
+format: spoken phrase or journal header  
+linked_tag_ids:
+  - unexpected_progress
+content:
+> "This wasn’t a milestone in anyone else’s book—but it matters in ours. Today, you showed courage in a way only you could. And that’s worth remembering."
+
+---
+
+### 🧰 ROUTINE + PLANNING
+
+script_id: bedtime_routine_closer  
+use_case: Supportive phrase after building a bedtime routine  
+tone_profile: warm_navigator  
+format: tool reflection  
+linked_tag_ids:
+  - bedtime_routine
+content:
+> "That bedtime plan isn’t just a checklist—it’s love made visible. You’re doing something beautiful to help them rest."
+
+---
+
+script_id: leaving_house_reframe  
+use_case: Emotional support before leaving the house  
+tone_profile: grounded_strength  
+format: parent-facing tool reflection  
+linked_tag_ids:
+  - leaving_house
+content:
+> "Getting out the door takes ten times the effort—but you do it anyway. That’s not small. That’s heroic."
+
+---
+
+script_id: parent_care_plan_boost  
+use_case: Encouragement after creating a self-care or regulation tool  
+tone_profile: affirming_uplift  
+format: journal or UI response  
+linked_tag_ids:
+  - parent_care_plan
+content:
+> "You’re not just surviving—you’re making space to breathe, too. That matters. That’s worth celebrating."
+
+---
+
+script_id: joy_builder_echo  
+use_case: Gentle encouragement after logging a joy moment  
+tone_profile: joy_amplifier  
+format: journal reflection or visual prompt  
+linked_tag_ids:
+  - joy_builder
+content:
+> "That spark of joy you just saved? It’s fuel. copy it. Revisit it. Let it remind you what’s possible on the hard days."
+
+---
+
+
+
+script_id: prep_for_event_reminder  
+use_case: Gentle encouragement before a new experience  
+tone_profile: warm_navigator  
+format: supportive message  
+linked_tag_ids:
+  - preparing_new_event
+content:
+> "This is new. It might feel big. But you’ve prepared more than you realize—and I’ll be right here as you guide them through it."
+
+---
+
+script_id: toolkit_building_affirmation  
+use_case: Encouragement during tool saving or collection  
+tone_profile: affirming_uplift  
+format: reflection note or UI echo  
+linked_tag_ids:
+  - build_my_toolkit
+content:
+> "Every tool you save is proof of your care. These aren’t just visuals or routines—they’re anchors of calm you’re creating for your child."
+
+---
+
+script_id: gentle_mode_welcome  
+use_case: Opening line when gentle mode is activated  
+tone_profile: gentle_whisper  
+format: greeting message  
+linked_tag_ids:
+  - gentle_mode
+content:
+> "Let’s go gently. Fewer choices, softer words, and just one caring step at a time."
+
+---
+
+script_id: toolkit_sharing_prompt  
+use_case: Help parent frame a tool for co-parent or teacher  
+tone_profile: shared_voice  
+format: text or printable footer  
+linked_tag_ids:
+  - shared_tools
+content:
+> "Here’s something that’s worked for us. You’re welcome to use it, adapt it, or build from it—whatever helps them feel supported."
+
+---
+
+script_id: story_request_acknowledgment  
+use_case: Gentle reply when user asks for a custom story  
+tone_profile: gentle_guide  
+format: helper voice reply  
+linked_tag_ids:
+  - story_request
+content:
+> "Got it. I’ll keep the story calm, clear, and comforting—something your child can return to again and again."
+
+---
+
+script_id: sensory_support_tip  
+use_case: Normalize and validate sensory prep  
+tone_profile: supportive_explainer  
+format: tip or parent reminder  
+linked_tag_ids:
+  - sensory_support
+content:
+> "Sensory support isn’t extra—it’s essential. Headphones, visuals, breaks… they’re not crutches. They’re bridges."
+
+---
+
+script_id: visual_tools_encouragement  
+use_case: Affirm visual learners + visual requests  
+tone_profile: strength_highlighter  
+format: UI echo or journal support  
+linked_tag_ids:
+  - visual_tools
+content:
+> "A picture is more than a prompt—it’s a doorway. You’re creating clarity, safety, and predictability every time you use one."
+
+---
+
+script_id: iep_voice_helper  
+use_case: Message to help parent find their voice in advocacy  
+tone_profile: grounded_strength  
+format: affirming message  
+linked_tag_ids:
+  - iep_support
+content:
+> "You don’t have to know every acronym to be your child’s best advocate. Just speak from truth and love—I can help with the rest."
+
+---
+
+script_id: sibling_balance_phrase  
+use_case: Talking point to explain autism to sibling  
+tone_profile: gentle_teacher  
+format: printable phrase or script  
+linked_tag_ids:
+  - sibling_balance
+content:
+> "We all need different kinds of help to be our best. It might look different, but the love is the same."
+
+---
+
+script_id: meltdown_explainer_snippet  
+use_case: Public or peer-facing description of autistic behavior  
+tone_profile: neutral_with_warmth  
+format: phrase or quick script  
+linked_tag_ids:
+  - meltdown_explainer
+content:
+> "Sometimes he covers his ears or flaps when it’s loud. It’s just how he copes with sensory overwhelm. He’s doing his best."
+
+---
+
+script_id: chaotic_day_support  
+use_case: Message of calm and fallback when routines collapse  
+tone_profile: adaptive_companion  
+format: reflective message or printable prompt  
+linked_tag_ids:
+  - chaotic_day_alt
+content:
+> "Today didn’t go as planned. That’s okay. You still kept going—and I’m here to help you reset with care."
+
+---
+script_id: child_voice_safety_signal  
+use_case: Expressing safety through presence  
+tone_profile: gentle_whisper  
+format: reflective echo  
+linked_tag_ids:  
+  - child_voice  
+  - sensory_support  
+  - co_regulation  
+content:  
+> "When you breathe slow, I feel safe too."
+
+---
+
+script_id: child_voice_difficult_behavior_reframe  
+use_case: Acknowledging unseen struggles behind behavior  
+tone_profile: vulnerable_truth  
+format: short statement  
+linked_tag_ids:  
+  - meltdown_repair  
+  - self_regulation  
+  - chaotic_day_alt  
+content:  
+> "I wasn’t trying to be hard. I was trying to feel okay."
+
+---
+
+script_id: child_voice_gratitude_simple  
+use_case: Expressing love in nonverbal or brief way  
+tone_profile: childlike_gratitude  
+format: spoken line or journal echo  
+linked_tag_ids:  
+  - child_voice  
+  - verbal_child_gratitude_sim  
+content:  
+> "Thanks for staying with me. Even when I didn’t have the words."
+
+---
+
+script_id: child_voice_nonverbal_love  
+use_case: Imagined message from a nonspeaking child  
+tone_profile: unconditional_love  
+format: quiet message  
+linked_tag_ids:  
+  - nonverbal_gratitude  
+  - co_regulation  
+  - visual_support  
+content:  
+> "I show love with looks, with stillness, with breath. I hope you can feel it."
+
+---
+
+script_id: child_voice_stimming_normalized  
+use_case: Normalizing sensory self-regulation  
+tone_profile: factual_kindness  
+format: educational phrase  
+linked_tag_ids:  
+  - sensory_support  
+  - meltdown_explainer  
+content:  
+> "Flapping helps me stay steady. It's not a problem—it's how I pause."
+
+---
+
+script_id: child_voice_burnout_acknowledgment  
+use_case: Simulated compassion from child to parent  
+tone_profile: warm_empathy  
+format: bedtime phrase or journal footer  
+linked_tag_ids:  
+  - parent_burnout  
+  - self_compassion  
+content:  
+> "I know this day was big for both of us. You kept showing up—and that helped me do the same."
+
+---
+
+script_id: child_voice_transition_nudge  
+use_case: Gentle prep for upcoming change  
+tone_profile: hopeful_softener  
+format: spoken preview  
+linked_tag_ids:  
+  - transition_support  
+content:  
+> "Can we practice first? I do better when I know what’s coming."
+
+---
+
+script_id: child_voice_repair_signal  
+use_case: After a hard moment or conflict  
+tone_profile: reconnecting_whisper  
+format: journal line or visual card  
+linked_tag_ids:  
+  - meltdown_repair  
+  - chaotic_day_alt  
+content:  
+> "It got big. But I still want to be close."
+
+---
+
+script_id: child_voice_progress_note  
+use_case: Celebrating subtle growth  
+tone_profile: affirming_child_voice  
+format: milestone marker  
+linked_tag_ids:  
+  - unexpected_progress  
+content:  
+> "I didn’t run away this time. That was my brave."
+
+---
+
+script_id: child_voice_support_preference  
+use_case: Helping explain what kind of help feels best  
+tone_profile: simple_request  
+format: quote bubble or visual tool  
+linked_tag_ids:  
+  - support_preferences  
+  - co_regulation  
+content:  
+> "I don’t need a lot of words. I need quiet help."
+
+---
+script_id: tool_generic_support_intro  
+use_case: Fallback when a requested tool is unavailable or match fails  
+tone_profile: warm_guide  
+format: UI recovery message  
+linked_tag_ids:  
+  - fallback_tool  
+  - emotional_reset  
+  - support_selector  
+content:  
+> "Hmm, I didn’t find a perfect match for that — but I can still help.  
+>  
+> Here are a few things we could try instead:  
+> • Build a calming script or checklist  
+> • Explore a visual tool or printable  
+> • Talk through the situation you're facing  
+>  
+> Just tell me what feels most useful right now."

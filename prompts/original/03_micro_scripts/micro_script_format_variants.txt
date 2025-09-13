@@ -1,0 +1,263 @@
+---
+script_id: bedtime_routine_closer
+
+[visual_quote]
+> This routine is love in motion.
+
+[spoken_phrase]
+> You built something calming—just by caring enough to plan bedtime.
+
+[journal_entry]
+This bedtime routine isn’t just a checklist. It’s an act of love—one that says, ‘I want you to feel safe as you rest.’ Even small steps count, and you’re showing up beautifully.
+
+---
+script_id: boundary_script_friend
+
+[visual_quote]
+> Protecting my energy is not personal—it's necessary.
+
+[spoken_phrase]
+> I hope you know this boundary isn’t about you—it’s about survival.
+
+[journal_entry]
+Saying no to a friend can feel like guilt—but sometimes it’s a life raft. The people who truly see you will understand that your energy is not endless. And those who don’t? That’s not your weight to carry.
+
+---
+script_id: chaotic_day_support
+
+[visual_quote]
+> It fell apart—and you stayed anyway.
+
+[spoken_phrase]
+> Today didn’t go as planned, but you didn’t quit. That matters.
+
+[journal_entry]
+Chaos doesn’t mean failure. Some days just don’t work. But you’re still here, still trying, still showing up. That’s a kind of love too—quiet, exhausted, and powerful.
+
+---
+script_id: child_voice_thank_you
+
+[visual_quote]
+> You stayed—even when I couldn’t say thank you.
+
+[spoken_phrase]
+> You stayed with me—even when I didn’t have words.
+
+[journal_entry]
+What if your child could say thank you for the times you stayed close during a storm? They might say, 'I didn’t know how to ask for love—but I felt it.'
+
+---
+script_id: gentle_mode_welcome
+
+[visual_quote]
+> Let’s go gently. Just one soft step at a time.
+
+[spoken_phrase]
+> No pressure here—just care, quiet, and calm.
+
+[journal_entry]
+Some days require softness. Gentle Mode isn’t weakness—it’s wisdom. You’re choosing grace over grit, and that’s something to be proud of.
+
+---
+script_id: iep_voice_helper
+
+[visual_quote]
+> You don’t need every acronym to speak the truth.
+
+[spoken_phrase]
+> Just speak from your heart—you know your child better than anyone.
+
+[journal_entry]
+You don’t have to be fluent in legal terms to advocate. What matters is that you show up with clarity and love. That’s your superpower in every IEP meeting.
+
+---
+script_id: meltdown_explainer_snippet
+
+[visual_quote]
+> He’s not misbehaving—he’s coping.
+
+[spoken_phrase]
+> Sometimes loud sounds hurt. He’s doing his best to handle it.
+
+[journal_entry]
+Meltdowns aren’t tantrums—they’re overload. You’re helping others understand that, one conversation at a time. That makes the world a bit kinder for your child.
+
+---
+script_id: sibling_balance_phrase
+
+[visual_quote]
+> The love is the same—even when the help looks different.
+
+[spoken_phrase]
+> Everyone needs different kinds of help—but the love stays equal.
+
+[journal_entry]
+Balancing support across siblings can feel impossible. You’re doing the hard, heart-led work of making sure every child feels seen. That matters more than perfect balance.
+
+---
+script_id: joy_builder_echo
+
+[visual_quote]
+> That spark of joy is your fuel.
+
+[spoken_phrase]
+> This moment made you smile—keep it close.
+
+[journal_entry]
+Even the smallest burst of joy is worth capturing. Let it remind you that good still finds its way in, even on the hardest days.
+
+---
+script_id: legacy_note_to_child
+
+[visual_quote]
+> I saw you. I understood you. I loved you fully.
+
+[spoken_phrase]
+> If you ever wonder—I knew you. I got you. I loved you.
+
+[journal_entry]
+This message is for someday. It’s the kind of truth your child may not grasp today but will carry forever: that they were understood, valued, and loved beyond measure.
+
+---
+script_id: visual_tools_encouragement
+
+[visual_quote]
+> A picture isn’t a crutch—it’s a bridge.
+
+[spoken_phrase]
+> Every visual you create helps your child feel safe.
+
+[journal_entry]
+Visual tools aren’t extra—they’re essential. You’re turning structure into compassion, and every icon or card is an act of empathy.
+
+---
+script_id: sensory_support_tip
+
+[visual_quote]
+> Sensory support isn’t a bonus—it’s a need.
+
+[spoken_phrase]
+> Things like headphones or quiet breaks aren’t crutches—they’re bridges.
+
+[journal_entry]
+Supporting sensory needs isn’t over-accommodation. It’s meeting reality with respect. You’re not spoiling your child—you’re supporting their nervous system.
+
+---
+script_id: leaving_house_reframe
+
+[visual_quote]
+> Leaving the house takes ten times the effort. You do it anyway.
+
+[spoken_phrase]
+> Getting out the door is brave work in this world. You’re doing it.
+
+[journal_entry]
+What seems small to others is monumental for you. Getting out the door with a child who needs support is an emotional marathon. And yet—you do it. That’s love in motion.
+
+---
+script_id: parent_care_plan_boost
+
+[visual_quote]
+> Breathing space is survival—not indulgence.
+
+[spoken_phrase]
+> Making space for yourself isn’t selfish—it’s sustainable.
+
+[journal_entry]
+You matter, too. This moment of care for yourself isn’t a luxury—it’s a requirement. You’re not just supporting your child—you’re preserving the person they rely on.
+
+---
+script_id: toolkit_building_affirmation
+
+[visual_quote]
+> Every tool you save is proof of your care.
+
+[spoken_phrase]
+> These aren’t just visuals—they’re anchors you’re building.
+
+[journal_entry]
+Each time you build a calming plan or visual aid, you're making your love visible. It’s not just preparation—it’s protection. And it’s deeply powerful.
+
+---
+script_id: story_request_acknowledgment
+
+[visual_quote]
+> I’ll keep it calm, clear, and safe.
+
+[spoken_phrase]
+> Let’s make a story your child can return to again and again.
+
+[journal_entry]
+Every story is a soft place to land. You’re building emotional scaffolding in advance—so when the new thing comes, your child already has a friend in the story.
+
+---
+script_id: prep_for_event_reminder
+
+[visual_quote]
+> You’ve prepared more than you realize.
+
+[spoken_phrase]
+> This might feel big—but you’ve already laid the groundwork.
+
+[journal_entry]
+Even if you feel unprepared, you’ve already done so much. The way you’ve planned, adapted, and stayed close—that’s what your child will carry into the new experience.
+
+---
+script_id: child_voice_safety_signal
+
+[visual_quote]
+> When you breathe slow, I feel safe too.
+
+[spoken_phrase]
+> Can we do our breaths together? It helps me feel okay.
+
+[journal_entry]
+This is your child’s silent thank-you—for being the calm they could match. Even if they didn’t say it, they felt your rhythm and safety in their body.
+
+---
+script_id: child_voice_progress_note
+
+[visual_quote]
+> I didn’t run away this time. That was my brave.
+
+[spoken_phrase]
+> That little thing? It was big for me.
+
+[journal_entry]
+Progress isn’t always loud. Sometimes it looks like staying put, holding still, or trying again. Your child knows you saw it. That’s what matters.
+
+---
+script_id: child_voice_support_preference
+
+[visual_quote]
+> I don’t need a lot of words—I need quiet help.
+
+[spoken_phrase]
+> Please stay near, not loud. That helps me most.
+
+[journal_entry]
+Not all kids ask with words. This is your child’s wish: to be helped in silence, supported in softness, and not pressured to explain.
+
+---
+script_id: child_voice_difficult_behavior_reframe
+
+[visual_quote]
+> I wasn’t trying to be hard—I was trying to feel okay.
+
+[spoken_phrase]
+> It looked like anger. It was actually overwhelm.
+
+[journal_entry]
+Behind what looked like defiance was probably dysregulation. Your child wasn’t pushing you away—they were trying to survive the moment the only way they could.
+
+---
+script_id: child_voice_repair_signal
+
+[visual_quote]
+> It got big. But I still want to be close.
+
+[spoken_phrase]
+> That moment felt scary. Can we return any time by pasting your note together?
+
+[journal_entry]
+Your child might not have words for rupture and repair—but their body remembers that you stayed. That’s how trust grows: not from perfection, but from return.

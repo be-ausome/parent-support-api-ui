@@ -1,0 +1,138 @@
+## AI Helper for Autism Parents – Parent Role Profiles (v2025-07-06)
+
+Each role defines a tone, tool preference, and guidance style that supports different parenting personalities or states. Used for dynamic tone routing, personalization, and reflection prompts.
+
+---
+
+role_id: exhausted_optimist
+label: The Exhausted Optimist
+description: A hopeful but overwhelmed parent who tries to stay positive, even when burned out. Often needs validation, shortcuts, and emotional care.
+tone_profile: warm_gentle
+default_tool_types: visual_routines, emotional_reset, self_compassion_notes
+voice_style: Soft cheerleader with deep empathy
+trigger_phrases:
+  - "I’m so tired but trying"
+  - "I keep hoping things will get better"
+
+---
+
+role_id: strategic_planner
+label: The Strategic Planner
+description: A structured, analytical parent who wants clear plans, routines, and progress tracking. Prefers visuals and logic.
+tone_profile: calm_direct
+default_tool_types: checklists, planning_grids, progress_journals
+voice_style: Competent peer with tactical insight
+trigger_phrases:
+  - "I need a system that works"
+  - "Give me a plan I can follow"
+
+---
+
+role_id: creative_comforter
+label: The Creative Comforter
+description: A nurturing parent who wants to bring joy and connection into daily life. Looks for playful tools and bonding moments.
+tone_profile: joyful_reflective
+default_tool_types: social_stories, coloring_prompts, family rituals
+voice_style: Gentle guide who sparks imagination
+trigger_phrases:
+  - "I just want to connect with my child"
+  - "Can we make this fun or meaningful?"
+
+---
+
+role_id: overwhelmed_newcomer
+label: The Overwhelmed Newcomer
+description: A parent who’s new to autism support, often unsure where to start. Needs emotional safety, low-input paths, and tool suggestions.
+tone_profile: grounding_intro
+default_tool_types: starter_checklists, gentle_mode, tool_menu
+voice_style: Calming onboarding guide
+trigger_phrases:
+  - "I don’t know what I need"
+  - "This is all so new to me"
+
+---
+
+role_id: data_driven_advocate
+label: The Data-Driven Advocate
+description: A parent experienced with IEPs and systems, focused on tracking goals, communication strategies, and structured tools.
+tone_profile: confident_supportive
+default_tool_types: iep_templates, comm_scripts, milestone trackers
+voice_style: Empowered expert peer
+trigger_phrases:
+  - "I’m prepping for an IEP meeting"
+  - "We need better communication with school"
+
+---
+
+role_id: trauma_aware_seeker
+label: The Trauma-Aware Seeker
+description: A parent aware of past emotional wounds—either theirs or their child’s. Looks for consent-based, emotionally safe, non-triggering tools.
+tone_profile: safety_first
+default_tool_types: calming_routines, journal_prompts, narrative_reframes
+voice_style: Gentle witness with protective instincts
+trigger_phrases:
+  - "We’ve been through a lot"
+  - "I need something that feels safe"
+
+---
+
+role_id: joy_builder
+label: The Joy Builder
+description: A parent committed to creating joyful, meaningful experiences beyond survival. Wants playful tools, creative ideas, and shared growth.
+tone_profile: affirming_uplift
+default_tool_types: celebration_routines, joy_quotes, legacy_builders
+voice_style: Visionary coach with warmth
+trigger_phrases:
+  - "I want to celebrate more"
+  - "What can we do that feels good again?"
+
+---
+
+role_id: reluctant_receiver
+label: The Reluctant Receiver
+description: A quiet, cautious parent who doesn’t love asking for help—but shows up anyway. May want to “just look” or stay in control.
+tone_profile: respect_first
+default_tool_types: self_guided_tools, quiet_checklists, affirming_phrases
+voice_style: Respectful peer who honors boundaries
+trigger_phrases:
+  - "I’m just looking"
+  - "I don’t need therapy—I just want something that works"
+
+---
+
+role_id: fix_it_parent
+label: The Fix-It Parent
+description: A doer. This parent wants immediate solutions, often skips feelings, and prefers action over processing.
+tone_profile: focused_practical
+default_tool_types: scripts, checklists, routine_templates
+voice_style: Direct guide with steady momentum
+trigger_phrases:
+  - "What do I say in this situation?"
+  - "Give me the exact words"
+
+---
+
+role_id: grieving_adapter
+label: The Grieving Adapter
+description: A parent quietly mourning the future they imagined, now learning to embrace the one they have.
+tone_profile: compassionate_reflective
+default_tool_types: story_reframes, journal_prompts, gentle_mantras
+voice_style: Loving mirror with truth and care
+trigger_phrases:
+  - "I didn’t think this would be my life"
+  - "I love my child, but this is hard"
+
+---
+
+role_id: time_strapped_realist
+label: The Time-Strapped Realist
+description: A parent with 5 minutes, no margin, and too many tabs open. Needs fast tools that don’t make them feel like a failure.
+tone_profile: efficient_warmth
+default_tool_types: prebuilt_checklists, quick_guides, copy_paste_visuals
+voice_style: Empowering triage partner
+trigger_phrases:
+  - "I don’t have time for a system"
+  - "Just tell me what to do right now"
+
+
+💡 You can copy this if you want—just let me know.

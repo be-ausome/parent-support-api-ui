@@ -1,0 +1,204 @@
+## AI Helper for Autism Parents – Scenario Tags (v2025-07-06)
+
+Each tag defines a parenting situation or need this assistant supports. Used for routing, reflection, and personalized tool suggestions.
+
+---
+
+tag_id: morning_routine
+label: Morning Routine
+category: Routine
+description: Covers requests for building calm, structured morning routines that help a child transition into the day.
+example_phrases:
+  - "Help me build a morning routine"
+  - "Our mornings are chaos"
+
+---
+
+tag_id: bedtime_routine
+label: Bedtime Routine
+category: Routine
+description: Supports creating or improving bedtime routines, often involving calming activities, screen time wind-down, and sleep prep.
+example_phrases:
+  - "Bedtime is hard"
+  - "I need help with our night routine"
+
+---
+
+tag_id: leaving_house
+label: Leaving the House
+category: Routine
+description: Helps prepare a child for outings with visual checklists, sensory tools, or flexible scripting.
+example_phrases:
+  - "We struggle to leave the house"
+  - "Make a checklist for going out"
+
+---
+
+tag_id: meltdown_repair
+label: After a Meltdown
+category: Emotion
+description: Offers scripts and tools for emotional reconnection, co-regulation, and self-compassion after a child’s hard moment.
+example_phrases:
+  - "I yelled today"
+  - "We just had a meltdown"
+
+---
+
+tag_id: emotional_reset
+label: Emotional Reset
+category: Emotion
+description: Helps a parent ground themselves after stress using breathwork, reflection, or gentle mantras.
+example_phrases:
+  - "I'm overwhelmed"
+  - "I need a reset"
+
+---
+
+tag_id: sensory_support
+label: Sensory Support
+category: Planning
+description: Includes sensory-friendly tips, visuals, and adjustments for routines, outings, or new experiences.
+example_phrases:
+  - "She gets overwhelmed by sounds"
+  - "What can I do for sensory needs?"
+
+---
+
+tag_id: visual_tools
+label: Visual Tools
+category: Planning
+description: Requests for printable or on-screen tools like checklists, story cards, and visual schedules.
+example_phrases:
+  - "Show me a visual version"
+  - "Can I print this as a chart?"
+
+---
+
+tag_id: preparing_new_event
+label: Preparing for New Event
+category: Planning
+description: Covers any new situation—doctor, camp, first day of school—with scripts, preview plans, and sensory prep.
+example_phrases:
+  - "He's going to a new class"
+  - "How do I prep her for camp?"
+
+---
+
+tag_id: iep_support
+label: IEP & Advocacy
+category: Communication
+description: Requests related to IEP prep, emails to staff, or parent statements that humanize the child.
+example_phrases:
+  - "Help me write something for the school"
+  - "I need IEP help"
+
+---
+
+tag_id: sibling_balance
+label: Sibling Balance
+category: Communication
+description: How to talk to neurotypical siblings about differences, fairness, and love.
+example_phrases:
+  - "How do I explain this to my other child?"
+  - "My daughter feels left out"
+
+---
+
+tag_id: self_compassion
+label: Self-Compassion
+category: Parent Support
+description: Requests that involve reframing guilt, exhaustion, or the feeling of not being enough.
+example_phrases:
+  - "I feel like I failed"
+  - "I'm trying my best but it's never enough"
+
+---
+
+tag_id: parent_care_plan
+label: Parent Self-Care Plan
+category: Parent Support
+description: Build a simple, realistic care routine for the parent that fits inside daily chaos.
+example_phrases:
+  - "How do I take care of myself too?"
+  - "I need something just for me"
+
+---
+
+tag_id: meltdown_explainer
+label: Explaining Hard Moments to Others
+category: Communication
+description: Scripts to explain autism-related moments to others (teachers, family, public) without shame.
+example_phrases:
+  - "What do I say when he covers his ears?"
+  - "Someone said 'he doesn’t look autistic'"
+
+---
+
+tag_id: chaotic_day_alt
+label: Backup Plan for Chaotic Day
+category: Routine
+description: Create fallback visual schedules and routines for sick days, school closures, or sensory overload.
+example_phrases:
+  - "Today went off the rails"
+  - "We need a plan when everything breaks down"
+
+---
+
+tag_id: shared_tools
+label: Sharing Tools with Others
+category: Planning
+description: Send checklists, visuals, or social stories to co-parents, teachers, or family.
+example_phrases:
+  - "Can I share this with school?"
+  - "Send this to my partner"
+
+---
+
+tag_id: joy_builder
+label: Joy-Building Moments
+category: Parent Support
+description: Request for uplifting, creative, or bonding activities that go beyond survival.
+example_phrases:
+  - "We need a little joy"
+  - "Give me something fun or light"
+
+---
+
+tag_id: reflective_journal
+label: Reflective Journal Prompt
+category: Emotion
+description: Offers gentle, guided self-reflection to process recent parenting experiences.
+example_phrases:
+  - "Help me process today"
+  - "I want to journal this"
+
+---
+
+tag_id: build_my_toolkit
+label: Build My Toolkit
+category: Planning
+description: Requests to begin reflecting, processing, or printing a thought to revisit later if helpful.
+example_phrases:
+  - "Build my toolkit"
+  - "Download this reflection"
+  - "Print this moment"
+  - "Use this again if helpful"
+---
+
+tag_id: gentle_mode
+label: Gentle Mode (Low Input)
+category: Emotion
+description: User wants a simplified, soothing experience with fewer choices and calm pacing.
+example_phrases:
+  - "I need gentleness"
+  - "Go gentle please"
+
+---
+
+tag_id: story_request
+label: Social Story Request
+category: Routine
+description: Request to generate or customize a gentle social story for a common or new experience.
+example_phrases:
+  - "Make a social story for the dentist"
+  - "He’s scared of getting a haircut"

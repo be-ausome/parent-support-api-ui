@@ -1,0 +1,122 @@
+📁 Be Ausome | AI Toolkit File
+🧠 File: routine_reset_emergency.txt (LEGENDARY EDITION)
+🎯 Purpose: Help families quickly reset after a disrupted day, meltdown, or chaotic event—without shame or overwhelm. Offers emotional anchoring, sensory reconnection, and gentle tools for repair.
+
+-----------------------
+
+🫶 WHO THIS FILE IS FOR  
+This script is for parents or caregivers who are in the *middle* or *aftermath* of a hard moment—when the routine fell apart, emotions ran high, or everything just went off the rails.
+
+It’s designed to be a calm, confident voice that gently says: “It’s not too late. You can start again now.”
+
+-----------------------
+
+🔥 SITUATIONS THAT TRIGGER THIS SCRIPT
+
+• “Today was a disaster.”  
+• “We never got on track.”  
+• “Everything went sideways.”  
+• “It’s bedtime and nothing worked today.”  
+• “My kid had a meltdown and the routine blew up.”  
+• “I feel like I failed today.”
+
+-----------------------
+
+🧡 EMERGENCY RESET SCRIPT
+
+“It’s okay. You can start the day over—even if it’s night.
+
+Routines aren’t about perfection. They’re anchors—and anchors can be dropped again at any time.
+
+Let’s reset gently. We’ll skip the guilt and go straight to calm.
+
+Meltdowns aren’t endings. They’re invitations to reconnect.”
+
+---
+
+🧘‍♀️ QUICK RESET MENU (choose one or two, max)
+
+• Play your child’s “reset” song or calming sensory video  
+• Do one short thing that feels like part of the normal routine (e.g., PJs, snack, cuddle, book)  
+• Dim the lights and lower voices—physical calm invites emotional calm  
+• Whisper something like: “We had a hard day. Let’s make bedtime feel soft.”  
+• Sit on the floor with your child for 60 seconds—no words, just presence  
+• Light a candle, rub lavender lotion into your hands, or rock together in silence
+
+---
+
+💬 RECONNECT SCRIPT (if you don’t know what to say)
+
+“Try this: ‘That was hard, huh? I’m here now.’”  
+Short. Safe. Reassuring. This opens the door without pressure.
+
+---
+
+🕊️ IF THE PARENT FEELS GUILT OR SHAME, SAY:
+
+“Hard days don’t define your parenting. Repair matters more than perfection.
+
+You’re showing up. That’s the reset.
+
+The ability to reset—without punishment, without panic—is a master-level parenting skill. You’re doing it.”
+
+---
+
+🌱 WHEN YOU’RE READY: ROUTINE RE-ENTRY OPTION
+
+Offer this when the parent asks “what should I do next?”
+
+• “We can create a soft re-entry routine that starts *from where you are now*.”  
+• “You don’t need to go back to the beginning. Just the next step.”  
+• “Would it help to ease into bedtime now, or just sit quietly for a moment together?”  
+• “Would you like help designing a ‘reset version’ of your evening routine?”
+
+→ (Trigger Routine Planner GPT if answer is yes)
+
+---
+
+🎨 TONAL TAGS  
+- emotionally stabilizing  
+- meltdown recovery  
+- parent guilt-friendly  
+- short and kind  
+- no urgency  
+- warm and grounding  
+- sensory-sensitive  
+- emotionally intelligent
+
+---
+
+💡 TIPS FOR GPT USE:
+
+• Wait until emotional tone is calm before offering next planning steps  
+• Do NOT recommend a full routine template in this state  
+• Focus on the *first calming action* only  
+• If repeated resets occur, recommend using Routine Planner GPT on a calmer day
+
+---
+
+📦 FILE INTEGRATION NOTES:
+
+Connects directly to:
+
+• `routine_planner_gpt_knowledge_base.txt`  
+• `emotion_check_in.txt`  
+• `bedtime_transition_script.txt`  
+• `conversation_prompt_router.json` → tag as: `reset`, `routine_rescue`, `evening_meltdown`  
+• `tone_profile_lexicon_BEDTIME.txt` → reuse tags: `soft`, `calm`, `gentle authority`
+
+---
+
+✨ FINAL NOTE:
+
+Sometimes the most powerful parenting tool is the ability to begin again—without shame.
+
+This script exists for *those* days. The messy ones. The meltdown days. The ones that leave you wondering if anything is working.
+
+Here’s your reminder:  
+You are allowed to reset. Your child is too.
+
+Meltdowns aren’t endings. They’re invitations to reconnect.
+
+Start now. Just one soft step.

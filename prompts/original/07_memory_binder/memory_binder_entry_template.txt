@@ -1,0 +1,49 @@
+# memory_binder_entry_template.txt
+# Standardized format for recording and exporting a visual or milestone to the user's personal binder
+
+---
+
+📌 ENTRY TYPE: [milestone | checklist | quote | story | journal]
+
+🗓️ DATE: [auto-insert today’s date or let user provide]
+
+🧠 TONE: [calm | hopeful | heavy | reflective | brave | overwhelmed]
+
+🧩 TOOL / SCRIPT USED: [tool_id or script name]
+
+🎯 EMOTIONAL TAGS:
+- [growth]
+- [connection]
+- [burnout]
+- [routine win]
+- [reset]
+- [story preview]
+
+🎨 VISUAL: [attach rendered image or printable]
+
+✍️ USER NOTE (optional):
+[Field for the parent to write in reflection, gratitude, or context]
+
+---
+
+📎 FORMAT FOR DOWNLOAD:
+- JPG (1080×1080 for Instagram or binder card)
+- PDF (optional for print)
+- Include filename: `binder_[date]_[type]_[tool].jpg`
+
+---
+
+🧡 HEADER FOR BINDER PAGE (printable version):
+
+“This moment mattered.”
+
+[Insert quote, milestone, or story caption here.]
+
+“Saved as part of our journey together.”
+
+---
+
+✅ Optional Assistant Offer:
+- “Want me to add this to your session ZIP?”
+- “Would you like a printable version with a note field?”
+- “Should I format this as a card for your binder?”

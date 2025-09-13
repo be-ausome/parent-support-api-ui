@@ -1,0 +1,16 @@
+{% comment %}
+Embed the Parent Support bot via iframe. Publish as a Section, then create a Page using this section.
+{% endcomment %}
+<section id="ausome-bot" style="min-height:600px">
+  <iframe src="{{ settings.ausome_bot_url }}" style="width:100%;min-height:80vh;border:0" allow="clipboard-write;"
+    sandbox="allow-scripts allow-same-origin allow-forms"></iframe>
+</section>
+
+{% schema %}
+{
+  "name": "Ausome Bot (Embed)",
+  "settings": [
+    { "type": "url", "id": "ausome_bot_url", "label": "Bot URL (Vercel app page)" }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,184 @@
+{
+    "routes": [
+        {
+            "pattern": "*gentle*mode*|*soft*voice*",
+            "precedence": 100,
+            "template_id": "tone_gentle_selected",
+            "tone_profile": "gentle_support",
+            "tools": [
+                "support_selector_intro"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*talk to*my child*|*say this*to my kid*|*child voice*|*switch to kid*",
+            "precedence": 95,
+            "template_id": "child_autonomy_mode",
+            "tone_profile": "friendly_direct",
+            "tools": [
+                "child_facing_mode"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*together*calm*|*co-regulation*|*regulate*with*child*",
+            "precedence": 85,
+            "template_id": "co_regulation_menu",
+            "tone_profile": "gentle_support",
+            "tools": [
+                "co_regulation_tools"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*encouraging*mode*|*hopeful*tone*",
+            "precedence": 100,
+            "template_id": "tone_encouraging_selected",
+            "tone_profile": "uplifting_encouragement",
+            "tools": [
+                "support_selector_intro"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*clear*mode*|*solution*tone*",
+            "precedence": 100,
+            "template_id": "tone_direct_selected",
+            "tone_profile": "calm_direct",
+            "tools": [
+                "support_selector_intro"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*morning*routine*",
+            "precedence": 100,
+            "template_id": "routine_morning_default",
+            "tone_profile": "warm_gentle",
+            "tools": [
+                "morning_routine_visual_builder"
+            ],
+            "script_complexity_max": 2,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*bedtime*",
+            "precedence": 95,
+            "template_id": "routine_bedtime_default",
+            "tone_profile": "joyful_reflective",
+            "tools": [
+                "bedtime_visual_builder"
+            ],
+            "script_complexity_max": 2,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*meltdown*",
+            "precedence": 90,
+            "template_id": "emotional_repair_script",
+            "tone_profile": "compassionate_reflective",
+            "tools": [
+                "meltdown_explanation_script"
+            ],
+            "script_complexity_max": 2,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*visual*checklist*",
+            "precedence": 85,
+            "template_id": "checklist_visual_tool",
+            "tone_profile": "calm_direct",
+            "tools": [
+                "visual_list_builder"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*iep*|*school*communication*",
+            "precedence": 90,
+            "template_id": "school_advocacy_script",
+            "tone_profile": "confident_supportive",
+            "tools": [
+                "conversation_helper_script"
+            ],
+            "script_complexity_max": 2,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*toolbox*",
+            "precedence": 99,
+            "template_id": "toolbox_menu",
+            "tone_profile": "grounding_intro",
+            "tools": [
+                "support_selector_intro"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*joy*|*something fun*",
+            "precedence": 70,
+            "template_id": "joy_builder_menu",
+            "tone_profile": "affirming_uplift",
+            "tools": [
+                "encouragement_script"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*i yelled*|*i failed*|*i feel awful*",
+            "precedence": 85,
+            "template_id": "self_compassion_note",
+            "tone_profile": "respect_first",
+            "tools": [
+                "confidence_boost_guide"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*new*experience*|*prepare for*",
+            "precedence": 80,
+            "template_id": "new_event_preparation",
+            "tone_profile": "safety_first",
+            "tools": [
+                "social_story_generator"
+            ],
+            "script_complexity_max": 2,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        },
+        {
+            "pattern": "*milestone*|*legacy moment*|*something amazing*",
+            "precedence": 90,
+            "template_id": "emotional_milestone_log",
+            "tone_profile": "joyful_reflective",
+            "tools": [
+                "legacy_milestone_tracker"
+            ],
+            "script_complexity_max": 1,
+            "fallback": "tool_generic_support_intro",
+            "memory_simulation": false
+        }
+    ]
+}

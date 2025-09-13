@@ -1,0 +1,133 @@
+[
+  {
+    "id": "welcome_emotional_mirror",
+    "title": "Welcome + Emotional Mirror",
+    "type": "message",
+    "text": [
+      "Hi. I’m really glad you’re here.",
+      "Maybe this morning was full of meltdowns. Or maybe your child surprised you with something beautiful. Or maybe… you’re just tired.",
+      "Whatever brought you—this space is yours. You don’t need to be anything but exactly where you are.",
+      "This helper was made for parents like you—carrying a lot, learning as you go, still showing up with love. Let’s walk together now."
+    ]
+  },
+  {
+    "id": "emotional_signature_selector",
+    "title": "How’s Your Heart Today?",
+    "type": "choice",
+    "prompt": "Choose one, and I’ll adjust how I support you:",
+    "options": [
+      "😵 I’m maxed out",
+      "🤩 I’m figuring this out",
+      "❤️ I’m holding on to hope",
+      "🌧️ I need gentleness today",
+      "🧘 I need something steady",
+      "✨ Surprise me with kindness"
+    ],
+    "followup": "Want fewer words or soft visuals? Say: ‘Soft day.’"
+  },
+  {
+    "id": "time_to_value_fastlane",
+    "title": "Need Help Right Now?",
+    "type": "quick_actions",
+    "prompt": "Try one of these shortcuts to get support instantly:",
+    "options": [
+      {
+        "label": "🛠️ Toolbox",
+        "action": "support_selector_intro"
+      },
+      {
+        "label": "📖 Storytime",
+        "action": "social_story_generator"
+      },
+      {
+        "label": "📝 Reset",
+        "action": "support_selector_intro"
+      },
+      {
+        "label": "❓ Help me now",
+        "action": "support_selector_intro"
+      },
+      {
+        "label": "✨ Show me a tool",
+        "action": "support_selector_intro"
+      }
+    ]
+  },
+  {
+    "id": "mission_selector",
+    "title": "What Do You Wish Felt Easier Today?",
+    "type": "choice",
+    "prompt": "Let’s start where you are:",
+    "options": [
+      "🎯 Our mornings are chaos.",
+      "💬 I need help explaining something to my child.",
+      "🛌 I want one calm day where I’m not winging it.",
+      "🤗 I need to feel less alone—just for five minutes.",
+      "⚙️ Build me something that helps.",
+      "🧠 Teach me how this works."
+    ]
+  },
+  {
+    "id": "ai_literacy_moment",
+    "title": "You’re Already Using AI",
+    "type": "message",
+    "text": [
+      "That thing you just typed? That’s a prompt.",
+      "You just used AI—and you didn’t even need to know how. That’s amazing.",
+      "Every time you ask for something, you’re building your own support system.",
+      "That makes you a designer, not just a user."
+    ]
+  },
+  {
+    "id": "accessibility_options",
+    "title": "Want Me to Adjust How I Respond?",
+    "type": "choice",
+    "prompt": "Just say:",
+    "options": [
+      "Sensory-friendly mode – Fewer words, soft visuals",
+      "Quiet mode – Gentle output, no extras",
+      "Show me pictures – Visual-first guidance",
+      "Go slower – One soft step at a time"
+    ]
+  },
+  {
+    "id": "first_magic_moment",
+    "title": "Start with a First Magic Moment?",
+    "type": "choice",
+    "prompt": "Want to begin with something just for you?",
+    "options": [
+      "🌬️ A calming breath",
+      "💭 A note from another parent",
+      "🤗 A story of someone who gets it",
+      "🖨️ A printable to make today easier"
+    ]
+  },
+  {
+    "id": "personalization_setup",
+    "title": "Let’s Make This Yours",
+    "type": "message",
+    "text": [
+      "Want me to use your child’s name, your support style, or your favorite tools while we’re chatting?",
+      "I’ll keep track of it during this session to personalize your experience.",
+      "If you want to reuse it next time, I can help you create a copy-paste note to bring back when you're ready."
+    ]
+  },
+  {
+    "id": "profile_save_intro",
+    "title": "💾 Save My Profile — How It Works",
+    "type": "message",
+    "text": [
+      "I can’t remember across sessions. If you want to keep something, copy it to your notes or a clipboard app so you can reuse it whenever you’d like."
+    ]
+  },
+  {
+    "id": "journal_layer",
+    "title": "Everything You Build Here Becomes Part of Your Story",
+    "type": "message",
+    "text": [
+      "Every story. Every win. Every tool.",
+      "Together, they form your Progress Journal—a private space where effort becomes legacy.",
+      "You’re not just surviving. You’re building something beautiful."
+    ]
+  }
+]

@@ -1,0 +1,70 @@
+# sharecard_templates.txt
+# Visual layout templates for creating shareable card-style visuals with messages for support circle recipients
+
+---
+
+🔹 PURPOSE
+
+Define consistent, emotional-safe visual formats for sharing messages with others—
+such as teachers, friends, or grandparents—by combining image + caption + optional overlay text.
+
+These templates guide how to place headers, visuals, and tone-matched text in a visual frame.
+
+---
+
+🔸 TEMPLATE 1: “What This Moment Means to Us” Card
+
+• Format: 1080×1080 JPG
+• Header Text (top): “What This Moment Means to Us” (brush font, black)
+• Visual: Centered (image, quote card, story panel)
+• Bottom Caption: Parent-generated reflection or auto-caption (tone aware)
+• Icon (optional): Lower left or right sumi-e style (based on tone)
+
+---
+
+🔸 TEMPLATE 2: “Quiet Victory” Milestone Card
+
+• Format: Printable card or JPG
+• Header: “A Quiet Win” or “One Step Forward”
+• Image: Left side
+• Quote or reflection: Right side
+• Optional: Footer line: “Shared with love, not for applause”
+
+---
+
+🔸 TEMPLATE 3: “Just for You” Gentle Sharecard
+
+• Format: Phone-optimized JPG (1080x1350)
+• Header: “[Name], this helped us today.”
+• Image: Full bleed or framed
+• Caption: 1–2 short sentences of context
+• Optional: “You don’t have to reply. Just wanted you to see it.”
+
+---
+
+🔸 TEMPLATE 4: “Progress Reflection” Downloadable PDF
+
+• Format: A4 printable PDF
+• Top: Title line: “This is what progress looks like.”
+• Visual panel: Full width (story or checklist)
+• Text block: Space for parent reflection (or assistant-generated)
+• Footer: “Printed for our binder / shared with love”
+
+---
+
+🔸 TEMPLATE 5: Social Media Square (Optional Use)
+
+• Format: 1080x1080 for Facebook or Instagram
+• No header
+• Centered quote + image
+• Alt text and description auto-filled
+
+---
+
+🧠 TIPS FOR VISUAL CONSISTENCY
+
+• Font: Always use black brushstroke font
+• Backgrounds: Soft watercolor wash, matching tone_profile (e.g., apricot for hope)
+• Icons: Optional sumi-e icon based on emotion (see icon map)
+• Contrast: Ensure caption text has clear readability
+• Keep visual simple—avoid clutter

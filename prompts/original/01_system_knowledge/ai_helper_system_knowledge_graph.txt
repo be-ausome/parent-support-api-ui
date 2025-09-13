@@ -1,0 +1,85 @@
+## AI Helper – System Knowledge Graph + Visual Growth Overview (v2025-07-06)
+
+This master file defines how every tool, mode, and framework in the AI Helper system connects into a unified emotional development engine. It serves as the **core map for contributors, designers, and users**.
+
+---
+
+### 🧱 SYSTEM PILLARS
+| Pillar | Function |
+|--------|----------|
+| Emotional Co-Regulation | Every feature models or supports real-time calming and bonding |
+| Visual Ownership | Children help build their tools, increasing emotional agency |
+| Gentle Intelligence | Tools adapt based on warmth, not performance |
+| Legacy Building | Everything contributes to memory, identity, and shared growth |
+
+---
+
+### 🧩 MODES OF USE
+1. **Solo Parent Mode** – Tools, scripts, journaling
+2. **Unified Growth Mode** – Co-learning with child
+3. **Print & Export Mode** – Visuals become rituals
+4. **Progress Journal** – Logs insight, strength, identity
+5. **Micro-Script Routing** – Emotional support flows
+6. **Prompt Directory Access** – For advanced parenting goals
+
+---
+
+### 🧰 TOOL ECOSYSTEM BY CATEGORY
+| Category | Tools |
+|----------|--------|
+| **Routine & Tasking** | `visual_checklist_minimal`, `visual_routine_board` |
+| **Emotion Skill-Building** | `emotional_checkin_sheet`, `emotion_vocab_card`, `emotion_telescope_tool` |
+| **Behavioral Tools** | `tool_builder_card`, `routine_journey_map`, `badge_builder_sheet` |
+| **Reflection & Ritual** | `shared_memory_page`, `moment_marker_template`, `parallel_reflection_page` |
+| **Legacy & Identity** | `growth_timeline_banner`, `legacy_tool_portfolio`, `emotion_dna_builder` |
+
+---
+
+### 🔁 FLOW OF USE – From Spark to Identity
+1. Parent or child hits emotional need or friction
+2. Assistant offers tool/script/ritual (based on mode)
+3. Tool is co-created or used
+4. Emotion is reflected / tracked / named
+5. Outcome added to Journal, Timeline, or Portfolio
+6. Emotional growth is made visible and reusable
+
+---
+
+### 🗺️ SYSTEM MAP METAPHORS
+You may represent the system as:
+- **Metro Map** – Each transit line = emotion (Calm Line, Brave Line, etc.)
+- **Growth Tree** – Roots = Scripts, Trunk = Modes, Branches = Tools, Leaves = Memories
+- **Orbiting Planet System** – Center = Child, Planets = Tools, Moons = Emotions
+- **Strand Map** – DNA helix with tool links as sequence of regulated growth
+
+---
+
+### 📌 TAGGING SYSTEM (FOR SEARCH/ROUTING)
+Every tool and interaction includes:
+- `Emotion Tag` (e.g., Calm, Brave, Kind)
+- `Usage Mode` (Parent, Child, Both)
+- `Exportable?` (Yes/No)
+- `Tool Class` (Checklist, Routine, Visual Builder, Memory Maker)
+
+---
+
+### 📚 INTEGRATED TOOL CYCLE
+| Step | Tool | Export |
+|------|------|--------|
+| 1. Trigger | Micro-script, Prompt | No |
+| 2. Visualize | Checklist, Routine Board, Card | Yes |
+| 3. Emotion Marking | Check-in, Vocabulary Card | Optional |
+| 4. Reflection | Shared Memory Page, Moment Marker | Yes |
+| 5. Identity Encoding | Growth Timeline, DNA Builder | Yes |
+| 6. Legacy | Tool Portfolio | Yes |
+
+---
+
+This system was designed to be:
+- Emotionally safe
+- Neurodivergent-friendly
+- Visually clear
+- Spiritually affirming
+- Print-and-go functional
+
+**Together, this map + tools form the emotional learning infrastructure of the AI Helper experience.**

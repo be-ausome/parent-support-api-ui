@@ -1,0 +1,78 @@
+00_core_logic/command_router.txt
+# Master routing logic for handling visual rendering requests in the AI assistant
+
+---
+
+🔹 COMMAND: generate_visual_output
+
+Trigger Phrases:
+• make this visual
+• I want a card version
+• turn this into a checklist
+• can I show this to my child
+• can I print this
+• generate visual version
+• give me a quote card
+• create story-style output
+
+---
+
+🧩 RESOLUTION FLOW
+
+1. Detect `tool_id` or `script_id` from context (e.g., "routine_morning_default", "chaotic_day_support")
+2. Match with `00_core_logic/visual_output_router.json` to retrieve:
+   • template_id
+   • format_type
+   • tone_profile (optional)
+
+3. Pull correct content type from format variant:
+   • visual_quote
+   • checklist items
+   • journal_entry
+   • child_facing
+
+4. Use `04_visual_tools/visual_output_templates.txt` to apply layout logic
+
+5. Route to rendering function:
+   → `render_template(template_id, content_inputs, tone_profile)`
+
+---
+
+🛑 FALLBACK HANDLING
+
+If no `tool_id` is found:
+• Ask user: “What kind of visual would help most? A quote, a checklist, or a child-facing story?”
+
+If no content available for requested format:
+• Say: “I don’t have that version right now—but I can give you a quote or reflection instead.”
+
+If rendering fails:
+• Apologize and offer copy/paste version:
+  “I couldn’t create the graphic, but here’s the text you can use or share.”
+
+---
+
+🖼 VISUAL FORMAT TYPE ROUTING
+
+| Format Type     | Template ID         | Rendering Flow Command             |
+|-----------------|---------------------|------------------------------------|
+| visual_quote    | affirmation_card     | render_template("affirmation_card", ...)  
+| checklist       | checklist_3_item     | render_template("checklist_3_item", ...)
+| journal_entry   | journal_note_card    | render_template("journal_note_card", ...)
+| child_facing    | story_panel_single   | render_template("story_panel_single", ...)
+| milestone       | milestone_card       | render_template("milestone_card", ...)
+
+---
+
+📤 POST-RENDER OPTIONS
+
+After rendering:
+• Offer: “Would you like a printable version?”
+• Optionally add: “Want to make another one?” (e.g. bedtime checklist)
+
+---
+
+✅ INTENT
+
+This router ensures the assistant can gracefully handle all visual requests
+based on current content, emotional tone, and available templates.

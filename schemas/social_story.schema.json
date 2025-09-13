@@ -1,0 +1,61 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "SocialStory",
+  "type": "object",
+  "required": [
+    "title",
+    "lines"
+  ],
+  "properties": {
+    "title": {
+      "type": "string",
+      "maxLength": 120
+    },
+    "persona": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "maxLength": 40
+        },
+        "age": {
+          "type": "integer",
+          "minimum": 2,
+          "maximum": 25
+        },
+        "sensitivities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "lines": {
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 12,
+      "items": {
+        "type": "string",
+        "maxLength": 140
+      }
+    },
+    "captions": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 6,
+      "items": {
+        "type": "string",
+        "maxLength": 80
+      }
+    },
+    "tips": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "maxLength": 160
+      }
+    }
+  },
+  "additionalProperties": false
+}

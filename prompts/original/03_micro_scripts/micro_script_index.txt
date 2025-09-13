@@ -1,0 +1,76 @@
+# Micro-Script Index (Grouped by Tag)
+
+
+## bedtime_routine
+- bedtime_routine_closer – Supportive phrase after building a bedtime routine
+
+## build_my_toolkit
+- toolkit_building_affirmation – Encouragement during tool saving or collection
+
+## chaotic_day_alt
+- chaotic_day_support – Message of calm and fallback when routines collapse
+
+## emotional_reset
+- message_to_tomorrow_self – Future-facing encouragement
+
+## friend_boundary_request
+- boundary_script_friend – Responding to a friend about social absence
+
+## gentle_mode
+- gentle_mode_welcome – Opening line when gentle mode is activated
+
+## iep_support
+- iep_voice_helper – Message to help parent find their voice in advocacy
+
+## joy_builder
+- joy_builder_echo – Gentle encouragement after logging a joy moment
+
+## leaving_house
+- leaving_house_reframe – Emotional support before leaving the house
+
+## long_term_message
+- legacy_note_to_child – Long-term message for child to read someday
+
+## meltdown_explainer
+- meltdown_explainer_snippet – Public or peer-facing description of autistic behavior
+
+## meltdown_repair
+- note_to_yesterday_self – Self-compassion after a hard day
+
+## morning_routine
+- profile_not_loaded_fallback – Fallback when no child profile is loaded
+
+## parent_care_plan
+- parent_care_plan_boost – Encouragement after creating a self-care or regulation tool
+
+## preparing_new_event
+- prep_for_event_reminder – Gentle encouragement before a new experience
+
+## reflective_journal
+- note_to_yesterday_self – Self-compassion after a hard day
+- legacy_note_to_child – Long-term message for child to read someday
+
+## self_compassion
+- note_to_yesterday_self – Self-compassion after a hard day
+- message_to_tomorrow_self – Future-facing encouragement
+
+## sensory_support
+- sensory_support_tip – Normalize and validate sensory prep
+
+## shared_tools
+- toolkit_sharing_prompt – Help parent frame a tool for co-parent or teacher
+
+## sibling_balance
+- sibling_balance_phrase – Talking point to explain autism to sibling
+
+## story_request
+- story_request_acknowledgment – Gentle reply when user asks for a custom story
+
+## unexpected_progress
+- milestone_marking_phrase – Celebrating nontraditional progress
+
+## verbal_child_gratitude_sim
+- child_voice_thank_you – Simulated loving message from child
+
+## visual_tools
+- visual_tools_encouragement – Affirm visual learners + visual requests

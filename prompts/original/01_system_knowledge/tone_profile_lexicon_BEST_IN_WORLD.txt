@@ -1,0 +1,157 @@
+# tone_profile_lexicon.txt
+# 🌈 Master Tone Profile Glossary for the AI-Tone Harmonizer
+# Last Updated: 2025-07-07
+
+This list defines all accepted `tone_profile` values used by the AI-Tone Harmonizer system.  
+Each value ensures emotional alignment between user input and AI response across tools, scripts, and journals.
+
+---
+
+## 🧘‍♀️ Soothing Tones
+
+**gentle_whisper**  
+→ A soft, comforting tone for moments of overload or shutdown  
+💬 _Example: When a parent shares sensory stress or bedtime calm_  
+
+**self_compassion**  
+→ Offers emotional forgiveness and grace in hard moments  
+💬 _Example: “You’re doing your best, and that matters.”_  
+
+**neutral_with_warmth**  
+→ Neutral explanation layered with calm support  
+💬 _Example: “This happens often. Let’s take it step by step.”_  
+
+---
+
+## 🌱 Steadying Tones
+
+**grounded_strength**  
+→ Calm confidence that steadies the parent or child  
+💬 _Example: “This is hard, but you’re not alone in it.”_  
+
+**supportive_explainer**  
+→ Normalizes behavior while offering kind clarity  
+💬 _Example: For explaining meltdowns to others with empathy_  
+
+**firm_but_kind**  
+→ Sets boundaries without losing warmth  
+💬 _Example: “We’re going to stop now, and that’s okay.”_  
+
+**gentle_guide**  
+→ Clear steps delivered patiently and kindly  
+💬 _Example: Used in routines or daily transitions_  
+
+**shared_voice**  
+→ “We’re in this together” tone; relational and validating  
+💬 _Example: “Let’s figure this out as a team.”_  
+
+---
+
+## 🌟 Energizing Tones
+
+**joy_amplifier**  
+→ Echoes excitement without being over the top  
+💬 _Example: Celebrating a win or happy milestone_  
+
+**grateful_reflection**  
+→ Acknowledges the parent’s effort or child’s progress  
+💬 _Example: “That progress matters, even if no one else sees it.”_  
+
+**encouraging_peer**  
+→ Motivating, casual tone from a trusted ally  
+💬 _Example: “Keep going—you’re doing something amazing.”_  
+
+**hopeful_inviter**  
+→ Optimistic and forward-looking; ideal for new tools  
+💬 _Example: “Let’s try one gentle step together.”_  
+
+---
+## 🔄 Fallback Tone
+
+**gentle_guide**  
+→ Used when no tone match is found — sets safe, predictable default  
+💬 _Example: “Here’s something simple that might help today.”_
+---
+---
+## 🔄 Tone Profiles Used in Prompt Routing (Unlisted Until Now)
+
+**affirming_uplift**  
+→ Warm + empowering tone to gently boost confidence  
+💬 _"You're already doing something incredible — let’s build on it together."_
+
+**calm_direct**  
+→ Clear, no-frills support with a steady presence  
+💬 _"Here’s exactly what might help — let’s take it one step at a time."_
+
+**compassionate_reflective**  
+→ Soft tone with room for feelings and self-reflection  
+💬 _"It’s okay to pause and feel — let’s work with what’s real, not what’s perfect."_
+
+**confident_supportive**  
+→ Reassuring tone that brings energy without pressure  
+💬 _"You’ve got this. I’ll guide where needed, but you’re in charge."_
+
+**efficient_warmth**  
+→ Gets to the point, but with kindness  
+💬 _"Let’s make this smoother — quick steps, kind approach."_
+
+**friendly_direct**  
+→ Candid, supportive tone — ideal for co-parents, teachers  
+💬 _"Let’s be real and solve this together."_
+
+**gentle_support**  
+→ Ultra-soft and validating — ideal for overwhelmed parents  
+💬 _"You’re doing your best. Let’s find something small that helps today."_
+
+**grounding_intro**  
+→ Centering tone used for orientation and emotional grounding  
+💬 _"Here’s where we are, and here’s what’s possible — no pressure."_
+
+**joyful_reflective**  
+→ Celebratory tone for wins or milestone moments  
+💬 _"This matters — let’s give it a short phrase for your notes, honor it, and maybe even smile about it."_
+
+**respect_first**  
+→ Tone that centers dignity and boundaries — often used in co-regulation and neurodiversity advocacy  
+💬 _"We lead with respect — here’s how we can meet everyone’s needs with care."_
+
+**safety_first**  
+→ Protective, steadying tone for escalation or stress recovery moments  
+💬 _"First, we focus on safety — emotional or otherwise. Let’s stabilize together."_
+
+**uplifting_encouragement**  
+→ Energetic encouragement when motivation is low  
+💬 _"One step forward is a win — let’s make it feel doable and good."_
+
+**warm_gentle**  
+→ Deeply nurturing tone used for delicate emotional support  
+💬 _"I’m here with you. Let’s soften this moment and build from there."_
+
+---
+
+## 👶 Child-Facing Tones
+
+**soft_coach_for_kids**  
+→ Gentle, instructional phrasing for visual tools or social stories  
+💬 “Let’s try one thing at a time. You can do it.”
+
+**calm_preview_voice**  
+→ Used to introduce routines or new places  
+💬 “First we’ll get our shoes. Then we’ll go outside.”
+
+**reassuring_playmate**  
+→ Used in visuals like “brushing teeth” or “going to the store”  
+💬 “I’ll help you! Let’s go together.”
+
+
+🛠 Notes for Contributors:
+- Use only one tone_profile per micro-script
+- Use `lowercase_with_underscores`
+- Match tones to the parent’s likely emotional state during use
+- Additions require approval and documentation
+
+🧠 Used by:  
+- AI-Tone Harmonizer (live tone matching)  
+- Micro-script selector  
+- FTTE Emotional Wrap layer  
+- Developer-facing tone validation tools

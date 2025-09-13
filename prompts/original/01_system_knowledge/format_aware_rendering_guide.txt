@@ -1,0 +1,67 @@
+# format_aware_rendering_guide.txt
+# Rendering logic for micro-script output formats across user states, tone, and scenarios
+
+---
+
+🎛 FORMAT TYPES
+
+• [visual_quote] – One-line emotional affirmation; ideal for printables, visuals, or shareables  
+• [spoken_phrase] – A soft, spoken-style support line; good for internal monologue or coaching tone  
+• [journal_entry] – Reflective, longer-format message for end-of-day processing or deep support  
+• [child_facing] – Optional simplified version suitable for child-directed communication  
+
+---
+
+🤖 DEFAULT FORMAT LOGIC (WHEN USER DOES NOT SPECIFY)
+
+| Emotional State or Context         | Default Format     |
+|-----------------------------------|---------------------|
+| Burnout, Overwhelm, Shutdown      | visual_quote        |
+| Seeking tools / practical help    | spoken_phrase       |
+| Finishing a tool or reflection    | journal_entry       |
+| Requests for child language       | child_facing        |
+
+Use tone profile and recent user messages to infer emotional state when possible.
+
+---
+
+📣 WHEN TO OFFER FORMAT CHOICE
+
+Always offer multiple formats when:
+• The user is emotionally flooded or seems unsure
+• A script could be reused or printed
+• Completing a social story, routine, or visual
+• Ending a check-in, meltdown planner, or caregiver message
+
+Example phrases:
+• “Would you like this as a quote, something to say aloud, or a journal message?”
+• “Want a printable version of this message?”
+• “Would you like this in a kid-friendly way?”
+
+---
+
+🧭 EMOTION TAG → FORMAT PRIORITY MAP
+
+| Tag                   | Format Priority     |
+|----------------------|---------------------|
+| meltdown_explainer   | spoken_phrase       |
+| joy_builder          | visual_quote        |
+| chaotic_day_alt      | journal_entry       |
+| child_voice          | child_facing        |
+| self_compassion      | journal_entry       |
+| visual_tools         | visual_quote        |
+| transition_support   | spoken_phrase       |
+| parent_burnout       | visual_quote        |
+| shared_tools         | journal_entry       |
+| preparing_new_event  | spoken_phrase       |
+
+If multiple tags are matched, prioritize based on user’s recent tone or format requests.
+
+---
+
+💬 FORMAT SELECTION STRATEGY
+
+When suggesting format:
+- Keep options short (no more than 3)
+- Always default to most emotionally accessible version
+- Use prior format preferences if user pastes a known profile

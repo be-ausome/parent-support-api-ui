@@ -1,0 +1,81 @@
+# visual_output_templates.txt
+# Layout blueprints for rendering visual outputs from scripts or tools
+
+---
+
+template_id: affirmation_card
+description: A 1080×1080 card with soft background, centered quote, and optional icon
+export: JPG, 1080×1080 (ideal for Instagram/social)
+content_inputs:
+  - visual_quote
+  - optional icon (e.g., heart, wave, compass)
+  - optional tag or emotion label
+  - optional tone_profile (e.g., calm, hopeful, heavy)
+layout:
+  - Background: watercolor or muted tone based on tone_profile
+  - Centered brush-font quote (visual_quote)
+  - Icon below quote (if present)
+  - Bottom-right emotion tag (if used)
+
+---
+
+template_id: checklist_3_item
+description: A 3-step visual checklist with large icons and short phrases
+export: JPG or 8.5×11 PDF (for printing)
+content_inputs:
+  - 3 checklist items (e.g., “Brush teeth”, “Pack bag”, “High five”)
+  - title or routine name
+  - optional “I did it!” phrase
+  - optional tone_profile
+layout:
+  - Title at top
+  - 3 rows with checkbox, icon, text
+  - Final celebratory row or sticker
+
+---
+
+template_id: milestone_card
+description: Visual log of a meaningful emotional or behavioral milestone
+export: JPG, 1080×1080 or printable card format
+content_inputs:
+  - milestone text
+  - child’s name (optional)
+  - date (optional)
+  - emotion tag or sticker
+  - optional tone_profile
+layout:
+  - Title: “Legacy Moment”
+  - Milestone centered in a speech bubble or framed box
+  - Optional banner: Brave / Calm / Flexible / Connected
+  - Footer: “This matters because…”
+
+---
+
+template_id: story_panel_single
+description: 1-panel story visual with space for child-facing language and illustration
+export: JPG or story-style slide
+content_inputs:
+  - child_facing script
+  - story title
+  - optional icon (e.g., sun, shoes, calendar)
+  - optional tone_profile
+layout:
+  - Title bar
+  - Large visual scene or placeholder
+  - Text caption below: gentle story narration
+  - Visual-friendly font
+
+---
+
+template_id: journal_note_card
+description: Card-style version of a journal reflection
+export: JPG or printable 4x6 card
+content_inputs:
+  - journal_entry
+  - optional tag or heading
+  - date or memory stamp
+  - optional tone_profile
+layout:
+  - Title: “Parent Reflection”
+  - Body text in centered box
+  - Footer: space to add own note or heart icon

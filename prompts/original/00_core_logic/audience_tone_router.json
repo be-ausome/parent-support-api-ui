@@ -1,0 +1,72 @@
+{
+  "teacher": {
+    "tone": "professional but warm",
+    "caption_style": "Supportive insight with brief explanation",
+    "overlay_prompt": "What helps my child feel safe",
+    "language_note": "Avoid jargon, use IEP-friendly phrasing",
+    "icon_recommendation": "bridge"
+  },
+  "grandparent": {
+    "tone": "gentle and sentimental",
+    "caption_style": "Heartfelt message about connection or growth",
+    "overlay_prompt": "A quiet win from our week",
+    "language_note": "Use familiar, loving language; avoid clinical terms",
+    "icon_recommendation": "heart"
+  },
+  "partner": {
+    "tone": "vulnerable but appreciative",
+    "caption_style": "Shared insight into parenting moment",
+    "overlay_prompt": "What I needed today",
+    "language_note": "Use emotionally open phrasing, not instructional",
+    "icon_recommendation": "wave"
+  },
+  "therapist": {
+    "tone": "clear and clinical-light",
+    "caption_style": "Context for progress or strategy used",
+    "overlay_prompt": "What worked at home this week",
+    "language_note": "Include behavior context or sensory note if relevant",
+    "icon_recommendation": "book"
+  },
+  "faith_leader": {
+    "tone": "inclusive and grateful",
+    "caption_style": "Message about belonging or kindness received",
+    "overlay_prompt": "How we felt welcomed",
+    "language_note": "Avoid heavy emotional burdening",
+    "icon_recommendation": "sun"
+  },
+  "friend": {
+    "tone": "real and informal",
+    "caption_style": "Simple \u2018this helped\u2019 or \u2018this is our life\u2019 note",
+    "overlay_prompt": "This helped today",
+    "language_note": "Make message low-pressure to read or reply",
+    "icon_recommendation": "leaf"
+  },
+  "coach": {
+    "tone": "respectful and encouraging",
+    "caption_style": "Small insight into child\u2019s needs or routines",
+    "overlay_prompt": "What sets [Name] up for success",
+    "language_note": "Frame as a tool for support, not criticism",
+    "icon_recommendation": "compass"
+  },
+  "classroom_aide": {
+    "tone": "friendly and clear",
+    "caption_style": "Helpful strategies or reminders for daily support",
+    "overlay_prompt": "What helps [Name] during class time",
+    "language_note": "Use supportive, collaborative phrasing",
+    "icon_recommendation": "puzzle"
+  },
+  "babysitter": {
+    "tone": "gentle and specific",
+    "caption_style": "Simple do/don\u2019t or helpful tip",
+    "overlay_prompt": "How to help things go smoothly",
+    "language_note": "Use checklist-style language if needed",
+    "icon_recommendation": "house"
+  },
+  "future_employer": {
+    "tone": "strength-based and professional",
+    "caption_style": "Highlight of ability, accommodation insight",
+    "overlay_prompt": "How [Name] shines in the right environment",
+    "language_note": "Avoid deficits; lead with strengths and structure",
+    "icon_recommendation": "mountain"
+  }
+}

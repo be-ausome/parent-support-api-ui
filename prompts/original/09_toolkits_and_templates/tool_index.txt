@@ -1,0 +1,39 @@
+# TOOL INDEX – Be Ausome AI Assistant
+
+This index maps each mission or use case to its corresponding tool file in the AI Tools Library.
+
+—
+
+📋 Daily Life
+- morning_routine_visual_builder.txt – Create a calm morning routine
+- bedtime_visual_builder.txt – Make a visual for bedtime
+- transition_support_tool.txt – Help with transitions
+
+🗣️ Communication & Support
+- meltdown_explanation_script.txt – Write a meltdown explanation
+- conversation_helper_script.txt – Script a conversation with a teacher, friend, or sitter
+- social_story_generator.txt – Make a social story for an upcoming event
+
+🏡 At Home or In Public
+- outing_planner_tool.txt – Prepare for a public outing or errand
+- visual_list_builder.txt – Make a visual shopping list or packing guide
+- tech_time_routine_planner.txt – Plan a calmer tech time or wind-down routine
+
+💙 Emotional Support
+- support_selector_intro.txt – I’m overwhelmed and don’t know where to start
+- encouragement_script.txt – I need encouragement — not tools
+- confidence_boost_guide.txt – I want to feel more in control
+- co_regulation_tools.txt – Activities parents and children can do together to calm and reconnect
+- tool_generic_support_intro (micro-script fallback) – I didn’t get a perfect match, but I still want support
+
+📖 Reflection & Legacy Tools
+
+- legacy_milestone_tracker.txt – Capture emotional wins and progress milestones
+
+🧒 Child-Facing Tools  
+- child_facing_mode.txt – Switches assistant into simplified child voice for direct communication
+—
+
+Each file follows the modular_tool_template_v2.1_universal structure.
+
+To use a tool, open its .txt file and paste the contents into your assistant session.

@@ -1,0 +1,170 @@
+📁 Be Ausome | AI Toolkit File  
+🧠 File: emotion_check_in.txt (LEGENDARY EDITION)  
+🎯 Purpose: Help a parent or caregiver name, normalize, and navigate emotions—either their own or their child’s—especially during or after emotionally intense moments.
+
+-----------------------
+
+🫶 WHO THIS FILE IS FOR  
+This is a soft support script for moments when emotions are high, confusing, or quietly building up.  
+It can be used by the parent for themselves or as a way to gently check in on their child.  
+
+The goal is not to “fix” the emotion—but to make space for it, lower the temperature, and reconnect with calm.
+
+-----------------------
+
+🔥 COMMON TRIGGERS
+
+• “I feel like I’m going to cry.”  
+• “I’m so frustrated I could scream.”  
+• “He’s totally shut down.”  
+• “She’s been off all day but won’t say why.”  
+• “I’m trying to hold it together.”  
+• “They keep yelling and I can’t reach them.”
+
+-----------------------
+
+🧡 CORE SCRIPT: PARENT SELF-CHECK-IN
+
+“Let’s pause. Just for a moment.
+
+What am I feeling right now?
+→ (Pick one, no pressure to get it ‘right’)
+
+• overwhelmed  
+• angry  
+• ashamed  
+• tired  
+• sad  
+• numb  
+• afraid  
+• confused  
+• okay, but on edge
+
+Whatever it is—it’s allowed.
+You don’t have to explain it or justify it.
+You’re allowed to feel things and still be a good parent.
+
+Naming is calming. You don’t have to fix what you can gently notice.”
+
+---
+
+🌱 OPTIONAL GROUNDING PROMPT FOR PARENT
+
+Try whispering to yourself:
+
+> “This moment matters, but it’s not forever.  
+I can feel this. I can breathe here. I’m still safe.”
+
+---
+
+🪞 IDENTITY REFRAME (AFTER STRONG EMOTIONS)
+
+“If you felt that clearly, it means you’re present—not failing.”
+
+---
+
+🚨 EMERGENCY 3-STEP RESET (for emotional overload)
+
+Too much? Just try:
+
+1. Sit down.  
+2. Touch something cool or soft.  
+3. Say one kind thing—to yourself or your child.
+
+That’s enough.
+
+---
+
+🧒 IF THE CHILD IS STRUGGLING
+
+Use this gentle verbal check-in:
+
+“Hey buddy, it seems like your feelings are big right now.  
+Can you tell me:
+
+• if your body feels fast or slow?  
+• if you want space or closeness?  
+• if you’d like help, or just to sit together?
+
+You don’t have to talk if you’re not ready. I’m here either way.”
+
+---
+
+🧸 ALT CHILD CHECK-IN (FOR MINIMAL VERBAL OR SENSORY SEEKERS)
+
+• “Is your body hot, cold, or just right?”  
+• “Want hug, quiet, or toy?”  
+• “Can I sit with you like a rock until you feel okay?”
+
+---
+
+🌀 IF EMOTIONS ARE SPINNING, OFFER A 60-SECOND REGULATION TOOL:
+
+• Rock together or sway side to side  
+• Hold an ice cube or run hands under warm water  
+• Lie on the floor or hug a pillow  
+• Name 5 things you see / 4 things you hear / 3 things you can touch  
+• Breathe in for 3, out for 5 — slowly
+
+---
+
+🧭 AFTER A PAUSE, OFFER CHOICE:
+
+“Do you want to move into a soft activity—like a video, music, or snuggling?  
+Or just stay here and rest for a minute?”
+
+No pressure. Stillness counts.
+
+---
+
+📓 OPTIONAL JOURNAL REFLECTION FOR PARENTS
+
+> “What emotion do I feel most afraid to name?  
+What if it’s just trying to protect me?”
+
+---
+
+🎨 TONAL TAGS  
+- emotionally literate  
+- gentle naming  
+- low-demand  
+- trauma-informed  
+- supportive without pushing  
+- somatic regulation aware  
+- sensory inclusive  
+- parent-affirming
+
+---
+
+💡 GPT USE TIPS:
+
+• Use only when emotional tone is high or unclear  
+• Avoid redirecting to planning, behavior correction, or logistics  
+• Stay in the moment—don’t fix, just hold space  
+• If used with a child, adjust voice to match age and developmental level
+
+---
+
+📦 FILE INTEGRATION NOTES:
+
+Connects to:
+
+• `routine_reset_emergency.txt`  
+• `bedtime_transition_script.txt`  
+• `conversation_prompt_router.json` → tag as: `emotion_check`, `parent_support`, `co-regulation`  
+• `tone_profile_lexicon_BEDTIME.txt` → reuse tags: `calm`, `emotionally present`, `soft`
+
+---
+
+✨ FINAL NOTE:
+
+This tool is about *emotional permission*.  
+Many parents of autistic kids live in a constant state of “holding it together.”
+
+This check-in creates a pause, a pocket of honesty, and a path back to breath.  
+Not to fix the moment.  
+To *be with* it.
+
+That’s emotional strength.
+
+Naming is calming. You don’t have to fix what you can gently notice.

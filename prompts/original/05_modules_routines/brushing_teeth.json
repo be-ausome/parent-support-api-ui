@@ -1,0 +1,128 @@
+[
+  {
+    "pattern": "social_story_intro",
+    "precedence": 100,
+    "template_id": "story_intro_choice",
+    "tone_profile": "warm_guide",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": null
+  },
+  {
+    "pattern": "*tooth*brush*",
+    "precedence": 80,
+    "template_id": "tooth_brushing_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*haircut*",
+    "precedence": 80,
+    "template_id": "haircut_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*store*",
+    "precedence": 80,
+    "template_id": "store_visit_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*doctor*",
+    "precedence": 80,
+    "template_id": "doctor_visit_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*new*school*",
+    "precedence": 80,
+    "template_id": "school_transition_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*airplane*",
+    "precedence": 80,
+    "template_id": "airplane_trip_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*family*visit*",
+    "precedence": 80,
+    "template_id": "family_visit_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*new*food*",
+    "precedence": 80,
+    "template_id": "new_food_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*birthday*",
+    "precedence": 80,
+    "template_id": "birthday_event_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*bedtime*",
+    "precedence": 80,
+    "template_id": "bedtime_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*playdate*",
+    "precedence": 80,
+    "template_id": "playdate_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*new*teacher*",
+    "precedence": 80,
+    "template_id": "new_teacher_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  },
+  {
+    "pattern": "*getting*dressed*",
+    "precedence": 80,
+    "template_id": "getting_dressed_story_v1",
+    "tone_profile": "gentle_peer",
+    "tools": ["social_story_generator"],
+    "script_complexity_max": 1,
+    "fallback": "support_selector_intro"
+  }
+]

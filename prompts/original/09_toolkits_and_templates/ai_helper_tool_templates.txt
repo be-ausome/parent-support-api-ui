@@ -1,0 +1,149 @@
+### 🔮 SMART PREAMBLE GENERATOR
+
+This block dynamically creates a short, human-sounding preamble based on the active child profile. It’s used at the top of outputs for tools like routines, social stories, journals, and more.
+
+---
+
+#### 🧠 generate_preamble_from_profile(profile, tool_type):
+
+```python
+if not profile or profile is incomplete:
+    return ""
+
+preamble = ""
+
+# Extract common fields
+name = profile.get("name")
+age = profile.get("age")
+strengths = profile.get("strengths", [])
+challenges = profile.get("challenges", [])
+supports = profile.get("supports", [])
+communication = profile.get("communication_style")
+
+# Optional phrasings
+age_phrase = f"as a {age}-year-old" if age else ""
+name_phrase = f"Since {name}" if name else "For your child"
+
+# Tool-specific phrasing
+if tool_type == "routine":
+    preamble = f"{name_phrase} {age_phrase} benefits from structure, I've kept this routine clear and step-by-step."
+elif tool_type == "social_story":
+    preamble = f"Because {name or 'your child'} may find transitions tough, I’ve kept this story calm and predictable."
+elif tool_type == "meltdown_support":
+    preamble = f"Knowing {name or 'your child'} may need short instructions and support during meltdowns, I’ve kept this extra gentle."
+elif tool_type == "visual_schedule":
+    preamble = f"{name or 'Your child'} benefits from visual aids, so this schedule is clean and simple."
+elif tool_type == "progress_journal":
+    preamble = f"Here’s a reflection personalized for {name or 'your child'} based on what helps them most."
+else:
+    preamble = f"Based on your profile, I’ve adjusted this to suit your child’s strengths and needs."
+
+return preamble.strip()
+```
+
+---
+
+#### 🔁 Example Output Insert
+When generating tool output:
+```python
+preamble = generate_preamble_from_profile(session.profile, tool_type="routine")
+output = preamble + "\n\n" + main_response
+```
+
+---
+
+This generator ensures all tools speak with personalization *only if* the profile is available, and it gracefully skips otherwise. Tone: warm, natural, affirming—not robotic or clinical.
+
+You can expand this with more detailed templates per tool as needed.
+
+---
+
+## AI Helper Tool Output Templates (v2025-07-06)
+
+These are standard formats used by the assistant when outputting tools like checklists, planners, and social stories. Each template can be rendered in multiple formats (visual, printable, text).
+
+---
+
+template_id: routine_visual_card
+label: Visual Routine Card
+type: Visual Export
+used_for: Routines (e.g., morning, bedtime)
+description: A large-font, icon-supported vertical list of 4–6 steps. Includes option for sensory cues or reward preview.
+elements:
+  - Emoji or icon for each step
+  - Short step description (5–7 words)
+  - Optional "I can do it" box or star space
+
+---
+
+template_id: checklist_quick_print
+label: Quick Printable Checklist
+type: Printable Export
+used_for: Leaving the house, packing, morning tasks
+description: Minimal words, checkbox list with optional visual line dividers. Great for fridge or backpack.
+elements:
+  - Simple task list
+  - Optional emojis for visual cue
+  - Final check-off item with a motivational phrase
+
+---
+
+template_id: emotional_reset_card
+label: Emotional Reset Mini Tool
+type: Text or Visual Card
+used_for: Parent or child calming moments
+description: A 3-step grounding sequence using breath, affirmation, and sensory action. Delivered as text or calming-style image.
+elements:
+  - Title line: "Reset Moment" or custom name
+  - Step 1: Grounding breath or pause
+  - Step 2: Gentle phrase
+  - Step 3: Optional small action (e.g., stretch, sip water)
+
+---
+
+template_id: event_preview_story
+label: Social Story / Event Preview
+type: Text Story or Printable Card
+used_for: Preparing for transitions or new experiences
+description: Gentle first-person or third-person script with sensory-aware language, describing what to expect and how to self-regulate.
+elements:
+  - Title (e.g., "Going to the Doctor")
+  - 5–6 story lines (short, child-friendly)
+  - Optional sensory support tip per line
+
+---
+
+template_id: planner_grid_page
+label: Weekly Planner Grid (Parent View)
+type: Printable or Digital Grid
+used_for: Weekly planning with child support built in
+description: 7-day grid with space for therapy, school, sensory breaks, meals, and downtime. Optional color coding.
+elements:
+  - Day/time layout
+  - Row for each major category
+  - Optional reflection notes area
+
+---
+
+template_id: toolkit_export_sheet
+label: Toolkit Export Sheet
+type: Text summary or printable list
+used_for: Progress review or sharing with others
+description: Collection of built tools (checklists, routines, stories) listed with dates and summary lines.
+elements:
+  - Tool title
+  - Date built
+  - One-line purpose/summary
+  - Export/share option block
+
+---
+
+template_id: joy_card_generator
+label: Joy Moment Card
+type: Surprise Uplift Output
+used_for: Celebrating parent or child joy
+description: One quote, one sensory visual, and one optional idea for sharing or saving the moment.
+elements:
+  - Uplifting phrase
+  - Sensory visual (emoji/icon or style)
+  - Save or share option prompt

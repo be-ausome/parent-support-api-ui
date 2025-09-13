@@ -1,0 +1,96 @@
+# 🧩 IEP Support Tool — Legendary Edition (Be Ausome AI Library)
+
+Welcome to the **IEP Support Tool**, part of your interstellar AI-powered toolkit. This module is designed to:
+
+- Help you understand and navigate the IEP process
+- Draft clear, parent-empowered communication
+- Suggest accommodations based on your child's real needs
+- Build goals that are meaningful, measurable, and hopeful
+
+This is more than just text—this is emotional armor, gentle guidance, and a toolkit that speaks your language.
+
+---
+
+## 🛠️ What This Tool Can Do
+
+### ✅ Write or Edit:
+- IEP goals (by domain: communication, sensory, behavior, academics, independence)
+- Parent input statements
+- Email drafts to case managers or schools
+- Polite but firm advocacy messages
+
+### 💡 Suggest:
+- Accommodations (customized to sensory, executive functioning, or communication needs)
+- Goal scaffolding (what comes before/after a skill)
+- Questions to ask in IEP meetings
+- Reframes for pushback or gaslighting
+
+### 💬 Translate:
+- Legal or school jargon into plain language
+- Behavioral reports into human stories
+- Emotional overwhelm into clear requests
+
+---
+
+## ✏️ Example Prompts You Can Use
+
+- “Help me write a parent statement about my child’s strengths and needs.”
+- “What are 5 accommodations for transitions between classes?”
+- “Rewrite this goal to be measurable and autism-affirming.”
+- “Draft a reply to the teacher about behavior that respects my child’s regulation needs.”
+- “I’m overwhelmed. What should I ask at the IEP meeting?”
+
+---
+
+## 📋 Built-in Supports
+
+### 🎯 Goal Builder (Autism-Affirming)
+> Use this structure for most goals:
+
+**[Name] will [observable skill] with [support or condition] in [setting or routine] measured by [method] with [success criteria].**
+
+Example:
+> Dylan will use a visual schedule with staff support to transition between classes with no more than one verbal prompt, measured by staff observation across 3 out of 5 days.
+
+### 🧠 Parent Input Builder
+
+Start with this structure:
+
+- My child thrives when...
+- We’ve noticed challenges when...
+- What’s working well right now is...
+- Our top priority this year is...
+- We hope the team will remember...
+
+Example:
+> Dylan thrives when he knows what to expect. Unstructured times like transitions can lead to dysregulation. We’ve had success with visuals at home and hope to implement the same at school. Our priority is helping him feel safe and regulated so he can learn.
+
+### 🛡️ Advocacy Builder (Polite but Firm)
+
+Use this when you need to be heard without being combative:
+
+> “Thank you for your time and the work the team is doing. I want to clarify that [child's name]’s behaviors are not defiance, but communication. We’d like to prioritize supports that recognize this and prevent escalation, rather than only responding after the fact.”
+
+---
+
+## 🧰 Companion Tools to Link Here
+
+- `iep_phrase_library.txt` (coming next): prewritten goal phrases, accommodation banks, legal language translation
+- `school_communication_assistant.txt`: templates for emailing teachers, requesting data, or following up post-meeting
+- `tone_tool_task_matrix.txt`: to auto-match tone to message type (firm, collaborative, formal, warm)
+
+---
+
+## 🪐 Final Note
+This tool exists to help you feel:
+- More in control of your child’s future
+- More supported during emotional IEP seasons
+- More powerful in your voice as a parent
+
+Even if the system feels stacked against you—**you are not alone**. This tool is designed to speak like a parent, think like a strategist, and show up like a friend.
+
+Let’s make the system better, one prompt at a time. 💙
+
+---
+
+To explore deeper planning tools, advocacy coaching, and timeline support, try launching the **IEP Assistant GPT** — the full IEP powerhouse built for strategic parents like you.

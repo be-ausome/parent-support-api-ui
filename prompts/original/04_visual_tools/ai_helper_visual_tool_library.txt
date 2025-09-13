@@ -1,0 +1,173 @@
+## AI Helper – Visual Growth Framework (v2025-07-06 – Emotional Identity Architecture Edition)
+
+This library defines a world-first system of emotionally intelligent, visually accessible tools that shape memory, identity, and co-regulation. Each format is designed for printable and digital use, grounded in simplicity, neurodivergent clarity, and emotional meaning.
+
+---
+
+### 📋 visual_checklist_minimal
+**Use for:** Leaving house, bedtime, daily tasks  
+**Export:** Printable (Fridge / Backpack)  
+**Structure:**
+- Large checkbox + short text (5 words max)
+- Optional emoji icon left of text
+- Final row: “I did it!” or custom phrase
+**Notes:** Visual whitespace between rows; early-reader friendly; symbol tested for clarity
+
+---
+
+### 🧼 visual_routine_board
+**Use for:** Morning/bedtime/school prep routines  
+**Export:** Horizontal or vertical strip / visual card format  
+**Structure:**
+- Emoji or visual cue top left
+- Short action: “Brush Teeth”, “Pack Bag”
+- Optional comfort cue: “Bring hoodie”
+- End-of-routine celebration: “We did it together!”
+- Mirrored steps for parent + child:
+  - Parent: “Check bag” | Child: “Zip bag”
+
+---
+
+### 🎨 emotional_checkin_sheet
+**Use for:** Daily mood tracking / emotion reflection  
+**Export:** Printable worksheet or laminated page  
+**Structure:**
+- Grid of 8–12 icons (faces, colors, symbols)
+- Prompt: “How did your body feel today?”
+- Optional: name of day, sticker zone
+
+---
+
+### 🧠 emotion_vocab_card
+**Use for:** Teaching nuanced emotional language  
+**Export:** Flashcard sheet (digital or print)  
+**Structure:**
+- 12–20 emotion faces
+- 2-word feeling variations by category (body, social, sensory)
+- Prompt: “I feel ___ because ___”
+- Parent toggle: “Help me help them give it a short phrase for your notes”
+
+---
+
+### 🛠 tool_builder_card
+**Use for:** Step-based visual tools (calm plan, sensory routine)  
+**Export:** Digital card or printable  
+**Structure:**
+- Title banner (e.g., “My Calm Plan”)
+- 3–6 steps with simple text + icons
+- Final frame: “What’s next?” or sticker reward
+
+---
+
+### 🌈 shared_memory_page
+**Use for:** Capturing a powerful co-created moment  
+**Export:** Keepsake or scrapbook visual  
+**Structure:**
+- Title: “Our Brave Moment”
+- Space for drawing/photo/symbol
+- Text: “What we did together:”
+- Emotions: “Felt: Brave, Curious, Proud…”
+- Flag: Growth theme (e.g., “Transition Team”)
+
+---
+
+### 🧭 routine_journey_map
+**Use for:** Visual timeline of habit or practice  
+**Export:** Printable tracker or banner  
+**Structure:**
+- Horizontal steps/circles (1 per day)
+- Stickers or emojis per step
+- Completion line: “This path was ours.”
+- Dynamic sticker bank:
+  - 🛡️ Brave → “I tried again”
+  - 🌬️ Calm → “I used my breath”
+  - 🔁 Flexible → “I switched plans”
+
+---
+
+### 🎖️ badge_builder_sheet
+**Use for:** Earning affirming emotional wins  
+**Export:** Sticker pack or badge sheet  
+**Structure:**
+- 6–12 badge spaces
+- Color-coded: Calm, Brave, Kind, Flexible
+- Text: “I stayed calm,” etc.
+- Signature: “Created by me & my grown-up”
+- Auto-upgrading symbol bank (adaptive badges)
+
+---
+
+### 📈 growth_timeline_banner
+**Use for:** Tracking tools and emotional growth  
+**Export:** Printable strip or digital milestone map  
+**Structure:**
+- 5–10 frames
+- Icon + quote: “We built this after a tough day.”
+- Sticker + tag: e.g., “Trust Moment”, “First Try”
+
+---
+
+### 📖 legacy_milestone_tracker (New)
+**Use for:** Capturing emotional wins and parenting progress  
+**Export:** Printable memory log or digital milestone entry  
+**Structure:**  
+- Text entry of the moment: “Dylan stayed calm during fireworks.”  
+- Optional timestamp or note  
+- Prompt: “What helped make this moment possible?”  
+- Tag options: Calm, Brave, Flexible, Connected
+
+---
+
+### 🌀 moment_marker_template (New)
+**Use for:** Pausing to reflect after a memory-making moment  
+**Export:** Printable or journal-attachable  
+**Structure:**
+- “What happened?”
+- “What did it mean to us?”
+- Sticker: ⭐ “This was a memory moment.”
+
+---
+
+### 📓 parallel_reflection_page (New)
+**Use for:** Dual reflection from parent and child on same event  
+**Export:** Printable or digital split-page
+**Structure:**
+- Child section: “What happened?” / “How I felt” / “What I want to remember”
+- Parent section: “What I saw” / “How I felt” / “What I want to honor”
+
+---
+
+### 🔭 emotion_telescope_tool (New)
+**Use for:** Anticipating tomorrow’s emotional landscape  
+**Export:** Visual forecast or planning page  
+**Structure:**
+- “What might come up tomorrow?”
+- “What strength can we bring forward?”
+- “What might help us feel ready?”
+
+---
+
+### 📚 legacy_tool_portfolio (New)
+**Use for:** Creating a personal resource book over time  
+**Export:** Exportable binder or book  
+**Structure:**
+- Title: “My Tools” or “What Helps Me”
+- Inside: All co-created visual tools
+- Final page: “Things people can do to help me”
+- Designed to last through schooling, care transitions, and life stages
+
+---
+
+### 🧬 emotion_dna_builder (New)
+**Use for:** Tracking the evolution of a child’s emotional skills  
+**Export:** Visual DNA strand builder  
+**Structure:**
+- Beads = emotion wins (calm, brave, kind, flexible)
+- Optional color-coding or shape upgrades
+- Custom naming: “Want to name this strand?”
+
+---
+
+Each tool is a building block in a long-view system of emotional identity. Designed for memory, bonding, transition, safety, and co-authorship.
+
+**Exportable from journal view, Unified Growth Mode, or independently.**

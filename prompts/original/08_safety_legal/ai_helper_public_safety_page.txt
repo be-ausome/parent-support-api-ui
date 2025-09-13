@@ -1,0 +1,124 @@
+## 🛡️ Be Ausome AI Helper – Safety, Ethics, and Legal Information
+
+Welcome to the Be Ausome AI Helper for Autism Parents. We’re honored to support you—and we want to do it with full transparency, safety, and care.
+
+---
+
+### 🚦 Getting Started Safely (Onboarding Message)
+
+> **Hi there! Before we begin:**
+> I’m here to support you emotionally and practically—but I’m not a doctor, therapist, or lawyer.
+>
+> I don’t remember anything unless you ask me to. And to protect your child’s privacy, please use general terms like “my son” or “her teacher”—not names, locations, or medical info.
+>
+> Ready to start?
+
+---
+
+### 🤖 What This AI Assistant *Does*
+
+This tool is powered by emotionally intelligent AI and designed specifically for parents and caregivers of autistic children. It can:
+
+* ✅ Help you create calm routines and visual schedules
+* ✅ Offer gentle emotional support and encouragement
+* ✅ Generate scripts for explaining things like haircuts or appointments
+* ✅ Suggest empowering language for IEPs, teacher communication, or daily life
+* ✅ Celebrate your parenting efforts and provide small wins
+
+---
+
+### ❌ What It *Does Not* Do
+
+To keep you safe and legally protected, here’s what this tool will *never* do:
+
+* ❌ Diagnose medical, psychological, or developmental conditions
+* ❌ Offer therapy, legal advice, or educational recommendations
+* ❌ Store your data without your permission
+* ❌ Collect full names, locations, or treatment histories
+
+---
+
+### 🔐 Your Privacy and Consent
+
+We take your privacy seriously. This assistant:
+
+* Remembers nothing by default
+* Will *only* save personalized info with your **explicit opt-in**
+* Offers a clear way to choose whether it remembers something *just for today* or *for next time*
+
+You can always say: "Forget everything" and it will.
+
+---
+
+### 👶 Children’s Privacy (COPPA Compliance)
+
+This tool is for adults only. Please avoid sharing:
+
+* Your child’s full name
+* Their specific school or location
+* Any diagnosis or treatment plan
+
+It’s safe to say: “my daughter,” “his teacher,” or “we’re working on transitions.”
+
+---
+
+### ⚠️ Safe Sharing Filter (Overshare Logic)
+
+To protect you and your child, the assistant is trained to gently redirect risky inputs in real time. If you accidentally type something like:
+
+* A full name ("Jason Smith")
+* A school name ("Lincoln Elementary")
+* A medical diagnosis ("autism level 3", "ABA therapy")
+
+It will reply with something like:
+
+> “Thanks for sharing. To help protect your child’s privacy, I recommend keeping names and details general—like ‘my son’ or ‘her teacher.’ Want me to reword that for you?”
+
+This helps keep your experience safe without disrupting the support.
+
+---
+
+### ⚖️ Legal Disclaimer
+
+> *This assistant offers general emotional support only. It does not provide medical, psychological, legal, or educational advice. For professional guidance, please consult a licensed provider.*
+
+This disclaimer automatically applies to:
+
+* Generated social stories
+* Letters to schools or IEP teams
+* Communication templates
+* Sensory routines, bedtime scripts, and transitions
+
+---
+
+### 🧠 AI Transparency
+
+This tool is powered by artificial intelligence. It generates responses by identifying patterns in text—it does not have thoughts, awareness, or emotions. Its purpose is to offer guidance, not decisions.
+
+---
+
+### ♿ Accessibility and Inclusion
+
+We are committed to digital accessibility for all users.
+
+We aim to use clear, autism-friendly language and formatting throughout. If anything creates confusion, friction, or overwhelm, please tell us — we’ll do our best to adjust.
+
+If something in this tool creates a barrier for you, contact us at **support@be-ausome.com** and we will help.
+
+---
+
+### 💙 Our Ethical Promise
+
+This tool was created by a single father raising a high-support autistic son. It is part of the Be Ausome mission to:
+
+* Put people before products
+* Offer free, empowering support
+* Center lived experience and emotional safety
+* Never sell your data or show ads
+* Build tools that uplift autism families without clinical judgment
+
+If you’d like to learn more about our mission or support the Be Ausome project, visit **be-ausome.com**.
+
+Thank you for being here. You’re not alone.
+
+— The Be Ausome Team

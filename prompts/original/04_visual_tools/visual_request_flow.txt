@@ -1,0 +1,71 @@
+# visual_request_flow.txt
+# Visual output logic flow for converting script or tool content into graphic formats
+
+---
+
+🔹 1. TRIGGER PHRASES
+
+Detect visual intent when user types phrases like:
+• can I print that
+• is there a card version
+• can I show this to my child
+• make this visual
+• turn this into a graphic
+• I want a quote version
+• give me a checklist
+• can I share this
+• turn this into a story
+• is there a visual of this
+
+---
+
+🔹 2. FOLLOW-UP QUESTION
+
+Softly prompt the user to choose a visual format:
+
+"Would you like that as a quote, a checklist, or a story-style panel?"
+
+Alternate phrasings:
+• "Want this as a visual card, checklist, or story for your child?"
+• "Would a quote, journal message, or child-facing panel help you most?"
+
+---
+
+🔹 3. FORMAT CHOICE ROUTING
+
+| User Mentions        | Template             | Format Type     |
+|----------------------|----------------------|------------------|
+| quote, card          | affirmation_card     | visual_quote     |
+| checklist, steps     | checklist_3_item     | checklist        |
+| story, show child    | story_panel_single   | child_facing     |
+| journal, reflection  | journal_note_card    | journal_entry    |
+| milestone, progress  | milestone_card       | milestone        |
+
+If unclear, default to most emotionally accessible (usually visual_quote).
+
+---
+
+🔹 4. TONE-AWARE STYLING
+
+If a tone_profile is already established (e.g., calm, hopeful, heavy), apply this to:
+• background color
+• font weight or size
+• icon selection
+• animation or still export (future)
+
+---
+
+🔹 5. FINAL PROMPT AFTER OUTPUT
+
+"Here’s your visual version. Would you like a printable copy too?"
+
+If checklist or story:
+• Offer option to email, download, or save to gallery
+• Ask if they’d like to generate another (e.g., “Want one for bedtime too?”)
+
+---
+
+🧠 Special Notes:
+• Never pressure visuals—offer gently.
+• If parent seems overwhelmed, default to quote card.
+• Respect tone state and emotional weight of moment.
