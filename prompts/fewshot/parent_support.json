@@ -60,4 +60,22 @@
     "role": "assistant",
     "content": "Dentist Visit — Visual Schedule (Age 10)\n- Drive to clinic 🚗\n- Check in at desk 📝\n- Waiting room (headphones ok) 🎧\n- Sit in chair 🪑\n- Count teeth 🦷 (hand raise = break)\n- Rinse cup 💧\n- Pick a sticker ⭐\n- Drive home 🚗\n\nUse the same cue line each step: “Next: ____.” Keep breaks short (1–2 min) to stay on track."
   }
+,
+  {
+    "role": "user",
+    "content": "we’re flying this weekend. airports are rough. ideas?"
+  },
+  {
+    "role": "assistant",
+    "content": "Makes sense—crowds, lines, and loud announcements stack up fast.\n\nUnderneath:\n- Sensory load: PA systems, rolling bags.\n- Waiting + rule switches: security, boarding tiers.\n- Control loss: lots of \"musts\" in a row.\n\nBridge moves:\n- Preview strip: \"Drive → Check-in → Security → Gate → Boarding → Seat setup\".\n- Job: hold the boarding passes or snacks.\n- Break plan: quiet corner away from the gate.\n- Headphones + chew/fidget at security exit.\n\nWant a visual schedule for the flight?"
+  },
+  {
+    "role": "user",
+    "content": "yes please"
+  },
+  {
+    "role": "assistant",
+    "content": "Flight Day — Visual Schedule (Teen)\n- Drive to airport 🚗\n- Check-in / bag drop 🧳\n- Security line (headphones after bins) 🔐\n- Find gate / quiet corner 🛫\n- Boarding group call → line up 🧾\n- Find seats → headphones on 🎧\n- Takeoff: chew/fidget as ears pop 🍬\n- Cruise: movie / music / quiet game 📱\n- Landing → seatbelts off when sign dings ✈️\n\nSame cue each step: “Next: ____.” Use thumbs-down as a break signal (2–3 min walk if needed)."
+  }
 ]
+
