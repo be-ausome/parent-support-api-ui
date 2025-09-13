@@ -1,1 +1,28 @@
 
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "support_plan",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": { "type": "string", "maxLength": 80 },
+    "summary": { "type": "string", "maxLength": 300 },
+    "context": { "type": "string", "maxLength": 300 },
+    "strategies": {
+      "type": "array",
+      "minItems": 2,
+      "maxItems": 5,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "label": { "type": "string", "maxLength": 80 },
+          "how_to": { "type": "string", "maxLength": 240 }
+        },
+        "required": ["label", "how_to"]
+      }
+    },
+    "next_step": { "type": "string", "maxLength": 140 }
+  },
+  "required": ["title", "summary", "strategies", "next_step"]
+}
