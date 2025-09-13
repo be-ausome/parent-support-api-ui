@@ -4,10 +4,9 @@ import fs from "node:fs";
 import path from "node:path";
 import crypto from "node:crypto";
 
-// Use relative imports so this works without path aliases.
-// If you created these files exactly as suggested, they live at /lib/*.ts
-import { inferMode, type Mode } from "../../../lib/router";
-import { inferTone, inferTags, buildOverlay, type Tone } from "../../../lib/overlays";
+// Correct imports: inferTone comes from router
+import { inferMode, inferTone, type Mode } from "../../../lib/router";
+import { inferTags, buildOverlay, type Tone } from "../../../lib/overlays";
 
 export const runtime = "nodejs"; // ensure Node runtime on Vercel
 
