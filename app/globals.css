@@ -57,3 +57,7 @@ body {
 .toast {
   @apply fixed bottom-24 left-1/2 -translate-x-1/2 bg-red-600 text-white px-3 py-2 rounded-md shadow-lg;
 }
+/* Markdown lists inside assistant bubbles */
+.msg-assistant ul { @apply list-disc ml-5 space-y-1; }
+.msg-assistant ol { @apply list-decimal ml-5 space-y-1; }
+.msg-assistant p  { @apply mb-2; }
