@@ -174,18 +174,22 @@ export default function ParentSupportPage() {
   return (
     <div className="mx-auto max-w-5xl min-h-[100dvh] flex flex-col bg-white">
       {/* Header */}
-      <header className="px-4 sm:px-6 py-4 border-b bg-white">
-        <div className="flex items-center gap-3">
-          <div className="size-8 rounded-lg bg-blue-600" />
-          <div>
-            <h1 className="text-lg font-semibold">Be Ausome — Parent Support</h1>
-            <p className="text-sm text-neutral-500">Calm, practical help. Not medical advice.</p>
-          </div>
-          <div className="ml-auto">
-            <button onClick={resetChat} className="chip">Reset</button>
-          </div>
-        </div>
-      </header>
+  <header className="px-4 sm:px-6 py-5 border-b bg-white relative">
+  {/* Reset button pinned to the right */}
+  <button
+    onClick={resetChat}
+    className="chip absolute right-4 top-1/2 -translate-y-1/2"
+  >
+    Reset
+  </button>
+
+  {/* Centered title + subline */}
+  <div className="text-center">
+    <h1 className="text-xl sm:text-2xl font-semibold">Be Ausome — Parent Support</h1>
+    <p className="text-sm text-neutral-500">Calm, practical help. Not medical advice.</p>
+  </div>
+</header>
+
 
       {/* Chat area */}
       <div
