@@ -148,7 +148,7 @@ export default function ParentSupportPage() {
       </header>
 
       {/* Chat area */}
-      <div ref={scrollerRef} className="flex-1 overflow-y-auto px-4 sm:px-6 py-6">
+     <div ref={scrollerRef} className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 pb-40">
         {/* Presets row */}
         <div className="flex flex-wrap gap-2 mb-4">
           {presets.map(p => (
