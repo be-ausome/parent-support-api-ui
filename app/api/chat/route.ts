@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Ajv from 'ajv'
+import Ajv from 'ajv/dist/2020'   // <-- use the 2020-12 engine
 import fs from 'node:fs'
 import path from 'node:path'
 
