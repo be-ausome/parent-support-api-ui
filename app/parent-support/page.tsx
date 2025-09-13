@@ -1,15 +1,87 @@
 'use client'
 import { useEffect, useRef, useState } from 'react'
+import ReactMarkdown from 'react-markdown'
 
-type Msg = { role: 'user'|'assistant', content: string }
+type Msg = { role: 'user'|'assistant', content: string, ts: number }
+
+function formatTime(ts: number) {
+  try { return new Date(ts).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) }
+  catch { return '' }
+}
+
+// Pull image URLs from markdown ![](url) and plain URLs
+function extractImages(content: string) {
+  const images: { url: string; alt?: string }[] = []
+  let text = content
+
+  // Markdown ![alt](url)
+  const mdImg = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g
+  text = text.replace(mdImg, (_: any, alt: string, url: string) => {
+    images.push({ url, alt })
+    return '' // strip from text (we'll render images separately)
+  })
+
+  // Plain image URLs
+  const urlRegex = /(https?:\/\/[^\s)]+?\.(?:png|jpe?g|gif|webp))(?!\S)/gi
+  text = text.replace(urlRegex, (url: string) => {
+    images.push({ url })
+    return ''
+  })
+
+  text = text.replace(/\r\n/g, '\n').replace(/\n{3,}/g, '\n\n').trim()
+  return { text, images }
+}
+
+/** Clean up model text so Markdown lists render:
+ * - normalize dashes
+ * - newline after common headers
+ * - force a newline + bullet when the model tried inline “ - ”
+ */
+function toMarkdown(content: string) {
+  let c = content.replace(/\r\n/g, '\n').replace(/[–—]/g, '-')
+
+  const headers = [
+    "What’s likely happening","What's likely happening",
+    "What’s underneath","Underneath",
+    "What’s happening","What's happening",
+    "What might help","What may help",
+    "Bridge moves","Bridge ideas","Next steps","Options","Try this"
+  ]
+  for (const h of headers) {
+    const re = new RegExp(`(^|\\n)\\s*${h}:?\\s*`, 'gi')
+    c = c.replace(re, (_m, p1) => `${p1}${h}:\n`)
+  }
+
+  // Inline bullets → real bullets
+  c = c.replace(/:\s*-\s+/g, ':\n- ')
+  c = c.replace(/([.)])\s-\s+/g, '$1\n- ')
+  c = c.replace(/(\S)\s-\s(?=[A-Za-z(])/g, '$1\n- ')
+  c = c.replace(/\s•\s+/g, '\n• ')
+
+  // Numbered items inline → new line numbers
+  c = c.replace(/:\s*(\d+)\.\s/g, ':\n$1. ')
+  c = c.replace(/([.!?])\s+(\d+)\.\s/g, '$1\n$2. ')
+  c = c.replace(/([^\n])\s(\d+)\.\s/g, (_m, p1, n) => `${p1}\n${n}. `)
+
+  // Ensure a blank line before a list (Markdown requirement for some renderers)
+  c = c.replace(/([^\n])\n(- |\d+\. )/g, '$1\n\n$2')
+
+  return c.replace(/\n{3,}/g, '\n\n').trim()
+}
 
 export default function ParentSupportPage() {
   const [input, setInput] = useState('')
   const [log, setLog] = useState<Msg[]>([])
   const [isLoading, setIsLoading] = useState(false)
-  const scrollerRef = useRef<HTMLDivElement>(null)
+  const [errorMsg, setErrorMsg] = useState<string | null>(null)
+  const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
 
-  // Presets with spacing
+  const scrollerRef = useRef<HTMLDivElement>(null)
+  const endRef = useRef<HTMLDivElement>(null)
+  const taRef = useRef<HTMLTextAreaElement>(null)
+  const footerRef = useRef<HTMLFormElement>(null)
+  const [footerH, setFooterH] = useState(0)
+
   const presets = [
     'We are going to a baseball game. Make a visual schedule for the outing (age 15).',
     'Morning routine meltdown. Need a 5-step bridge.',
@@ -17,57 +89,87 @@ export default function ParentSupportPage() {
     'Dentist visit Thursday—help with a visual strip (age 10).'
   ]
 
-  // Auto-scroll on new messages
+  // Measure footer height so content never hides behind it
   useEffect(() => {
-    scrollerRef.current?.scrollTo({ top: scrollerRef.current.scrollHeight, behavior: 'smooth' })
-  }, [log, isLoading])
+    const measure = () => setFooterH(footerRef.current?.offsetHeight ?? 0)
+    measure()
+    const ro = new (window as any).ResizeObserver?.(measure)
+    if (ro && footerRef.current) ro.observe(footerRef.current)
+    window.addEventListener('resize', measure)
+    return () => { window.removeEventListener('resize', measure); ro?.disconnect?.() }
+  }, [])
+
+  // Rock-solid autoscroll to sentinel
+  useEffect(() => {
+    const go = () => endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    go(); const t1 = setTimeout(go, 60); const t2 = setTimeout(go, 140)
+    return () => { clearTimeout(t1); clearTimeout(t2) }
+  }, [log, isLoading, footerH])
+
+  // Autosize textarea as you type
+  useEffect(() => {
+    const ta = taRef.current
+    if (!ta) return
+    const handler = () => {
+      ta.style.height = '0px'
+      ta.style.height = Math.min(ta.scrollHeight, 220) + 'px'
+    }
+    handler()
+    ta.addEventListener('input', handler)
+    return () => ta.removeEventListener('input', handler)
+  }, [])
 
   async function sendMessage(e?: React.FormEvent) {
     e?.preventDefault()
     const text = input.trim()
     if (!text || isLoading) return
 
-    setLog(l => [...l, { role: 'user', content: text }])
+    const userMsg: Msg = { role: 'user', content: text, ts: Date.now() }
+    setLog(l => [...l, userMsg])
     setInput('')
     setIsLoading(true)
+    setErrorMsg(null)
 
     try {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Always text mode now; include thread for context
-        body: JSON.stringify({ message: text, mode: 'text', thread: [...log, { role: 'user', content: text }] })
+        body: JSON.stringify({
+          message: text,
+          mode: 'text',            // always text
+          thread: [...log, userMsg].map(({ role, content }) => ({ role, content }))
+        })
       })
       const data = await res.json()
       if (!res.ok) {
-        setLog(l => [...l, { role: 'assistant', content: `Hmm, I hit an error: ${data.error || res.status}` }])
+        setErrorMsg(data.error || `HTTP ${res.status}`)
+        setLog(l => [...l, { role: 'assistant', content: 'I hit a hiccup. Try again in a moment.', ts: Date.now() }])
       } else {
         const answer = data.kind === 'json'
-          ? 'I’m set up for text only here. (JSON was returned by the API.)'
-          : data.text
-        setLog(l => [...l, { role: 'assistant', content: answer }])
+          ? 'I’m set up for text here. (The API returned JSON.)'
+          : (data.text || '')
+        setLog(l => [...l, { role: 'assistant', content: answer, ts: Date.now() }])
       }
-    } catch (err: any) {
-      setLog(l => [...l, { role: 'assistant', content: 'Network hiccup—try again.' }])
+    } catch {
+      setErrorMsg('Network error. Please check your connection.')
+      setLog(l => [...l, { role: 'assistant', content: 'Network hiccup—try again.', ts: Date.now() }])
     } finally {
       setIsLoading(false)
     }
   }
 
   function onKeyDown(e: React.KeyboardEvent<HTMLTextAreaElement>) {
-    if (e.key === 'Enter' && !e.shiftKey) {
-      e.preventDefault()
-      sendMessage()
-    }
+    if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage() }
   }
 
-  function resetChat() {
-    setLog([])
-    setInput('')
+  function resetChat() { setLog([]); setInput(''); setErrorMsg(null) }
+
+  async function copyMsg(i: number, content: string) {
+    try { await navigator.clipboard.writeText(content); setCopiedIndex(i); setTimeout(() => setCopiedIndex(null), 1200) } catch {}
   }
 
   return (
-    <div className="mx-auto max-w-4xl min-h-screen flex flex-col">
+    <div className="mx-auto max-w-5xl min-h-[100dvh] flex flex-col bg-white">
       {/* Header */}
       <header className="px-4 sm:px-6 py-4 border-b bg-white">
         <div className="flex items-center gap-3">
@@ -83,22 +185,76 @@ export default function ParentSupportPage() {
       </header>
 
       {/* Chat area */}
-      <div ref={scrollerRef} className="flex-1 overflow-y-auto px-4 sm:px-6 py-6">
+      <div
+        ref={scrollerRef}
+        className="flex-1 overflow-y-auto px-4 sm:px-6 py-6"
+        style={{ paddingBottom: `calc(${footerH + 96}px + env(safe-area-inset-bottom))` }}
+      >
+        {/* Presets row */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {presets.map(p => (
+          {[
+            'We are going to a baseball game. Make a visual schedule for the outing (age 15).',
+            'Morning routine meltdown. Need a 5-step bridge.',
+            'Grocery store is loud. Lines are hard—short plan with a break signal.',
+            'Dentist visit Thursday—help with a visual strip (age 10).'
+          ].map(p => (
             <button key={p} type="button" className="chip" onClick={() => setInput(p)}>
               {p}
             </button>
           ))}
         </div>
 
+        {/* Messages */}
         <div className="space-y-4">
-          {log.map((m, i) => (
-            <div key={i} className={`msg ${m.role === 'user' ? 'msg-user' : 'msg-assistant'}`}>
-              {m.content}
-            </div>
-          ))}
+          {log.map((m, i) => {
+            const { text, images } = extractImages(m.content)
+            const isAssistant = m.role === 'assistant'
+            const md = toMarkdown(text)
 
+            return (
+              <div key={i} className={`msg ${isAssistant ? 'msg-assistant' : 'msg-user'} relative`}>
+                {/* Copy button on assistant bubbles */}
+                {isAssistant && (
+                  <button
+                    onClick={() => copyMsg(i, m.content)}
+                    className="absolute -top-2 -right-2 bg-white border shadow px-2 py-0.5 rounded text-xs"
+                    title="Copy"
+                  >
+                    {copiedIndex === i ? 'Copied' : 'Copy'}
+                  </button>
+                )}
+
+                {/* Markdown-rendered content */}
+                {text && (
+                  <ReactMarkdown
+                    components={{
+                      p: ({ children }) => <p className="mb-2 leading-relaxed">{children}</p>,
+                      ul: ({ children }) => <ul className="list-disc ml-5 space-y-1">{children}</ul>,
+                      ol: ({ children }) => <ol className="list-decimal ml-5 space-y-1">{children}</ol>,
+                      li: ({ children }) => <li className="leading-relaxed">{children}</li>,
+                      strong: ({ children }) => <strong className="font-semibold">{children}</strong>
+                    }}
+                  >
+                    {md}
+                  </ReactMarkdown>
+                )}
+
+                {/* Images (if any) */}
+                {images.length > 0 && (
+                  <div className="mt-3 grid grid-cols-2 gap-2">
+                    {images.map((img, idx) => (
+                      <img key={idx} src={img.url} alt={img.alt || 'image'} loading="lazy" />
+                    ))}
+                  </div>
+                )}
+
+                {/* Timestamp */}
+                <div className="meta text-right">{formatTime(m.ts)}</div>
+              </div>
+            )
+          })}
+
+          {/* Thinking bubble */}
           {isLoading && (
             <div className="msg msg-assistant inline-flex items-center gap-2">
               <span className="text-neutral-500">Thinking</span>
@@ -109,21 +265,28 @@ export default function ParentSupportPage() {
               </span>
             </div>
           )}
+
+          {/* Scroll sentinel */}
+          <div ref={endRef} />
         </div>
       </div>
 
-      {/* Sticky input at bottom */}
-      <form onSubmit={sendMessage} className="footer">
-        <div className="mx-auto max-w-4xl px-4 sm:px-6 py-3">
+      {/* Error toast */}
+      {errorMsg && <div className="toast">{errorMsg}</div>}
+
+      {/* Sticky input */}
+      <form ref={footerRef} onSubmit={sendMessage} className="footer">
+        <div className="mx-auto max-w-5xl px-4 sm:px-6 py-3">
           <div className="flex items-end gap-3">
             <textarea
+              ref={taRef}
               value={input}
               onChange={e => setInput(e.target.value)}
               onKeyDown={onKeyDown}
               rows={3}
               placeholder="Describe the situation… (Enter to send, Shift+Enter for new line)"
               className="w-full resize-none rounded-xl border bg-white px-3 py-2 focus:outline-none focus:ring-2 focus:ring-blue-500"
-              style={{ minHeight: 60 }}
+              style={{ minHeight: 60, maxHeight: 220 }}
             />
             <button
               type="submit"
