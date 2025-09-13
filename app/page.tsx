@@ -15,6 +15,21 @@ function formatTime(ts: number) {
 function extractImages(content: string) {
   const images: { url: string; alt?: string }[] = []
   let text = content
+function prettifyText(content: string) {
+  let c = content;
+
+  // Newline after common section headers
+  c = c.replace(/(What’s likely happening:|What's likely happening:|What’s underneath:|Underneath:|Bridge moves:|Bridge ideas:|What may help:)/g, '$1\n');
+
+  // Turn inline bullets into real line-start bullets
+  c = c.replace(/([:\.])\s*-\s+/g, '$1\n- ');     // after ":" or "."
+  c = c.replace(/\s•\s+/g, '\n• ');               // dot bullets
+
+  // Compact excessive blank lines
+  c = c.replace(/\n{3,}/g, '\n\n').trim();
+
+  return c;
+}
 
   // Markdown ![alt](url)
   const mdImg = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g
