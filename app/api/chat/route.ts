@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server'
-import Ajv from 'ajv/dist/2020'   // use the 2020-12 engine
+import Ajv from 'ajv/dist/2020'   // 2020-12 metaschema
 import fs from 'node:fs'
 import path from 'node:path'
 
@@ -36,9 +36,7 @@ function extractJSONObject(text: string): any {
   return { __raw__: text }
 }
 
-// Read your Custom-GPT instruction files from prompts/original.
-// If prompts/original/_include.txt exists, we load ONLY the listed files in that order.
-// Otherwise we include every .md/.txt under prompts/original with a reasonable priority.
+// --- Load your Custom-GPT instruction files (prompts/original) ---
 function readOriginalInstructions(): string {
   const base = path.join(process.cwd(), 'prompts', 'original')
   try {
@@ -114,56 +112,65 @@ async function openaiChat(body: any) {
   return JSON.parse(text)
 }
 
-async function callOpenAI(prompt: string, mode: string) {
+type ThreadMsg = { role: 'user'|'assistant', content: string }
+
+function sanitizeThread(thread: any): ThreadMsg[] {
+  if (!Array.isArray(thread)) return []
+  const allowed = new Set(['user','assistant'])
+  const safe: ThreadMsg[] = []
+  for (const m of thread.slice(-8)) { // last 8 turns max
+    if (!m || !allowed.has(m.role)) continue
+    const content = String(m.content || '').slice(0, 2000) // cap length
+    if (content) safe.push({ role: m.role, content })
+  }
+  return safe
+}
+
+async function callOpenAI(prompt: string, mode: string, thread?: ThreadMsg[]) {
   // Base system pointer
   const systemPath = path.join(process.cwd(), 'prompts', 'system.md')
   let system = 'You are a calm, concise Parent Support assistant.'
   try { system = fs.readFileSync(systemPath, 'utf-8') } catch {}
 
-  // Voice charter (answer shape + taboos)
+  // Voice charter + few-shots
   let voice = ''
   try { voice = fs.readFileSync(path.join(process.cwd(), 'prompts', 'style', 'voice.md'), 'utf-8') } catch {}
 
-  // Few-shot examples (JSON array of messages)
   let fewshots: any[] = []
   try {
     const raw = fs.readFileSync(path.join(process.cwd(), 'prompts', 'fewshot', 'parent_support.json'), 'utf-8')
     const arr = JSON.parse(raw); if (Array.isArray(arr)) fewshots = arr
   } catch {}
 
-  // Your full Custom-GPT instructions
+  // Your original Custom-GPT corpus
   const original = readOriginalInstructions()
 
-  // Build the system content and messages
+  // Messages
   const baseSystem = [system, voice, original].filter(Boolean).join('\n\n')
+  const baseMessages: any[] = [{ role: 'system', content: baseSystem }, ...fewshots]
+  const history = sanitizeThread(thread)
+
+  // TEXT MODE — tuned for your voice
   let schemaName: string | null = null
   if (mode === 'support_plan') schemaName = 'support_plan.schema.json'
   if (mode === 'social_story') schemaName = 'social_story.schema.json'
   if (mode === 'routine_plan') schemaName = 'routine_plan.schema.json'
 
-  const baseMessages: any[] = [{ role: 'system', content: baseSystem }, ...fewshots]
-
-  // TEXT MODE — tuned for your voice
   if (!schemaName) {
     const data = await openaiChat({
-      messages: [...baseMessages, { role: 'user', content: prompt }],
-      temperature: 0.55,
-      top_p: 0.9,
-      presence_penalty: 0.1,
-      frequency_penalty: 0.2
+      messages: [...baseMessages, ...history, { role: 'user', content: prompt }],
+      temperature: 0.55, top_p: 0.9, presence_penalty: 0.1, frequency_penalty: 0.2
     })
     const text = data.choices?.[0]?.message?.content ?? ''
     return { kind: 'text', text }
   }
 
-  // JSON MODE — robust (no 500s on schema mismatch)
+  // JSON MODE — robust
   const schema = loadSchema(schemaName)
-
-  // Attempt 1: json_object (works well with 4o/mini)
   let data: any
   try {
     data = await openaiChat({
-      messages: [...baseMessages,
+      messages: [...baseMessages, ...history,
         { role: 'system', content: 'Reply with JSON only that strictly matches the provided schema. No code fences or extra text.' },
         { role: 'user', content: prompt }
       ],
@@ -171,9 +178,8 @@ async function callOpenAI(prompt: string, mode: string) {
       response_format: { type: 'json_object' }
     })
   } catch {
-    // Attempt 2: strong instruction, no response_format
     data = await openaiChat({
-      messages: [...baseMessages,
+      messages: [...baseMessages, ...history,
         { role: 'system', content: 'Return JSON only. No prose. No code fences. Match the schema exactly.' },
         { role: 'user', content: prompt }
       ],
@@ -185,9 +191,7 @@ async function callOpenAI(prompt: string, mode: string) {
   const parsed = extractJSONObject(text)
   const validate = ajv.compile(schema)
   const valid = validate(parsed)
-  if (!valid) {
-    return { kind: 'json', payload: { __repair__: validate.errors, raw: parsed } }
-  }
+  if (!valid) return { kind: 'json', payload: { __repair__: validate.errors, raw: parsed } }
   return { kind: 'json', payload: parsed }
 }
 
@@ -198,9 +202,9 @@ export async function OPTIONS(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   const origin = req.headers.get('origin')
-  const { message, mode } = await req.json()
+  const { message, mode, thread } = await req.json()
   try {
-    const result = await callOpenAI(message, mode || 'text')
+    const result = await callOpenAI(message, mode || 'text', thread)
     return NextResponse.json(result, { headers: corsHeaders(origin) })
   } catch (e: any) {
     return NextResponse.json({ error: e.message }, { status: 500, headers: corsHeaders(origin) })
