@@ -1,4 +1,4 @@
-// app/api/chat/route.ts — zero-fs/zero-HTTP, robust parsing, inline kernel + schemas
+// app/api/chat/route.ts — inline kernel/schemas, robust parsing, force text output
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "node:crypto";
 
@@ -17,7 +17,6 @@ function headersOrError() {
   if (!key || key.length < 20) return null;
   return { Authorization: `Bearer ${key}`, "Content-Type": "application/json" };
 }
-
 function fpKernel(text: string) {
   return {
     sha256: crypto.createHash("sha256").update(text).digest("hex"),
@@ -25,13 +24,11 @@ function fpKernel(text: string) {
   };
 }
 
-// Robust extraction for OpenAI Responses API
+// Very defensive extraction for the Responses API
 function extractText(data: any): string {
-  // Shortcut provided by Responses API
   if (typeof data?.output_text === "string" && data.output_text.trim()) {
     return data.output_text.trim();
   }
-  // Walk chunks defensively
   const pieces: string[] = [];
   const out = Array.isArray(data?.output) ? data.output : [];
   for (const part of out) {
@@ -40,26 +37,25 @@ function extractText(data: any): string {
       if ((c?.type === "output_text" || c?.type === "text") && typeof c?.text === "string") {
         pieces.push(c.text);
       }
+      // Some models use a generic "message" object
+      if (typeof c?.message === "string") pieces.push(c.message);
     }
   }
   return pieces.join("\n").trim();
 }
-
 function extractJSON(data: any): any | undefined {
   const out = Array.isArray(data?.output) ? data.output : [];
   for (const part of out) {
     const content = Array.isArray(part?.content) ? part.content : [];
     for (const c of content) {
-      if (c?.type === "output_json" || c?.type === "json") {
-        return c.json;
-      }
+      if (c?.type === "output_json" || c?.type === "json") return c.json;
     }
   }
   return undefined;
 }
 
 /* =========================
-   KERNEL (inline text)
+   KERNEL (inline)
    ========================= */
 const kernel = `# Be Ausome — Parent Support Kernel (v2.7-conversational)
 
@@ -122,7 +118,7 @@ If a tone hint appears (e.g., gentle/structured/playful), lean that way while st
 - “If it helps, one small next step: ___.”`;
 
 /* =========================
-   SCHEMAS (inline JSON)
+   SCHEMAS (inline)
    ========================= */
 const socialStorySchema = {
   $schema: "https://json-schema.org/draft/2020-12/schema",
@@ -131,18 +127,8 @@ const socialStorySchema = {
   additionalProperties: false,
   properties: {
     title: { type: "string", maxLength: 80 },
-    lines: {
-      type: "array",
-      minItems: 12,
-      maxItems: 12,
-      items: { type: "string", maxLength: 120 }
-    },
-    panel_captions: {
-      type: "array",
-      minItems: 6,
-      maxItems: 6,
-      items: { type: "string", maxLength: 60 }
-    }
+    lines: { type: "array", minItems: 12, maxItems: 12, items: { type: "string", maxLength: 120 } },
+    panel_captions: { type: "array", minItems: 6, maxItems: 6, items: { type: "string", maxLength: 60 } }
   },
   required: ["title", "lines", "panel_captions"]
 } as const;
@@ -214,7 +200,7 @@ function schemaFor(mode: Mode) {
 
 // ---------- route ----------
 export async function POST(req: NextRequest) {
-  // Parse request
+  // Parse body
   let body: any;
   try {
     body = await req.json();
@@ -235,7 +221,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: { stage: "env", hint: "OPENAI_API_KEY missing" } }, { status: 500 });
   }
 
-  // Kernel fingerprint (just for you to verify)
+  // Kernel fingerprint (for sanity)
   const { sha256: kernel_hash, firstLine: kernel_version } = fpKernel(kernel);
 
   // Routing & overlays
@@ -245,7 +231,7 @@ export async function POST(req: NextRequest) {
   const overlay = buildOverlay(tone, tags);
   const userContent = overlay ? `${overlay}\n\n---\n\n${message}` : message;
 
-  // TEXT MODE
+  // TEXT MODE — force plain text output
   if (userMode === "text") {
     let r: Response;
     try {
@@ -258,6 +244,7 @@ export async function POST(req: NextRequest) {
             { role: "system", content: kernel },
             { role: "user", content: userContent }
           ],
+          response_format: { type: "text" }, // <— force text
           temperature: 0.4,
           max_output_tokens: 600
         })
@@ -266,29 +253,35 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: { stage: "openai_fetch_text", hint: String(e?.message || e) } }, { status: 502 });
     }
 
+    const raw = await r.text();
     if (!r.ok) {
-      const body = await r.text().catch(() => "");
       return NextResponse.json(
-        { error: { stage: "openai_text_non_ok", status: r.status, body: body.slice(0, 400) } },
+        { error: { stage: "openai_text_non_ok", status: r.status, body: raw.slice(0, 800) } },
         { status: 502 }
       );
     }
 
+    // Try to parse JSON → extract text; if parsing fails, return raw as a last resort
     try {
-      const data = await r.json();
-      const text = extractText(data) || "(no text returned)";
+      const data = JSON.parse(raw);
+      const text = extractText(data) || raw; // fallback to raw body if no text field
       return NextResponse.json({
         mode: userMode,
         result: text,
         usage: data.usage,
         meta: { kernel_hash, kernel_version, tone, tags }
       });
-    } catch (e: any) {
-      return NextResponse.json({ error: { stage: "parse_text_json", hint: String(e?.message || e) } }, { status: 502 });
+    } catch {
+      // If the model ever returns non-JSON (rare), still surface it
+      return NextResponse.json({
+        mode: userMode,
+        result: raw || "(no text returned)",
+        meta: { kernel_hash, kernel_version, tone, tags }
+      });
     }
   }
 
-  // JSON MODES
+  // JSON MODES — strict structured outputs
   const schema = schemaFor(userMode);
   if (!schema) {
     return NextResponse.json({ error: { stage: "schema", hint: `Unknown mode: ${userMode}` } }, { status: 400 });
@@ -305,10 +298,7 @@ export async function POST(req: NextRequest) {
           { role: "system", content: kernel },
           { role: "user", content: userContent }
         ],
-        response_format: {
-          type: "json_schema",
-          json_schema: { name: userMode, strict: true, schema }
-        },
+        response_format: { type: "json_schema", json_schema: { name: userMode, strict: true, schema } },
         temperature: 0.2
       })
     });
@@ -316,20 +306,20 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: { stage: "openai_fetch_json", hint: String(e?.message || e) } }, { status: 502 });
   }
 
+  const raw = await r.text();
   if (!r.ok) {
-    const body = await r.text().catch(() => "");
     return NextResponse.json(
-      { error: { stage: "openai_json_non_ok", status: r.status, body: body.slice(0, 400) } },
+      { error: { stage: "openai_json_non_ok", status: r.status, body: raw.slice(0, 800) } },
       { status: 502 }
     );
   }
 
   try {
-    const data = await r.json();
+    const data = JSON.parse(raw);
     const json = extractJSON(data);
     if (json == null) {
       return NextResponse.json(
-        { error: { stage: "parse_json_json", hint: "No JSON payload in response" } },
+        { error: { stage: "parse_json_json", hint: "No JSON payload in response", raw: raw.slice(0, 800) } },
         { status: 502 }
       );
     }
@@ -340,6 +330,6 @@ export async function POST(req: NextRequest) {
       meta: { kernel_hash, kernel_version, tone, tags }
     });
   } catch (e: any) {
-    return NextResponse.json({ error: { stage: "parse_json_json", hint: String(e?.message || e) } }, { status: 502 });
+    return NextResponse.json({ error: { stage: "parse_json_json", hint: String(e?.message || e), raw: raw.slice(0, 800) } }, { status: 502 });
   }
 }
