@@ -38,4 +38,22 @@ body {
   @apply inline-flex items-center gap-1 align-middle;
 }
 .typing-dot {
-  width: 6px; height: 6px; border-radius: 9999px; background:
+  width: 6px; height: 6px; border-radius: 9999px; background: #0ea5e9;
+  animation: blink 1.2s infinite ease-in-out;
+}
+.typing-dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-dot:nth-child(3) { animation-delay: 0.4s; }
+@keyframes blink {
+  0%, 80%, 100% { opacity: 0.2; transform: translateY(0); }
+  40% { opacity: 1; transform: translateY(-2px); }
+}
+
+/* Assistant bubble can safely show inline images */
+.msg-assistant img {
+  @apply rounded-lg border max-w-full;
+}
+
+/* Toast for errors */
+.toast {
+  @apply fixed bottom-24 left-1/2 -translate-x-1/2 bg-red-600 text-white px-3 py-2 rounded-md shadow-lg;
+}
