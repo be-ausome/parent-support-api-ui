@@ -34,28 +34,40 @@ function extractImages(content: string) {
 /** Make model output easier to read:
  * - enforce line breaks after common section headers
  * - convert inline dashes ( -, – , — ) into real bullets
+ * - break numbered lists onto new lines
  * - compact extra blank lines
  */
 function prettifyText(content: string) {
-  let c = content
+  let c = content.replace(/\r\n/g, '\n')
 
-  // Newline after common headers
-  c = c.replace(
-    /(What’s likely happening:|What's likely happening:|What’s underneath:|Underneath:|Bridge moves:|Bridge ideas:|What may help:|What’s happening:|What's happening:)/g,
-    '$1\n'
-  )
+  // Normalize en/em dashes to a plain hyphen
+  c = c.replace(/[–—]/g, '-')
 
-  // Turn inline dash bullets into line-start bullets (supports -, – , —)
-  c = c.replace(/([:\.;])\s*[–—-]\s+/g, '$1\n- ') // after :, ., ;
-  // If a paragraph contains multiple spaced dashes, make them bullets
-  c = c.replace(/(\S)\s+[–—-]\s+/g, '$1\n- ')     // general case
+  // Newline after common headers (with/without colon)
+  const headers = [
+    "What’s likely happening", "What's likely happening",
+    "What’s underneath", "Underneath",
+    "What’s happening", "What's happening",
+    "What might help", "Bridge moves", "Bridge ideas", "What may help"
+  ]
+  for (const h of headers) {
+    const re = new RegExp(`(^|\\n)\\s*${h}:?\\s*`, 'gi')
+    c = c.replace(re, (_m, p1) => `${p1}${h}:\n`)
+  }
+
+  // Bullets from inline dashes
+  c = c.replace(/:\s*-\s+/g, ':\n- ')           // after a colon
+  c = c.replace(/([.)])\s-\s+/g, '$1\n- ')      // after . or )
+  c = c.replace(/(\S)\s-\s(?=[A-Za-z(])/g, '$1\n- ') // general case
+  c = c.replace(/"\s-\s+/g, '"\n- ')            // after a quote
+
   // Dot bullets
   c = c.replace(/\s•\s+/g, '\n• ')
 
-  // Ensure existing start-of-line dashes are on their own line
-  c = c.replace(/(?:^|\n)\s*[–—]\s+/g, m => m.replace(/[–—]/, '- '))
+  // Break numbered items that run inline: “… help. 1. Tip 2. Tip …”
+  c = c.replace(/([a-z)])\s+(\d+)\.\s/gi, '$1\n$2. ')
 
-  // Compact excessive blank lines
+  // Collapse extra blank lines
   c = c.replace(/\n{3,}/g, '\n\n').trim()
   return c
 }
@@ -68,6 +80,7 @@ export default function ParentSupportPage() {
   const [copiedIndex, setCopiedIndex] = useState<number | null>(null)
 
   const scrollerRef = useRef<HTMLDivElement>(null)
+  const endRef = useRef<HTMLDivElement>(null)
   const taRef = useRef<HTMLTextAreaElement>(null)
 
   const presets = [
@@ -77,13 +90,11 @@ export default function ParentSupportPage() {
     'Dentist visit Thursday—help with a visual strip (age 10).'
   ]
 
-  // Auto-scroll on new messages and after layout settles
+  // Always scroll to newest message (works even after long renders)
   useEffect(() => {
-    const el = scrollerRef.current
-    if (!el) return
-    const toBottom = () => el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
-    toBottom()
-    const t = setTimeout(toBottom, 50)
+    endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' })
+    // run again after layout settles
+    const t = setTimeout(() => endRef.current?.scrollIntoView({ behavior: 'smooth', block: 'end' }), 80)
     return () => clearTimeout(t)
   }, [log, isLoading])
 
@@ -180,8 +191,8 @@ export default function ParentSupportPage() {
       <div
         ref={scrollerRef}
         className="flex-1 overflow-y-auto px-4 sm:px-6 py-6"
-        // Enough space so the last message clears the sticky footer (plus safe-area)
-        style={{ paddingBottom: 'calc(14rem + env(safe-area-inset-bottom))' }}
+        // Enough space so last message clears sticky footer (plus iOS safe-area)
+        style={{ paddingBottom: 'calc(18rem + env(safe-area-inset-bottom))' }}
       >
         {/* Presets row */}
         <div className="flex flex-wrap gap-2 mb-4">
@@ -211,7 +222,7 @@ export default function ParentSupportPage() {
                 )}
 
                 {/* Text content with pretty line breaks */}
-                {text && <div className="whitespace-pre-wrap">{prettifyText(text)}</div>}
+                {text && <div className="whitespace-pre-wrap leading-relaxed">{prettifyText(text)}</div>}
 
                 {/* Images (if any) */}
                 {images.length > 0 && (
@@ -239,6 +250,9 @@ export default function ParentSupportPage() {
               </span>
             </div>
           )}
+
+          {/* Scroll sentinel */}
+          <div ref={endRef} />
         </div>
       </div>
 
