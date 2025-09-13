@@ -1,4 +1,4 @@
-// app/api/chat/route.ts — inline kernel/schemas, robust parsing, force plain text correctly
+// app/api/chat/route.ts — inline kernel/schemas, robust parsing, no text.format
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "node:crypto";
 
@@ -24,9 +24,10 @@ function fpKernel(text: string) {
   };
 }
 
-// Robust extraction for OpenAI Responses API
+// Robust extraction for OpenAI Responses API (covers multiple shapes)
 function extractText(data: any): string {
   if (typeof data?.output_text === "string" && data.output_text.trim()) return data.output_text.trim();
+
   const pieces: string[] = [];
   const out = Array.isArray(data?.output) ? data.output : [];
   for (const part of out) {
@@ -34,6 +35,8 @@ function extractText(data: any): string {
     for (const c of content) {
       if ((c?.type === "output_text" || c?.type === "text") && typeof c?.text === "string") pieces.push(c.text);
       if (typeof c?.message === "string") pieces.push(c.message);
+      // sometimes it's nested under annotations
+      if (c?.annotations && typeof c?.annotations?.text === "string") pieces.push(c.annotations.text);
     }
   }
   return pieces.join("\n").trim();
@@ -226,7 +229,7 @@ export async function POST(req: NextRequest) {
   const overlay = buildOverlay(tone, tags);
   const userContent = overlay ? `${overlay}\n\n---\n\n${message}` : message;
 
-  // TEXT MODE — force plain text with text.format
+  // TEXT MODE — no text.format; let API default, then extract robustly
   if (userMode === "text") {
     let r: Response;
     try {
@@ -239,7 +242,7 @@ export async function POST(req: NextRequest) {
             { role: "system", content: kernel },
             { role: "user", content: userContent }
           ],
-          text: { format: "plain" }, // << correct parameter
+          // no text.format, no response_format
           temperature: 0.4,
           max_output_tokens: 600
         })
@@ -258,7 +261,7 @@ export async function POST(req: NextRequest) {
 
     try {
       const data = JSON.parse(raw);
-      const text = extractText(data) || raw;
+      const text = extractText(data) || raw || "(no text returned)";
       return NextResponse.json({
         mode: userMode,
         result: text,
@@ -274,7 +277,7 @@ export async function POST(req: NextRequest) {
     }
   }
 
-  // JSON MODES — strict structured outputs (response_format is correct here)
+  // JSON MODES — strict structured outputs
   const schema = schemaFor(userMode);
   if (!schema) {
     return NextResponse.json({ error: { stage: "schema", hint: `Unknown mode: ${userMode}` } }, { status: 400 });
