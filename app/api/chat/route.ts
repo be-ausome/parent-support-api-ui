@@ -1,6 +1,7 @@
-// app/api/chat/route.ts — zero-fs, zero-HTTP, co-located kernel + schemas inline
+// app/api/chat/route.ts — zero-fs/zero-HTTP, robust parsing, inline kernel + schemas
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "node:crypto";
+
 import { inferMode, inferTone, type Mode } from "../../../lib/router";
 import { inferTags, buildOverlay, type Tone } from "../../../lib/overlays";
 
@@ -10,6 +11,7 @@ const OPENAI_URL = "https://api.openai.com/v1/responses";
 const MODEL_TEXT = process.env.OPENAI_MODEL_TEXT || "gpt-4.1-mini";
 const MODEL_JSON = process.env.OPENAI_MODEL_JSON || "gpt-4o-mini-2024-07-18";
 
+// ---------- helpers ----------
 function headersOrError() {
   const key = process.env.OPENAI_API_KEY?.trim();
   if (!key || key.length < 20) return null;
@@ -21,6 +23,39 @@ function fpKernel(text: string) {
     sha256: crypto.createHash("sha256").update(text).digest("hex"),
     firstLine: (text.split("\n")[0] || "").replace(/^#\s*/, "").trim()
   };
+}
+
+// Robust extraction for OpenAI Responses API
+function extractText(data: any): string {
+  // Shortcut provided by Responses API
+  if (typeof data?.output_text === "string" && data.output_text.trim()) {
+    return data.output_text.trim();
+  }
+  // Walk chunks defensively
+  const pieces: string[] = [];
+  const out = Array.isArray(data?.output) ? data.output : [];
+  for (const part of out) {
+    const content = Array.isArray(part?.content) ? part.content : [];
+    for (const c of content) {
+      if ((c?.type === "output_text" || c?.type === "text") && typeof c?.text === "string") {
+        pieces.push(c.text);
+      }
+    }
+  }
+  return pieces.join("\n").trim();
+}
+
+function extractJSON(data: any): any | undefined {
+  const out = Array.isArray(data?.output) ? data.output : [];
+  for (const part of out) {
+    const content = Array.isArray(part?.content) ? part.content : [];
+    for (const c of content) {
+      if (c?.type === "output_json" || c?.type === "json") {
+        return c.json;
+      }
+    }
+  }
+  return undefined;
 }
 
 /* =========================
@@ -177,9 +212,7 @@ function schemaFor(mode: Mode) {
   }
 }
 
-/* =========================
-   ROUTE
-   ========================= */
+// ---------- route ----------
 export async function POST(req: NextRequest) {
   // Parse request
   let body: any;
@@ -196,16 +229,16 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: { stage: "request", hint: "message is required" } }, { status: 400 });
   }
 
-  // Auth header
+  // Auth
   const headers = headersOrError();
   if (!headers) {
     return NextResponse.json({ error: { stage: "env", hint: "OPENAI_API_KEY missing" } }, { status: 500 });
   }
 
-  // Kernel fingerprint (for your sanity checks)
+  // Kernel fingerprint (just for you to verify)
   const { sha256: kernel_hash, firstLine: kernel_version } = fpKernel(kernel);
 
-  // Routing overlays
+  // Routing & overlays
   const userMode: Mode = (modeIn || inferMode(message, "text")) as Mode;
   const tone = inferTone(message, toneIn);
   const tags = inferTags(message);
@@ -243,10 +276,7 @@ export async function POST(req: NextRequest) {
 
     try {
       const data = await r.json();
-      const text =
-        data.output_text ??
-        data.output?.[0]?.content?.[0]?.text ??
-        "";
+      const text = extractText(data) || "(no text returned)";
       return NextResponse.json({
         mode: userMode,
         result: text,
@@ -296,7 +326,13 @@ export async function POST(req: NextRequest) {
 
   try {
     const data = await r.json();
-    const json = data.output ? data.output[0]?.content?.[0]?.json : undefined;
+    const json = extractJSON(data);
+    if (json == null) {
+      return NextResponse.json(
+        { error: { stage: "parse_json_json", hint: "No JSON payload in response" } },
+        { status: 502 }
+      );
+    }
     return NextResponse.json({
       mode: userMode,
       result: json,
