@@ -1,0 +1,46 @@
+[
+  {
+    "role": "user",
+    "content": "my son has trouble transitioning from lunch back to class. what can we do?"
+  },
+  {
+    "role": "assistant",
+    "content": "That switch is tough—lunch is loud and loose, then class asks for quiet focus.\n\nWhat’s underneath:\n- Sensory spike: cafeteria noise/pace lingers.\n- Loss of autonomy: fun → rules.\n- Abrupt cue: shift signal may be weak.\n\nBuild a tiny bridge:\n- 2-minute calm stop: water, short walk, or quiet corner.\n- Visual card he can hold: “Lunch → Quiet activity → Lesson”.\n- Simple job: carry a note/stack chairs—purpose beats loss.\n- Ritual cue: same phrase or 10-to-1 countdown daily.\n\nYou don’t need all of it—one predictable ritual often does the work.\nWhat feels hardest for him right now: the noise, losing play, or the sudden sit-down?"
+  },
+
+  {
+    "role": "user",
+    "content": "after screens, getting started on homework is a meltdown. help me shift that."
+  },
+  {
+    "role": "assistant",
+    "content": "Makes sense—screens are high-dopamine; homework is low-dopamine + demand.\n\nWhat’s going on:\n- State change: fast/bright → slow/effort.\n- No ramp: we ask for focus at zero mph.\n- Control drop: choice → chore.\n\nBridge ideas:\n- Landing ritual (2–3 min): snack + bathroom + 5 breaths.\n- Timer + preview: “When this hits 0, we do 5-minute starter.”\n- Starter task: the easiest piece first to get moving.\n- Choice of two: where to sit or which subject first.\n- Celebrate the start, not the finish: quick praise or sticker.\n\nWant a 5-step card you can print, or a short hand-off script?"
+  },
+
+  {
+    "role": "user",
+    "content": "mornings are chaos—won’t get dressed or eat. any ideas?"
+  },
+  {
+    "role": "assistant",
+    "content": "Totally common—mornings stack demands fast.\n\nWhat’s likely happening:\n- Decision overload right after waking.\n- No predictable cue chain yet.\n- Power struggle when time pressure shows up.\n\nBridge moves:\n- Night-before: lay out clothes + 2 breakfast choices.\n- Visual strip: “Wake → Bathroom → Clothes → Breakfast → Shoes”.\n- One song per step (same playlist each day).\n- Micro-choice: which sock first / which cup.\n- Praise the first step to get momentum.\n\nWant a printable 5-step strip or a one-song routine?"
+  },
+
+  {
+    "role": "user",
+    "content": "public places are hard—he wants to leave right away."
+  },
+  {
+    "role": "assistant",
+    "content": "Yep—new spaces = sensory + uncertainty.\n\nWhat may help:\n- Pre-brief: 3 pictures of where we’re going.\n- Exit plan: “If it’s too much, we take a 3-minute break.”\n- Safe spot: mark a quiet corner ahead of time.\n- Job on arrival: carry the map or pick the first booth.\n- Timer for ‘first look’: 5 minutes, then decide stay/leave.\n\nWant a tiny social story or a pocket card to bring?"
+  },
+
+  {
+    "role": "user",
+    "content": "teacher says he refuses to write. we’re stuck."
+  },
+  {
+    "role": "assistant",
+    "content": "Writing is a heavy lift—fine motor + language + sitting.\n\nBridge it:\n- Start with choice: pencil grip or marker.\n- 2-minute warmup: hand squeeze/trace lines.\n- Micro-goal: one word or one line first.\n- Dictate first sentence; he copies.\n- Praise the start; build from there.\n\nWant a 5-step starter card for class?"
+  }
+]
