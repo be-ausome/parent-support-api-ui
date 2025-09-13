@@ -65,6 +65,26 @@ function toMarkdown(content: string) {
   return c.replace(/\n{3,}/g, '\n\n').trim()
 }
 
+// Pull a printable string out of our API response, old or new shapes
+function pickAssistantText(d: any): string {
+  if (typeof d?.result === 'string' && d.result.trim()) return d.result.trim()
+  if (d?.result && typeof d.result === 'object') return JSON.stringify(d.result, null, 2)
+  if (typeof d?.output_text === 'string' && d.output_text.trim()) return d.output_text.trim()
+
+  // Very defensive fallback for Responses API chunk shapes
+  const out = Array.isArray(d?.output) ? d.output : []
+  const pieces: string[] = []
+  for (const part of out) {
+    const content = Array.isArray(part?.content) ? part.content : []
+    for (const c of content) {
+      if ((c?.type === 'output_text' || c?.type === 'text') && typeof c?.text === 'string') pieces.push(c.text)
+      if (typeof c?.message === 'string') pieces.push(c.message)
+    }
+  }
+  const joined = pieces.join('\n').trim()
+  return joined || '(no text returned)'
+}
+
 export default function ParentSupportPage() {
   const [input, setInput] = useState('')
   const [log, setLog] = useState<Msg[]>([])
@@ -140,20 +160,24 @@ export default function ParentSupportPage() {
         body: JSON.stringify({
           message: text,
           mode: 'text',
+          // optional thread context; harmless to keep
           thread: [...log, userMsg].map(({ role, content }) => ({ role, content }))
         })
       })
-      const data = await res.json()
-      if (!res.ok) {
-        setErrorMsg(data.error || `HTTP ${res.status}`)
+
+      const data = await res.json().catch(() => ({} as any))
+
+      if (!res.ok || (data && data.error)) {
+        const errStage = data?.error?.stage || 'server'
+        const errMsg = data?.error?.hint || data?.error?.body || `HTTP ${res.status}`
+        setErrorMsg(`[${errStage}] ${errMsg}`)
         setLog(l => [...l, { role: 'assistant', content: 'I hit a hiccup. Try again in a moment.', ts: Date.now() }])
-      } else {
-        const answer = data.kind === 'json'
-          ? 'I’m set up for text here. (The API returned JSON.)'
-          : (data.text || '')
-        setLog(l => [...l, { role: 'assistant', content: answer, ts: Date.now() }])
+        return
       }
-    } catch {
+
+      const answer = pickAssistantText(data)
+      setLog(l => [...l, { role: 'assistant', content: answer, ts: Date.now() }])
+    } catch (e: any) {
       setErrorMsg('Network error. Please check your connection.')
       setLog(l => [...l, { role: 'assistant', content: 'Network hiccup—try again.', ts: Date.now() }])
     } finally {
@@ -174,22 +198,21 @@ export default function ParentSupportPage() {
   return (
     <div className="mx-auto max-w-5xl min-h-[100dvh] flex flex-col bg-white">
       {/* Header */}
-  <header className="px-4 sm:px-6 py-5 border-b bg-white relative">
-  {/* Reset button pinned to the right */}
-  <button
-    onClick={resetChat}
-    className="chip absolute right-4 top-1/2 -translate-y-1/2"
-  >
-    Reset
-  </button>
+      <header className="px-4 sm:px-6 py-5 border-b bg-white relative">
+        {/* Reset button pinned to the right */}
+        <button
+          onClick={resetChat}
+          className="chip absolute right-4 top-1/2 -translate-y-1/2"
+        >
+          Reset
+        </button>
 
-  {/* Centered title + subline */}
-  <div className="text-center">
-    <h1 className="text-xl sm:text-2xl font-semibold">Be Ausome — Parent Support</h1>
-    <p className="text-sm text-neutral-500">Calm, practical help. Not medical advice.</p>
-  </div>
-</header>
-
+        {/* Centered title + subline */}
+        <div className="text-center">
+          <h1 className="text-xl sm:text-2xl font-semibold">Be Ausome — Parent Support</h1>
+          <p className="text-sm text-neutral-500">Calm, practical help. Not medical advice.</p>
+        </div>
+      </header>
 
       {/* Chat area */}
       <div
@@ -199,12 +222,7 @@ export default function ParentSupportPage() {
       >
         {/* Presets row */}
         <div className="flex flex-wrap gap-2 mb-4">
-          {[
-            'We are going to a baseball game. Make a visual schedule for the outing (age 15).',
-            'Morning routine meltdown. Need a 5-step bridge.',
-            'Grocery store is loud. Lines are hard—short plan with a break signal.',
-            'Dentist visit Thursday—help with a visual strip (age 10).'
-          ].map(p => (
+          {presets.map(p => (
             <button key={p} type="button" className="chip" onClick={() => setInput(p)}>
               {p}
             </button>
