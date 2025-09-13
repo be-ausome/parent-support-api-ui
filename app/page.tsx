@@ -4,50 +4,51 @@ import { useEffect, useRef, useState } from 'react'
 type Msg = { role: 'user'|'assistant', content: string, ts: number }
 
 function formatTime(ts: number) {
-  try {
-    return new Date(ts).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' })
-  } catch {
-    return ''
-  }
+  try { return new Date(ts).toLocaleTimeString([], { hour: 'numeric', minute: '2-digit' }) }
+  catch { return '' }
 }
 
 // Pull image URLs from markdown ![](url) and plain URLs
 function extractImages(content: string) {
   const images: { url: string; alt?: string }[] = []
   let text = content
-function prettifyText(content: string) {
-  let c = content;
-
-  // Newline after common section headers
-  c = c.replace(/(What’s likely happening:|What's likely happening:|What’s underneath:|Underneath:|Bridge moves:|Bridge ideas:|What may help:)/g, '$1\n');
-
-  // Turn inline bullets into real line-start bullets
-  c = c.replace(/([:\.])\s*-\s+/g, '$1\n- ');     // after ":" or "."
-  c = c.replace(/\s•\s+/g, '\n• ');               // dot bullets
-
-  // Compact excessive blank lines
-  c = c.replace(/\n{3,}/g, '\n\n').trim();
-
-  return c;
-}
 
   // Markdown ![alt](url)
   const mdImg = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g
-  text = text.replace(mdImg, (_, alt, url) => {
+  text = text.replace(mdImg, (_: any, alt: string, url: string) => {
     images.push({ url, alt })
-    return '' // remove from text
+    return '' // strip from text
   })
 
-  // Plain image URLs (png/jpg/jpeg/gif/webp)
+  // Plain image URLs
   const urlRegex = /(https?:\/\/[^\s)]+?\.(?:png|jpe?g|gif|webp))(?!\S)/gi
   text = text.replace(urlRegex, (url: string) => {
     images.push({ url })
-    return '' // remove from text
+    return '' // strip from text
   })
 
-  // Tidy leftover whitespace
   text = text.replace(/\n{3,}/g, '\n\n').trim()
   return { text, images }
+}
+
+// Make model output easier to read: enforce line breaks & bullets
+function prettifyText(content: string) {
+  let c = content
+
+  // Newline after common section headers
+  c = c.replace(
+    /(What’s likely happening:|What's likely happening:|What’s underneath:|Underneath:|Bridge moves:|Bridge ideas:|What may help:)/g,
+    '$1\n'
+  )
+
+  // Turn inline dash bullets into line-start bullets
+  c = c.replace(/([:\.])\s*-\s+/g, '$1\n- ')
+  // Dot bullets
+  c = c.replace(/\s•\s+/g, '\n• ')
+
+  // Compact excessive blank lines
+  c = c.replace(/\n{3,}/g, '\n\n').trim()
+  return c
 }
 
 export default function ParentSupportPage() {
@@ -67,12 +68,17 @@ export default function ParentSupportPage() {
     'Dentist visit Thursday—help with a visual strip (age 10).'
   ]
 
-  // Auto-scroll on new messages or while thinking
+  // Auto-scroll on new messages and after layout settles
   useEffect(() => {
-    scrollerRef.current?.scrollTo({ top: scrollerRef.current.scrollHeight, behavior: 'smooth' })
+    const el = scrollerRef.current
+    if (!el) return
+    const toBottom = () => el.scrollTo({ top: el.scrollHeight, behavior: 'smooth' })
+    toBottom()
+    const t = setTimeout(toBottom, 50)
+    return () => clearTimeout(t)
   }, [log, isLoading])
 
-  // Autosize textarea
+  // Autosize textarea as you type
   useEffect(() => {
     const ta = taRef.current
     if (!ta) return
@@ -100,10 +106,9 @@ export default function ParentSupportPage() {
       const res = await fetch('/api/chat', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        // Always text mode; include recent thread for context
         body: JSON.stringify({
           message: text,
-          mode: 'text',
+          mode: 'text', // always text now
           thread: [...log, userMsg].map(({ role, content }) => ({ role, content }))
         })
       })
@@ -117,7 +122,7 @@ export default function ParentSupportPage() {
           : (data.text || '')
         setLog(l => [...l, { role: 'assistant', content: answer, ts: Date.now() }])
       }
-    } catch (err: any) {
+    } catch {
       setErrorMsg('Network error. Please check your connection.')
       setLog(l => [...l, { role: 'assistant', content: 'Network hiccup—try again.', ts: Date.now() }])
     } finally {
@@ -143,7 +148,7 @@ export default function ParentSupportPage() {
       await navigator.clipboard.writeText(content)
       setCopiedIndex(i)
       setTimeout(() => setCopiedIndex(null), 1200)
-    } catch {}
+    } catch { /* ignore */ }
   }
 
   return (
@@ -163,7 +168,7 @@ export default function ParentSupportPage() {
       </header>
 
       {/* Chat area */}
-     <div ref={scrollerRef} className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 pb-40">
+      <div ref={scrollerRef} className="flex-1 overflow-y-auto px-4 sm:px-6 py-6 pb-40">
         {/* Presets row */}
         <div className="flex flex-wrap gap-2 mb-4">
           {presets.map(p => (
@@ -191,8 +196,8 @@ export default function ParentSupportPage() {
                   </button>
                 )}
 
-                {/* Text content */}
-                {text && <div className="whitespace-pre-wrap">{text}</div>}
+                {/* Text content with pretty line breaks */}
+                {text && <div className="whitespace-pre-wrap">{prettifyText(text)}</div>}
 
                 {/* Images (if any) */}
                 {images.length > 0 && (
