@@ -15,7 +15,7 @@ export default function Home() {
         </Link>
         <a
           className="chip"
-          href="https://be-ausome.org"
+          href="https://be-ausome.com"
           target="_blank"
           rel="noreferrer"
         >
