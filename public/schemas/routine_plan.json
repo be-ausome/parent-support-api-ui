@@ -1,1 +1,27 @@
-
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "routine_plan",
+  "type": "object",
+  "additionalProperties": false,
+  "properties": {
+    "title": { "type": "string", "maxLength": 80 },
+    "steps": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "properties": {
+          "step": { "type": "string", "maxLength": 100 },
+          "cue": { "type": "string", "maxLength": 120 },
+          "support": { "type": "string", "maxLength": 120 }
+        },
+        "required": ["step"]
+      }
+    },
+    "notes": { "type": "string", "maxLength": 280 },
+    "next_step": { "type": "string", "maxLength": 140 }
+  },
+  "required": ["title", "steps", "next_step"]
+}
