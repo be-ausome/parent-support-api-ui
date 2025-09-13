@@ -9,7 +9,7 @@ function formatTime(ts: number) {
   catch { return '' }
 }
 
-// Pull image URLs from markdown ![](url) and plain URLs
+// Pull image URLs from markdown ![](url) and plain URLs; return remaining text
 function extractImages(content: string) {
   const images: { url: string; alt?: string }[] = []
   let text = content
@@ -18,7 +18,7 @@ function extractImages(content: string) {
   const mdImg = /!\[([^\]]*)\]\((https?:\/\/[^\s)]+)\)/g
   text = text.replace(mdImg, (_: any, alt: string, url: string) => {
     images.push({ url, alt })
-    return '' // strip from text (we'll render images separately)
+    return '' // strip; we'll render images separately
   })
 
   // Plain image URLs
@@ -32,11 +32,7 @@ function extractImages(content: string) {
   return { text, images }
 }
 
-/** Clean up model text so Markdown lists render:
- * - normalize dashes
- * - newline after common headers
- * - force a newline + bullet when the model tried inline “ - ”
- */
+/** Clean up model text so Markdown lists render well */
 function toMarkdown(content: string) {
   let c = content.replace(/\r\n/g, '\n').replace(/[–—]/g, '-')
 
@@ -63,7 +59,7 @@ function toMarkdown(content: string) {
   c = c.replace(/([.!?])\s+(\d+)\.\s/g, '$1\n$2. ')
   c = c.replace(/([^\n])\s(\d+)\.\s/g, (_m, p1, n) => `${p1}\n${n}. `)
 
-  // Ensure a blank line before a list (Markdown requirement for some renderers)
+  // Ensure a blank line before a list
   c = c.replace(/([^\n])\n(- |\d+\. )/g, '$1\n\n$2')
 
   return c.replace(/\n{3,}/g, '\n\n').trim()
@@ -89,14 +85,21 @@ export default function ParentSupportPage() {
     'Dentist visit Thursday—help with a visual strip (age 10).'
   ]
 
-  // Measure footer height so content never hides behind it
+  // Measure footer height safely (no optional-chaining after `new`)
   useEffect(() => {
-    const measure = () => setFooterH(footerRef.current?.offsetHeight ?? 0)
+    const measure = () => setFooterH(footerRef.current ? footerRef.current.offsetHeight : 0)
     measure()
-    const ro = new (window as any).ResizeObserver?.(measure)
+
+    const RO: any = (typeof window !== 'undefined' && (window as any).ResizeObserver) || null
+    const ro = RO ? new RO(measure) : null
     if (ro && footerRef.current) ro.observe(footerRef.current)
+
     window.addEventListener('resize', measure)
-    return () => { window.removeEventListener('resize', measure); ro?.disconnect?.() }
+
+    return () => {
+      window.removeEventListener('resize', measure)
+      if (ro && typeof ro.disconnect === 'function') ro.disconnect()
+    }
   }, [])
 
   // Rock-solid autoscroll to sentinel
@@ -106,7 +109,7 @@ export default function ParentSupportPage() {
     return () => { clearTimeout(t1); clearTimeout(t2) }
   }, [log, isLoading, footerH])
 
-  // Autosize textarea as you type
+  // Autosize textarea
   useEffect(() => {
     const ta = taRef.current
     if (!ta) return
@@ -136,7 +139,7 @@ export default function ParentSupportPage() {
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           message: text,
-          mode: 'text',            // always text
+          mode: 'text',
           thread: [...log, userMsg].map(({ role, content }) => ({ role, content }))
         })
       })
@@ -213,7 +216,6 @@ export default function ParentSupportPage() {
 
             return (
               <div key={i} className={`msg ${isAssistant ? 'msg-assistant' : 'msg-user'} relative`}>
-                {/* Copy button on assistant bubbles */}
                 {isAssistant && (
                   <button
                     onClick={() => copyMsg(i, m.content)}
@@ -248,13 +250,11 @@ export default function ParentSupportPage() {
                   </div>
                 )}
 
-                {/* Timestamp */}
                 <div className="meta text-right">{formatTime(m.ts)}</div>
               </div>
             )
           })}
 
-          {/* Thinking bubble */}
           {isLoading && (
             <div className="msg msg-assistant inline-flex items-center gap-2">
               <span className="text-neutral-500">Thinking</span>
@@ -266,12 +266,10 @@ export default function ParentSupportPage() {
             </div>
           )}
 
-          {/* Scroll sentinel */}
           <div ref={endRef} />
         </div>
       </div>
 
-      {/* Error toast */}
       {errorMsg && <div className="toast">{errorMsg}</div>}
 
       {/* Sticky input */}
