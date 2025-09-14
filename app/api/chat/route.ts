@@ -1,4 +1,4 @@
-// app/api/chat/route.ts — inline kernel/schemas, robust parsing, no text.format
+// app/api/chat/route.ts — thread-aware, MAX_TURNS=12, lite-kernel after first turn, robust parsing
 import { NextRequest, NextResponse } from "next/server";
 import crypto from "node:crypto";
 
@@ -10,6 +10,11 @@ export const runtime = "nodejs";
 const OPENAI_URL = "https://api.openai.com/v1/responses";
 const MODEL_TEXT = process.env.OPENAI_MODEL_TEXT || "gpt-4.1-mini";
 const MODEL_JSON = process.env.OPENAI_MODEL_JSON || "gpt-4o-mini-2024-07-18";
+
+// ---- token / context guards ----
+const MAX_TURNS = 12;                 // keep the last 12 turns
+const MAX_OUTPUT_TOKENS_TEXT = 450;   // cap text length
+const MAX_OUTPUT_TOKENS_JSON = 280;   // JSON should be concise
 
 // ---------- helpers ----------
 function headersOrError() {
@@ -23,11 +28,8 @@ function fpKernel(text: string) {
     firstLine: (text.split("\n")[0] || "").replace(/^#\s*/, "").trim()
   };
 }
-
-// Robust extraction for OpenAI Responses API (covers multiple shapes)
 function extractText(data: any): string {
   if (typeof data?.output_text === "string" && data.output_text.trim()) return data.output_text.trim();
-
   const pieces: string[] = [];
   const out = Array.isArray(data?.output) ? data.output : [];
   for (const part of out) {
@@ -35,7 +37,6 @@ function extractText(data: any): string {
     for (const c of content) {
       if ((c?.type === "output_text" || c?.type === "text") && typeof c?.text === "string") pieces.push(c.text);
       if (typeof c?.message === "string") pieces.push(c.message);
-      // sometimes it's nested under annotations
       if (c?.annotations && typeof c?.annotations?.text === "string") pieces.push(c.annotations.text);
     }
   }
@@ -114,6 +115,8 @@ If a tone hint appears (e.g., gentle/structured/playful), lean that way while st
 - “Want a one-paragraph script for this?”
 - “Would a quick visual or checklist help?”
 - “If it helps, one small next step: ___.”`;
+
+const kernelLite = `You are Be Ausome — Parent Support. Plain-talk, neurodiversity-affirming guidance. Brief, concrete, one-step-forward replies. No medical/legal advice. Treat behavior as communication. Use tidy Markdown when helpful. When asked for JSON, return JSON only, matching the schema. Default tone: calm, respectful, practical.`;
 
 /* =========================
    SCHEMAS (inline)
@@ -209,7 +212,10 @@ export async function POST(req: NextRequest) {
   const message: string = (body?.message ?? "").toString();
   const modeIn: Mode | undefined = body?.mode;
   const toneIn: Tone | undefined = body?.tone;
-  if (!message.trim()) {
+  const threadIn: Array<{ role: "user" | "assistant"; content: string }> | undefined =
+    Array.isArray(body?.thread) ? body.thread : undefined;
+
+  if (!message.trim() && !(threadIn && threadIn.length)) {
     return NextResponse.json({ error: { stage: "request", hint: "message is required" } }, { status: 400 });
   }
 
@@ -219,17 +225,46 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: { stage: "env", hint: "OPENAI_API_KEY missing" } }, { status: 500 });
   }
 
-  // Kernel fingerprint (for sanity)
+  // Kernel fingerprint
   const { sha256: kernel_hash, firstLine: kernel_version } = fpKernel(kernel);
 
-  // Routing & overlays
-  const userMode: Mode = (modeIn || inferMode(message, "text")) as Mode;
-  const tone = inferTone(message, toneIn);
-  const tags = inferTags(message);
-  const overlay = buildOverlay(tone, tags);
-  const userContent = overlay ? `${overlay}\n\n---\n\n${message}` : message;
+  // Decide kernel size
+  const hasHistory = !!(threadIn && threadIn.length);
+  const systemKernel = hasHistory ? kernelLite : kernel;
 
-  // TEXT MODE — no text.format; let API default, then extract robustly
+  // Latest user content for routing
+  const lastUserText =
+    (threadIn && threadIn.length
+      ? [...threadIn].reverse().find(m => m.role === "user")?.content || message
+      : message) || "";
+
+  const userMode: Mode = (modeIn || inferMode(lastUserText, "text")) as Mode;
+  const tone = inferTone(lastUserText, toneIn);
+  const tags = inferTags(lastUserText);
+  const overlay = buildOverlay(tone, tags);
+
+  // Build input with history (apply overlay only to the most recent user turn)
+  const input: { role: "system" | "user" | "assistant"; content: string }[] = [
+    { role: "system", content: systemKernel }
+  ];
+
+  if (threadIn && threadIn.length) {
+    const recent = threadIn.slice(-MAX_TURNS);
+    const lastIdx = recent.length - 1;
+
+    recent.forEach((m, idx) => {
+      let content = (m.content ?? "").toString();
+      if (idx === lastIdx && m.role === "user" && overlay) {
+        content = `${overlay}\n\n---\n\n${content}`;
+      }
+      input.push({ role: m.role, content });
+    });
+  } else {
+    const content = overlay ? `${overlay}\n\n---\n\n${message}` : message;
+    input.push({ role: "user", content });
+  }
+
+  // TEXT MODE
   if (userMode === "text") {
     let r: Response;
     try {
@@ -238,13 +273,9 @@ export async function POST(req: NextRequest) {
         headers,
         body: JSON.stringify({
           model: MODEL_TEXT,
-          input: [
-            { role: "system", content: kernel },
-            { role: "user", content: userContent }
-          ],
-          // no text.format, no response_format
+          input,
           temperature: 0.4,
-          max_output_tokens: 600
+          max_output_tokens: MAX_OUTPUT_TOKENS_TEXT
         })
       });
     } catch (e: any) {
@@ -265,6 +296,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         mode: userMode,
         result: text,
+        output_text: text, // legacy key for older UI
         usage: data.usage,
         meta: { kernel_hash, kernel_version, tone, tags }
       });
@@ -272,12 +304,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({
         mode: userMode,
         result: raw || "(no text returned)",
+        output_text: raw || "(no text returned)",
         meta: { kernel_hash, kernel_version, tone, tags }
       });
     }
   }
 
-  // JSON MODES — strict structured outputs
+  // JSON MODES
   const schema = schemaFor(userMode);
   if (!schema) {
     return NextResponse.json({ error: { stage: "schema", hint: `Unknown mode: ${userMode}` } }, { status: 400 });
@@ -290,12 +323,10 @@ export async function POST(req: NextRequest) {
       headers,
       body: JSON.stringify({
         model: MODEL_JSON,
-        input: [
-          { role: "system", content: kernel },
-          { role: "user", content: userContent }
-        ],
+        input,
         response_format: { type: "json_schema", json_schema: { name: userMode, strict: true, schema } },
-        temperature: 0.2
+        temperature: 0.2,
+        max_output_tokens: MAX_OUTPUT_TOKENS_JSON
       })
     });
   } catch (e: any) {
@@ -322,6 +353,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({
       mode: userMode,
       result: json,
+      output_json: json, // legacy key
       usage: data.usage,
       meta: { kernel_hash, kernel_version, tone, tags }
     });
